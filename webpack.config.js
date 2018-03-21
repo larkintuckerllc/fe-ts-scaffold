@@ -20,7 +20,7 @@ module.exports = {
             before: [tsImportPluginFactory({
               libraryName: 'antd',
               libraryDirectory: 'es',
-              style: 'css',
+              style: true,
             })],
           }),
         },
@@ -42,6 +42,9 @@ module.exports = {
             loader: 'less-loader',
             options: {
               sourceMap: true,
+              modifyVars: {
+                '@primary-color': '#1DA57A',
+              },
             },
           },
         ],
