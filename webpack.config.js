@@ -2,6 +2,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const tsImportPluginFactory = require('ts-import-plugin');
+const lessModifyVars = require('./less-modify-vars');
 
 module.exports = {
   devServer: {
@@ -42,9 +43,7 @@ module.exports = {
             loader: 'less-loader',
             options: {
               sourceMap: true,
-              modifyVars: {
-                '@primary-color': '#1DA57A',
-              },
+              modifyVars: lessModifyVars,
             },
           },
         ],
