@@ -1,8 +1,9 @@
 /* tslint:disable-next-line */
 import React from 'react';
+import './Wow.less';
 
 export default function () {
   return (
-    <h2>WOW</h2>
+    <h2 className="wow">WOW</h2>
   );
 }

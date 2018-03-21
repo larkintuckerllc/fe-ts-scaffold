@@ -26,6 +26,8 @@
     "eslint-plugin-import": "^2.9.0",
     "html-webpack-plugin": "^3.0.7",
     "jest": "^22.4.2",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
     "style-loader": "^0.20.3",
     "ts-jest": "^22.0.4",
     "tslint": "^5.9.1",

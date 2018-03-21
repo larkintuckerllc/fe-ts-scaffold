@@ -15,13 +15,23 @@ module.exports = {
         loader: 'awesome-typescript-loader',
       },
       {
-        test: /\.css$/,
+        test: /\.(css|less)$/,
         use: [
           {
             loader: 'style-loader',
           },
           {
             loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              sourceMap: true,
+            },
           },
         ],
       },
