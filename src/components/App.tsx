@@ -1,8 +1,7 @@
 /* tslint:disable-next-line */
 import React from 'react';
 /* tslint:disable-next-line */
-import Button from 'antd/lib/button';
-import 'antd/lib/button/style/css';
+import { Button } from 'antd';
 import Wow from './Wow';
 
 interface AppProps {

@@ -1,6 +1,7 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const tsImportPluginFactory = require('ts-import-plugin');
 
 module.exports = {
   devServer: {
@@ -13,6 +14,16 @@ module.exports = {
       {
         test: /\.(tsx?)$/,
         loader: 'ts-loader',
+        options: {
+          transpileOnly: true,
+          getCustomTransformers: () => ({
+            before: [tsImportPluginFactory({
+              libraryName: 'antd',
+              libraryDirectory: 'es',
+              style: 'css',
+            })],
+          }),
+        },
       },
       {
         test: /\.(css|less)$/,
