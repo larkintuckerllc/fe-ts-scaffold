@@ -4,7 +4,7 @@ const path = require('path');
 const tsImportPluginFactory = require('ts-import-plugin');
 const lessModifyVars = require('./less-modify-vars');
 
-module.exports = {
+module.exports = env => ({
   devServer: {
     contentBase: './dist',
   },
@@ -14,6 +14,7 @@ module.exports = {
     rules: [
       {
         test: /\.(tsx?)$/,
+        exclude: /node_modules/,
         loader: 'ts-loader',
         options: {
           transpileOnly: true,
@@ -27,7 +28,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(css|less)$/,
+        test: /node_modules\/.*\.(css|less)$/,
         use: [
           {
             loader: 'style-loader',
@@ -48,6 +49,40 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(css|less)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              sourceMap: true,
+              modules: true,
+              localIdentName: env.NODE_ENV === 'production'
+                ? '[hash:base64]'
+                : '[name]__[local]__[hash:base64:5',
+            },
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              sourceMap: true,
+              modifyVars: lessModifyVars,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+        },
+      },
     ],
   },
   output: {
@@ -63,4 +98,4 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.ts', '.tsx'],
   },
-};
+});
