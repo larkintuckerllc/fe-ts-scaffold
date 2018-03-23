@@ -57,14 +57,15 @@ module.exports = env => ({
             loader: 'style-loader',
           },
           {
-            loader: 'css-loader',
+            loader: 'typings-for-css-modules-loader',
             options: {
               importLoaders: 1,
-              sourceMap: true,
-              modules: true,
               localIdentName: env.NODE_ENV === 'production'
                 ? '[hash:base64]'
                 : '[name]__[local]__[hash:base64:5',
+              modules: true,
+              namedExport: true,
+              sourceMap: true,
             },
           },
           {
