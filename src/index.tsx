@@ -2,7 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './components/App';
-import { sum } from './foo';
+import { sum } from './ducks/foo';
 
 render(
   <App message="world" />,
