@@ -6,7 +6,13 @@
         "moduleResolution": "node",
         "noImplicitAny": true,
         "sourceMap": true,
-        "target": "es5"
+        "target": "es5",
+        "baseUrl": ".",
+        "paths": {
+          "Ducks/*": [
+            "src/ducks/*"
+          ]
+        }
     },
     "exclude": [
         "node_modules"

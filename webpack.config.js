@@ -98,5 +98,8 @@ module.exports = env => ({
   ],
   resolve: {
     extensions: ['.js', '.json', '.ts', '.tsx'],
+    alias: {
+      Ducks: path.resolve(__dirname, 'src/ducks/'),
+    },
   },
 });
