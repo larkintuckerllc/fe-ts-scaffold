@@ -31,7 +31,7 @@ export function app({
        <div>
          <button onClick={() => add('Test')}>Add</button>
        </div>
-       <AppList items={adder.toJS()}/>
+       <AppList items={adder}/>
      </div>
   );
 }

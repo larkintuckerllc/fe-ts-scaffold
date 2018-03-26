@@ -1,15 +1,18 @@
 /* tslint:disable-next-line */
 import React from 'react';
+import toJS from './toJS';
 
 interface ListProps {
-  items: string[];
+  items: any;
 }
-export default function ({
+function AppList ({
   items,
 }: ListProps) {
   return (
      <ul>
-       {items.map(o => <li>{o}</li>)}
+       {items.map((o:any) => <li>{o}</li>)}
      </ul>
   );
 }
+export default toJS(AppList);
+
