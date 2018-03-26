@@ -15,7 +15,8 @@ interface AppProps {
   decrement(): void;
   increment(): void;
 }
-export function app({
+/* tslint:disable-next-line */
+function App({
   add,
   adder,
   counter,
@@ -49,4 +50,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(app);
+)(App);

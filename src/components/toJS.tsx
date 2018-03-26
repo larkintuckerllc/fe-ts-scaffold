@@ -1,16 +1,13 @@
 import * as React from 'react';
 import { Iterable } from 'immutable';
 
-/* tslint:disable-next-line */
-
 const KEY = 0;
 const VALUE = 1;
-interface toJSProps {
-}
-export default <P extends toJSProps>(
-  WrappedComponent: React.ComponentType<P>,
+export default (
+  /* tslint:disable-next-line */
+  WrappedComponent: React.ComponentType<any>,
 ) =>
-  class toJS extends React.Component<P> {
+  class toJS extends React.Component<any> {
     render() {
       const wrappedComponentProps = this.props;
       const reducer = (newProps: any, wrappedComponentProp: any) => {

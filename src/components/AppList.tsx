@@ -5,6 +5,7 @@ import toJS from './toJS';
 interface ListProps {
   items: any;
 }
+/* tslint:disable-next-line */
 function AppList ({
   items,
 }: ListProps) {
