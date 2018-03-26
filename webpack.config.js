@@ -17,7 +17,6 @@ module.exports = env => ({
         exclude: /node_modules/,
         loader: 'ts-loader',
         options: {
-          transpileOnly: true,
           getCustomTransformers: () => ({
             before: [tsImportPluginFactory({
               libraryName: 'antd',
@@ -100,6 +99,7 @@ module.exports = env => ({
     extensions: ['.js', '.json', '.ts', '.tsx'],
     alias: {
       Ducks: path.resolve(__dirname, 'src/ducks/'),
+      Store: path.resolve(__dirname, 'src/store/'),
     },
   },
 });

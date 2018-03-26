@@ -11,6 +11,9 @@
         "paths": {
           "Ducks/*": [
             "src/ducks/*"
+          ],
+          "Store/*": [
+            "src/store/*"
           ]
         }
     },
