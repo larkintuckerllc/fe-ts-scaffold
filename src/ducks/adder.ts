@@ -1,4 +1,5 @@
-import { AppAction, State } from 'Store/reducers';
+import { AppAction, AppState } from 'Store/reducers';
+import { List } from 'immutable';
 
 const ADD = 'ADD';
 export interface AddAction {
@@ -11,14 +12,14 @@ export function add(value: string) {
     payload: value,
   });
 }
-export default function adder(state: string[] = [], action: AppAction) {
+export default function adder(state = List<string>([]), action: AppAction) {
   switch (action.type) {
     case ADD:
-      return [...state, action.payload];
+      return state.push(action.payload);
     default:
       return state;
   }
 }
-export function getAdder(state: State) {
-  return state.adder;
+export function getAdder(state: AppState) {
+  return state.get('adder');
 }

@@ -2,13 +2,15 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { List } from 'immutable';
 import * as fromAdder from 'Ducks/adder';
 import * as fromCounter from 'Ducks/counter';
-import { State } from 'Store/reducers';
+import { AppState } from 'Store/reducers';
+import AppList from './AppList';
 
 interface AppProps {
   add(value: string): void;
-  adder: string[];
+  adder: List<string>;
   counter: number;
   decrement(): void;
   increment(): void;
@@ -26,14 +28,14 @@ export function app({
        <div>{counter}</div>
        <button onClick={increment}>+</button>
        <button onClick={decrement}>-</button>
-       <ul>
-         {adder.map(o => <li>{o}</li>)}
-        </ul>
-       <button onClick={() => add('Test')}>Add</button>
+       <div>
+         <button onClick={() => add('Test')}>Add</button>
+       </div>
+       <AppList items={adder.toJS()}/>
      </div>
   );
 }
-function mapStateToProps(state: State) {
+function mapStateToProps(state: AppState) {
   return ({
     adder: fromAdder.getAdder(state),
     counter: fromCounter.getCounter(state),

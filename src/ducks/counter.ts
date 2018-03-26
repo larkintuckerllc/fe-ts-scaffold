@@ -1,4 +1,4 @@
-import { AppAction, State } from 'Store/reducers';
+import { AppAction, AppState } from 'Store/reducers';
 
 const INCREMENT = 'INCREMENT';
 const DECREMENT = 'DECREMENT';
@@ -28,6 +28,6 @@ export default function counter(state = 0, action: AppAction) {
       return state;
   }
 }
-export function getCounter(state: State) {
-  return state.counter;
+export function getCounter(state: AppState) {
+  return state.get('counter');
 }
