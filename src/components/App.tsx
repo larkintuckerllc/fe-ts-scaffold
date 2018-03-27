@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import * as fromAdder from 'DUCKS/adder';
 import * as fromCounter from 'DUCKS/counter';
 import { AppState } from 'STORE/reducers';
+import Ant from './Ant';
 import Counter from './Counter';
+import Frame from './Frame';
 import Listing from './Listing';
 import Media from './Media';
 import Styling from './Styling';
@@ -26,7 +28,8 @@ function App({
   increment,
 }: AppProps) {
   return (
-     <div>
+     <Frame>
+       <Ant />
        <Counter
          counter={counter}
          decrement={decrement}
@@ -38,7 +41,7 @@ function App({
         />
         <Media />
         <Styling />
-     </div>
+     </Frame>
   );
 }
 function mapStateToProps(state: AppState) {

@@ -1,0 +1,13 @@
+/* tslint:disable-next-line */
+import React from 'react';
+import { Button } from 'antd';
+
+/* tslint:disable-next-line */
+export default function Ant() {
+  return (
+      <div>
+        <h2>Ant</h2>
+        <Button type="primary">Hello There</Button>
+      </div>
+  );
+}
