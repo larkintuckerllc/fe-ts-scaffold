@@ -16,7 +16,7 @@ export default class Listing extends Component<ListingProps> {
     return (
       <div>
         <h2>Listing</h2>
-        <button onClick={this.addItem}>Add</button>
+        <button id="rootAdd" onClick={this.addItem}>Add</button>
         <ul>
           {items.map((o, i) => <li key={i}>{o}</li>)}
         </ul>

@@ -16,8 +16,8 @@ export default function Counter ({
       <div>
         <h2>Counter</h2>
         <div>{counter.toString()}</div>
-        <button onClick={increment}>+</button>
-        <button onClick={decrement}>-</button>
+        <button id="rootIncrement" onClick={increment}>+</button>
+        <button id="rootDecrement" onClick={decrement}>-</button>
       </div>
   );
 }

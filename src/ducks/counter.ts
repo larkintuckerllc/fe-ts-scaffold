@@ -8,12 +8,12 @@ export interface IncrementAction {
 export interface DecrementAction {
   type: 'DECREMENT';
 }
-export function increment() {
+export function increment(): IncrementAction {
   return ({
     type: INCREMENT,
   });
 }
-export function decrement() {
+export function decrement(): DecrementAction {
   return ({
     type: DECREMENT,
   });

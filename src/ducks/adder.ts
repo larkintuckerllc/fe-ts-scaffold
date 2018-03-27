@@ -6,7 +6,7 @@ export interface AddAction {
   type: 'ADD';
   payload: string;
 }
-export function add(value: string) {
+export function add(value: string): AddAction {
   return ({
     type: ADD,
     payload: value,
