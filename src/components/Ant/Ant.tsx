@@ -1,6 +1,6 @@
+import { Button } from 'antd';
 /* tslint:disable-next-line */
 import React from 'react';
-import { Button } from 'antd';
 
 /* tslint:disable-next-line */
 export default function Ant() {
