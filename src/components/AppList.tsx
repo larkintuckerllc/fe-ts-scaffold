@@ -7,11 +7,7 @@ interface AppListProps {
 }
 /* tslint:disable-next-line */
 export default class AppList extends Component<AppListProps> {
-  constructor(props: AppListProps) {
-    super(props);
-    this.addItem = this.addItem.bind(this);
-  }
-  addItem() {
+  addItem = () => {
     const { add } = this.props;
     add('Hello There');
   }
