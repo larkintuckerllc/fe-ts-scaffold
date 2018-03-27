@@ -17,10 +17,10 @@
         ],
         "baseUrl": ".",
         "paths": {
-          "Ducks/*": [
+          "DUCKS/*": [
             "src/ducks/*"
           ],
-          "Store/*": [
+          "STORE/*": [
             "src/store/*"
           ]
         }

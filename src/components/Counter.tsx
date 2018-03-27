@@ -14,6 +14,7 @@ export default function Counter ({
 }: CounterProps) {
   return (
       <div>
+        <h2>Counter</h2>
         <div>{counter.toString()}</div>
         <button onClick={increment}>+</button>
         <button onClick={decrement}>-</button>

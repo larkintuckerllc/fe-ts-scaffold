@@ -53,6 +53,7 @@
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
-    "redux-immutable": "^4.0.0"
+    "redux-immutable": "^4.0.0",
+    "typings-for-css-modules-loader": "^1.7.0"
   }
 }

@@ -1,4 +1,4 @@
-import { AppAction, AppState } from 'Store/reducers';
+import { AppAction, AppState } from 'STORE/reducers';
 import { List } from 'immutable';
 
 const ADD = 'ADD';

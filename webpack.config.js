@@ -61,7 +61,7 @@ module.exports = env => ({
               importLoaders: 1,
               localIdentName: env.NODE_ENV === 'production'
                 ? '[hash:base64]'
-                : '[name]__[local]__[hash:base64:5',
+                : '[name]__[local]__[hash:base64:5]',
               modules: true,
               namedExport: true,
               sourceMap: true,
@@ -98,8 +98,8 @@ module.exports = env => ({
   resolve: {
     extensions: ['.js', '.json', '.ts', '.tsx'],
     alias: {
-      Ducks: path.resolve(__dirname, 'src/ducks/'),
-      Store: path.resolve(__dirname, 'src/store/'),
+      DUCKS: path.resolve(__dirname, 'src/ducks/'),
+      STORE: path.resolve(__dirname, 'src/store/'),
     },
   },
 });

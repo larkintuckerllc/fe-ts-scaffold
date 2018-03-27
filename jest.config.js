@@ -16,8 +16,8 @@ module.exports = {
   ],
   moduleNameMapper: {
     '\\.(css|jpg|less|png)$': '<rootDir>/empty-module.js',
-    '^Ducks/(.*)': '<rootDir>/src/ducks/$1',
-    '^Store/(.*)': '<rootDir>/src/store/$1',
+    '^DUCKS/(.*)': '<rootDir>/src/ducks/$1',
+    '^STORE/(.*)': '<rootDir>/src/store/$1',
   },
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',

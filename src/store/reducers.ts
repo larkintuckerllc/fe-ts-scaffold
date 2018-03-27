@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux-immutable';
 import { Collection } from 'immutable';
-import counter, { IncrementAction, DecrementAction } from 'Ducks/counter';
-import adder, { AddAction } from 'Ducks/adder';
+import counter, { IncrementAction, DecrementAction } from 'DUCKS/counter';
+import adder, { AddAction } from 'DUCKS/adder';
 
 export type AppAction =
   AddAction |
