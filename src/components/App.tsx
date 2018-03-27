@@ -6,6 +6,7 @@ import { List } from 'immutable';
 import * as fromAdder from 'Ducks/adder';
 import * as fromCounter from 'Ducks/counter';
 import { AppState } from 'Store/reducers';
+import AppCounter from './AppCounter';
 import AppList from './AppList';
 
 interface AppProps {
@@ -25,14 +26,15 @@ function App({
 }: AppProps) {
   return (
      <div>
-       <div>Hello World</div>
-       <div>{counter}</div>
-       <button onClick={increment}>+</button>
-       <button onClick={decrement}>-</button>
-       <div>
-         <button onClick={() => add('Test')}>Add</button>
-       </div>
-       <AppList items={adder}/>
+       <AppCounter
+         counter={counter}
+         decrement={decrement}
+         increment={increment}
+       />
+       <AppList
+         add={add}
+         items={adder.toJS()}
+        />
      </div>
   );
 }

@@ -49,7 +49,6 @@
     "@types/redux-immutable": "^3.0.38",
     "antd": "^3.2.1",
     "babel-polyfill": "^6.26.0",
-    "es7-object-polyfill": "0.0.5",
     "immutable": "^3.8.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
