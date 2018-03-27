@@ -1,13 +1,13 @@
+import { List } from 'immutable';
 /* tslint:disable-next-line */
 import React from 'react';
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { List } from 'immutable';
 import * as fromAdder from 'Ducks/adder';
 import * as fromCounter from 'Ducks/counter';
 import { AppState } from 'Store/reducers';
-import AppCounter from './AppCounter';
-import AppList from './AppList';
+import Counter from './Counter';
+import Listing from './Listing';
+import Media from './Media';
 
 interface AppProps {
   add(value: string): void;
@@ -26,12 +26,13 @@ function App({
 }: AppProps) {
   return (
      <div>
-       <AppCounter
+       <Counter
          counter={counter}
          decrement={decrement}
          increment={increment}
        />
-       <AppList
+       <Media />
+       <Listing
          add={add}
          items={adder.toJS()}
         />

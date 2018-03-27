@@ -1,4 +1,4 @@
-import { createStore, Store } from 'redux';
+import { createStore } from 'redux';
 import reducers from './reducers';
 
 const enhancer = (<any>window).devToolsExtension ?

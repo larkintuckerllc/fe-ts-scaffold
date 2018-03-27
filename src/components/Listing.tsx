@@ -1,18 +1,18 @@
 /* tslint:disable-next-line */
 import React, { Component } from 'react';
 
-interface AppListProps {
+interface ListingProps {
   add(value: string): void;
   items: string[];
 }
 /* tslint:disable-next-line */
-export default class AppList extends Component<AppListProps> {
+export default class Listing extends Component<ListingProps> {
   addItem = () => {
     const { add } = this.props;
     add('Hello There');
   }
   render() {
-    const { add, items } = this.props;
+    const { items } = this.props;
     return (
       <div>
         <button onClick={this.addItem}>Add</button>

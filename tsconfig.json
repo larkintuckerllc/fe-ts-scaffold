@@ -5,6 +5,8 @@
         "module": "ESNext",
         "moduleResolution": "node",
         "noImplicitAny": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
         "sourceMap": true,
         "target": "es5",
         "lib": [

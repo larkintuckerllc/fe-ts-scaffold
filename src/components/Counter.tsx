@@ -1,17 +1,17 @@
 /* tslint:disable-next-line */
 import React from 'react';
 
-interface AppCounterProps {
+interface CounterProps {
   counter: number;
   decrement(): void;
   increment(): void;
 }
 /* tslint:disable-next-line */
-export default function AppCounter ({
+export default function Counter ({
   counter,
   decrement,
   increment,
-}: AppCounterProps) {
+}: CounterProps) {
   return (
       <div>
         <div>{counter.toString()}</div>
