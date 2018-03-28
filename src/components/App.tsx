@@ -5,6 +5,7 @@ import configureStore from 'STORE/configureStore';
 import Page from './Page';
 
 const store = configureStore();
+/* tslint:disable-next-line */
 export default function App() {
   return (
     <Provider store={store}>

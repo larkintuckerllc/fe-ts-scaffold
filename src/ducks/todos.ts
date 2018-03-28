@@ -1,4 +1,5 @@
 import { List } from 'immutable';
+import { Dispatch } from 'redux';
 import { combineReducers } from 'redux-immutable';
 import { AppAction } from 'STORE/reducers';
 
@@ -17,17 +18,33 @@ export interface FetchTodosResponseAction {
   type: 'FETCH_TODOS_RESPONSE';
   payload: Todo[];
 }
-export function fetchTodosRequest():  FetchTodosRequestAction {
+function fetchTodosRequest():  FetchTodosRequestAction {
   return ({
     type: FETCH_TODOS_REQUEST,
   });
 } 
-export function fetchTodosResponse(payload: Todo[]):  FetchTodosResponseAction {
+function fetchTodosResponse(payload: Todo[]):  FetchTodosResponseAction {
   return ({
     type: FETCH_TODOS_RESPONSE,
     payload,
   });
 } 
+export const fetchTodos = () => (dispatch: Dispatch<AppAction>) => {
+  dispatch(fetchTodosRequest());
+  dispatch(fetchTodosResponse([]));
+};
+/*
+export const fetchPhrase = () => (dispatch) => {
+  dispatch(fetchPhraseRequest());
+  fromAPI.getPhrase()
+    .then((value) => {
+      dispatch(fetchPhraseResponse(value));
+    })
+    .catch((err) => {
+      dispatch(fetchPhraseResponse(err));
+    });
+};
+*/
 function ids (state = List([]), action: AppAction) {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:

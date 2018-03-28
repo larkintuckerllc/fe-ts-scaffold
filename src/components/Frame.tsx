@@ -2,7 +2,7 @@
 import React from 'react';
 
 interface FrameProps {
-  children: JSX.Element[],
+  children: JSX.Element[];
 }
 /* tslint:disable-next-line */
 export default function Frame ({

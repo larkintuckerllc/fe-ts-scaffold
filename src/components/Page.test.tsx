@@ -1,4 +1,4 @@
-import Adapter from 'enzyme-adapter-react-16';
+import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 /* tslint:disable-next-line */
 import Enzyme, { shallow } from 'enzyme';
 import { List } from 'immutable';
@@ -6,7 +6,7 @@ import { List } from 'immutable';
 import React from 'react';
 import { Page } from './Page';
 
-Enzyme.configure({ adapter: new Adapter() });
+Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 const setup = (propOverrides: any) => {
   const props = {
     add: jest.fn(),
@@ -16,9 +16,9 @@ const setup = (propOverrides: any) => {
     increment: jest.fn(),
     ...propOverrides,
   };
-   return ({
-      props,
-      wrapper: shallow(<Page {...props} />),
+  return ({
+    props,
+    wrapper: shallow(<Page {...props} />),
   });
 };
 it('shallow renders without crashing', () => {

@@ -5,7 +5,6 @@ interface ListingProps {
   add(value: string): void;
   items: string[];
 }
-/* tslint:disable-next-line */
 export default class Listing extends Component<ListingProps> {
   addItem = () => {
     const { add } = this.props;

@@ -1,11 +1,11 @@
-import Adapter from 'enzyme-adapter-react-16';
+import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 /* tslint:disable-next-line */
 import Enzyme, { shallow } from 'enzyme';
 /* tslint:disable-next-line */
 import React from 'react';
 import Counter from './Counter';
 
-Enzyme.configure({ adapter: new Adapter() });
+Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 const setup = (propOverrides: any) => {
   const props = {
     counter: 0,
@@ -14,8 +14,8 @@ const setup = (propOverrides: any) => {
     ...propOverrides,
   };
   return ({
-      props,
-      wrapper: shallow(<Counter {...props} />),
+    props,
+    wrapper: shallow(<Counter {...props} />),
   });
 }; 
 describe('Counter component', () => {
