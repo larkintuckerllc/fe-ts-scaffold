@@ -12,7 +12,7 @@ import Listing from './Listing';
 import Media from './Media';
 import Styling from './Styling';
 
-interface AppProps {
+interface PageProps {
   add(value: string): void;
   adder: List<string>;
   counter: number;
@@ -26,7 +26,7 @@ export function Page({
   counter,
   decrement,
   increment,
-}: AppProps) {
+}: PageProps) {
   return (
      <Frame>
        <Ant />
