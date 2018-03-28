@@ -68,14 +68,17 @@ module.exports = env => ({
             },
           },
           {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
             loader: 'less-loader',
             options: {
               sourceMap: true,
               modifyVars: lessModifyVars,
             },
-          },
-          {
-            loader: 'postcss-loader',
           },
         ],
       },
