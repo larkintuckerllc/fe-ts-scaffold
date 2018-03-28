@@ -2,6 +2,7 @@ import { combineReducers } from 'redux-immutable';
 import { Collection } from 'immutable';
 import counter, { IncrementAction, DecrementAction } from 'DUCKS/counter';
 import adder, { AddAction } from 'DUCKS/adder';
+import todos, { FetchTodosRequestAction, FetchTodosResponseAction} from 'DUCKS/todos';
 
 interface InitAction {
   type: '@@INIT';
@@ -13,6 +14,8 @@ export function init(): InitAction {
 }
 export type AppAction =
   AddAction |
+  FetchTodosRequestAction |
+  FetchTodosResponseAction |
   IncrementAction |
   InitAction |
   DecrementAction;
@@ -20,5 +23,6 @@ export type AppState = Collection<string, any>;
 const reducers = {
   adder,
   counter,
+  todos,
 };
 export default combineReducers(reducers);

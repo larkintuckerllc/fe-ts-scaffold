@@ -104,6 +104,7 @@ module.exports = env => ({
   resolve: {
     extensions: ['.js', '.json', '.ts', '.tsx'],
     alias: {
+      APIS: path.resolve(__dirname, 'src/apis/'),
       DUCKS: path.resolve(__dirname, 'src/ducks/'),
       STORE: path.resolve(__dirname, 'src/store/'),
     },

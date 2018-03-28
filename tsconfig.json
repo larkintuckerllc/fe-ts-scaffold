@@ -17,6 +17,9 @@
         ],
         "baseUrl": ".",
         "paths": {
+          "APIS/*": [
+            "src/apis/*"
+          ],
           "DUCKS/*": [
             "src/ducks/*"
           ],
