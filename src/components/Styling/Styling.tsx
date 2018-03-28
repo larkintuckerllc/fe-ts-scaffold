@@ -7,9 +7,11 @@ export default function Styling () {
   return (
       <div id={stylesLess.root}>
         <h2 className="my_global">Styling</h2>
-        <div className={stylesLess.rootItem}>One</div>
-        <div className={stylesLess.rootItem}>Two</div>
-        <div className={stylesLess.rootItem}>Three</div>
+        <div id={stylesLess.rootContainer}>
+          <div className={stylesLess.rootContainerItem}>One</div>
+          <div className={stylesLess.rootContainerItem}>Two</div>
+          <div className={stylesLess.rootContainerItem}>Three</div>
+        </div>
       </div>
   );
 }
