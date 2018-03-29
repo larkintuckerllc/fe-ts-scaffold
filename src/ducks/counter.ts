@@ -1,4 +1,3 @@
-import { ActionCreator } from 'redux';
 import { AppAction, AppState } from 'STORE/reducers';
 
 const INCREMENT = 'INCREMENT';
@@ -9,16 +8,12 @@ export interface IncrementAction {
 export interface DecrementAction {
   type: 'DECREMENT';
 }
-export const increment: ActionCreator<IncrementAction> = () => {
-  return ({
-    type: INCREMENT,
-  });
-};
-export const decrement: ActionCreator<DecrementAction> = () => {
-  return ({
-    type: DECREMENT,
-  });
-};
+export const increment = (): IncrementAction => ({
+  type: INCREMENT,
+});
+export const decrement = (): DecrementAction => ({
+  type: DECREMENT,
+});
 export const counterDefault = 0;
 export default (state: number, action: AppAction) => {
   switch (action.type) {

@@ -1,4 +1,3 @@
-import { ActionCreator } from 'redux';
 import { AppAction, AppState } from 'STORE/reducers';
 import { List } from 'immutable';
 
@@ -7,7 +6,7 @@ export interface AddAction {
   type: 'ADD';
   payload: string;
 }
-export const add: ActionCreator<AddAction> = (value: string) => ({
+export const add = (value: string): AddAction => ({
   type: ADD,
   payload: value,
 });
