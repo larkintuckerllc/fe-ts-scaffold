@@ -1,10 +1,10 @@
 import { init } from 'STORE/reducers';
-import { List, Map } from 'immutable';
+import { List } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
-import adder, { add, getAdder } from './adder';
+import adder, { add } from './adder';
 
 describe('adder duck', () => {
-  beforeEach(function () {
+  beforeEach(() => {
     jest.addMatchers(matchers);
   });
   it('reducer should return the initial state', () => {
@@ -20,8 +20,11 @@ describe('adder duck', () => {
     expect(add('Test')).toEqual({
       type: 'ADD',
       payload: 'Test',
-  })});
+    });
+  });
+  /*
   it('getAdder should return', () => {
     expect(getAdder(Map({ adder: true }))).toEqual(true);
   });
+  */
 });

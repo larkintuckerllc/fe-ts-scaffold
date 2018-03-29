@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux-immutable';
-import { Collection } from 'immutable';
+import { List, Record } from 'immutable';
 import counter, { IncrementAction, DecrementAction } from 'DUCKS/counter';
 import adder, { AddAction } from 'DUCKS/adder';
-import todos, { FetchTodosRequestAction, FetchTodosResponseAction} from 'DUCKS/todos';
 
 interface InitAction {
   type: '@@INIT';
@@ -14,15 +13,28 @@ export function init(): InitAction {
 }
 export type AppAction =
   AddAction |
-  FetchTodosRequestAction |
-  FetchTodosResponseAction |
   IncrementAction |
   InitAction |
   DecrementAction;
-export type AppState = Collection<string, any>;
+const appStateDefaults = {
+  adder: List<string>([]),
+  counter: 0,
+};
+interface AppStateParams {
+  adder: List<string>;
+  counter: number;
+}
+export class AppState extends Record(appStateDefaults) {
+  constructor(params: AppStateParams) {
+    super(params);
+  }
+  get<T extends keyof AppStateParams>(value: T): AppStateParams[T] { 
+    return super.get(value);
+  }
+}
+export const initialState = new AppState(appStateDefaults);
 const reducers = {
   adder,
   counter,
-  todos,
 };
 export default combineReducers(reducers);
