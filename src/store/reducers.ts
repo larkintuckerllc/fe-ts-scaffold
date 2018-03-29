@@ -1,14 +1,14 @@
-import { ActionCreator } from 'redux';
 import { combineReducers } from 'redux-immutable';
 import { List, Record } from 'immutable';
 import counter, { counterDefault, IncrementAction, DecrementAction } from 'DUCKS/counter';
 import adder, { adderDefault, AddAction } from 'DUCKS/adder';
+import my, { myInitialState, myState } from 'DUCKS/my';
 
 // ACTIONS
 interface InitAction {
   type: '@@INIT';
 }
-export const init: ActionCreator<InitAction> = () => ({
+export const init = (): InitAction => ({
   type: '@@INIT',
 });
 export type AppAction =
@@ -16,30 +16,6 @@ export type AppAction =
   IncrementAction |
   InitAction |
   DecrementAction;
-
- // TEMP 
-const myDefaults = {
-  flag: false,
-};
-interface myStateParams {
-  flag: boolean;
-}
-class myState extends Record(myDefaults) {
-  constructor(params: myStateParams) {
-    super(params);
-  }
-  get<T extends keyof myStateParams>(value: T): myStateParams[T] { 
-    return super.get(value);
-  }
-}
-const myInitialState = new myState(myDefaults);
-const flag = (state: any) => {
-  console.log(state);
-  return state;
-};
-const my = combineReducers({
-  flag,
-});
 // STATE
 const appStateDefaults = {
   adder: adderDefault,
