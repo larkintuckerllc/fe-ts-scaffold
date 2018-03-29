@@ -3,6 +3,7 @@ import { List, Record } from 'immutable';
 import counter, { IncrementAction, DecrementAction } from 'DUCKS/counter';
 import adder, { AddAction } from 'DUCKS/adder';
 
+// ACTIONS
 interface InitAction {
   type: '@@INIT';
 }
@@ -16,6 +17,7 @@ export type AppAction =
   IncrementAction |
   InitAction |
   DecrementAction;
+// STATE
 const appStateDefaults = {
   adder: List<string>([]),
   counter: 0,
@@ -33,6 +35,7 @@ export class AppState extends Record(appStateDefaults) {
   }
 }
 export const initialState = new AppState(appStateDefaults);
+// REDUCERS
 const reducers = {
   adder,
   counter,
