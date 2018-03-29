@@ -1,6 +1,5 @@
 import { List } from 'immutable';
 import { Dispatch } from 'redux';
-import { combineReducers } from 'redux-immutable';
 import { AppAction } from 'STORE/reducers';
 
 const FETCH_TODOS_REQUEST = 'FETCH_TODOS_REQUEST';
@@ -25,8 +24,8 @@ function fetchTodosRequest():  FetchTodosRequestAction {
 } 
 function fetchTodosResponse(payload: Todo[]):  FetchTodosResponseAction {
   return ({
-    type: FETCH_TODOS_RESPONSE,
     payload,
+    type: FETCH_TODOS_RESPONSE,
   });
 } 
 export const fetchTodos = () => (dispatch: Dispatch<AppAction>) => {
@@ -45,17 +44,15 @@ export const fetchPhrase = () => (dispatch) => {
     });
 };
 */
-function ids (state = List([]), action: AppAction) {
+export const idsDefault = List([]);
+export default function ids(state: List<number>, action: AppAction) {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
       return List(action.payload.map((o: Todo) => o.id));
     default:
       return state;
   }
-};
-export default combineReducers({
-  ids,
-});
+}
 
 /*
 export function getCounter(state: AppState) {
