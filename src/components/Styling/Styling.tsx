@@ -3,7 +3,7 @@ import React from 'react';
 import stylesLess from  './styles.less';
 
 /* tslint:disable-next-line */
-export default function Styling () {
+export default () => {
   return (
       <div id={stylesLess.root}>
         <h2 className="my_global">Styling</h2>
@@ -14,4 +14,4 @@ export default function Styling () {
         </div>
       </div>
   );
-}
+};

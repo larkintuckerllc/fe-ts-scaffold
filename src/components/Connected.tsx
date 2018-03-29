@@ -27,11 +27,11 @@ export class Connected extends Component<ConnectedProps> {
     );
   }
 }
-function mapStateToProps(state: AppState) {
+const mapStateToProps = (state: AppState) => {
   return ({
     counter: fromCounter.getCounter(state),
   });
-}
+};
 const mapDispatchToProps = {
   decrement: fromCounter.decrement,
   increment: fromCounter.increment,

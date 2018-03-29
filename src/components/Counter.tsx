@@ -7,11 +7,11 @@ interface CounterProps {
   increment(): void;
 }
 /* tslint:disable-next-line */
-export default function Counter ({
+export default ({
   counter,
   decrement,
   increment,
-}: CounterProps) {
+}: CounterProps) => {
   return (
       <div>
         <h2>Counter</h2>
@@ -20,4 +20,4 @@ export default function Counter ({
         <button id="rootDecrement" onClick={decrement}>-</button>
       </div>
   );
-}
+};

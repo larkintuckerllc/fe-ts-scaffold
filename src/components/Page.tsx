@@ -26,13 +26,13 @@ interface DispatchProps {
 interface PageProps extends StateProps, DispatchProps {
 }
 /* tslint:disable-next-line */
-export function Page({
+export const Page =  ({
   add,
   adder,
   counter,
   decrement,
   increment,
-}: PageProps) {
+}: PageProps) => {
   return (
      <Frame>
        <Ant />
@@ -51,13 +51,13 @@ export function Page({
         <Styling />
      </Frame>
   );
-}
-function mapStateToProps(state: AppState) {
+};
+const mapStateToProps = (state: AppState) => {
   return ({
     adder: fromAdder.getAdder(state),
     counter: fromCounter.getCounter(state),
   });
-}
+};
 const mapDispatchToProps = {
   add: fromAdder.add,
   decrement: fromCounter.decrement,

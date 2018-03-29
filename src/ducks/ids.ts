@@ -1,5 +1,5 @@
 import { List } from 'immutable';
-import { Dispatch } from 'redux';
+import { ActionCreator, Dispatch } from 'redux';
 import { AppAction } from 'STORE/reducers';
 
 const FETCH_TODOS_REQUEST = 'FETCH_TODOS_REQUEST';
@@ -17,17 +17,13 @@ export interface FetchTodosResponseAction {
   type: 'FETCH_TODOS_RESPONSE';
   payload: Todo[];
 }
-function fetchTodosRequest():  FetchTodosRequestAction {
-  return ({
-    type: FETCH_TODOS_REQUEST,
-  });
-} 
-function fetchTodosResponse(payload: Todo[]):  FetchTodosResponseAction {
-  return ({
-    payload,
-    type: FETCH_TODOS_RESPONSE,
-  });
-} 
+const fetchTodosRequest: ActionCreator<FetchTodosRequestAction> = () => ({
+  type: FETCH_TODOS_REQUEST,
+});
+const fetchTodosResponse: ActionCreator<FetchTodosResponseAction> = (payload: Todo[]) => ({
+  payload,
+  type: FETCH_TODOS_RESPONSE,
+});
 export const fetchTodos = () => (dispatch: Dispatch<AppAction>) => {
   dispatch(fetchTodosRequest());
   dispatch(fetchTodosResponse([]));
@@ -45,14 +41,14 @@ export const fetchPhrase = () => (dispatch) => {
 };
 */
 export const idsDefault = List([]);
-export default function ids(state: List<number>, action: AppAction) {
+export default (state: List<number>, action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
       return List(action.payload.map((o: Todo) => o.id));
     default:
       return state;
   }
-}
+};
 
 /*
 export function getCounter(state: AppState) {

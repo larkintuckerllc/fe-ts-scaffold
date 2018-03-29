@@ -1,3 +1,4 @@
+import { ActionCreator } from 'redux';
 import { AppAction, AppState } from 'STORE/reducers';
 import { List } from 'immutable';
 
@@ -6,14 +7,12 @@ export interface AddAction {
   type: 'ADD';
   payload: string;
 }
-export function add(value: string): AddAction {
-  return ({
-    type: ADD,
-    payload: value,
-  });
-}
+export const add: ActionCreator<AddAction> = (value: string) => ({
+  type: ADD,
+  payload: value,
+});
 export const adderDefault = List<string>([]);
-export default function adder(state: List<string>, action: AppAction) {
+export default (state: List<string>, action: AppAction) => {
   switch (action.type) {
     case ADD:
       return state.push(action.payload);
@@ -21,6 +20,6 @@ export default function adder(state: List<string>, action: AppAction) {
       return state;
   }
 }
-export function getAdder(state: AppState) {
+export const getAdder = (state: AppState) => {
   return state.get('adder');
-}
+};

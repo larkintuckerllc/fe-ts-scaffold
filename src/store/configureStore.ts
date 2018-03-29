@@ -10,6 +10,6 @@ const enhancer = compose(
   /* istanbul ignore next */
   (<any>window).devToolsExtension ? (<any>window).devToolsExtension() : (f: any) => f,
 );
-export default function () {
+export default () => {
   return createStore(reducers, initialState, enhancer);
 }

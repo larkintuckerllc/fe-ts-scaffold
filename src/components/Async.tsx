@@ -24,10 +24,10 @@ export class Async extends Component<AsyncProps> {
     );
   }
 }
-function mapStateToProps() {
+const mapStateToProps = () => {
   return ({
   });
-}
+};
 const mapDispatchToProps = {
   fetchTodos: fromIds.fetchTodos,
 };

@@ -1,3 +1,4 @@
+import { ActionCreator } from 'redux';
 import { combineReducers } from 'redux-immutable';
 import { List, Record } from 'immutable';
 import counter, { counterDefault, IncrementAction, DecrementAction } from 'DUCKS/counter';
@@ -8,11 +9,9 @@ import ids, { idsDefault, FetchTodosRequestAction, FetchTodosResponseAction } fr
 interface InitAction {
   type: '@@INIT';
 }
-export function init(): InitAction {
-  return ({
-    type: '@@INIT',
-  });
-}
+export const init: ActionCreator<InitAction> = () => ({
+  type: '@@INIT',
+});
 export type AppAction =
   AddAction |
   IncrementAction |

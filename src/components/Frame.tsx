@@ -5,12 +5,12 @@ interface FrameProps {
   children: JSX.Element[];
 }
 /* tslint:disable-next-line */
-export default function Frame ({
+export default ({
   children,
-}: FrameProps) {
+}: FrameProps) => {
   return (
       <div style={{ border: 'solid' }}>
         {children}
       </div>
   );
-}
+};

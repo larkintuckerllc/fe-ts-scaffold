@@ -6,10 +6,10 @@ import Page from './Page';
 
 const store = configureStore();
 /* tslint:disable-next-line */
-export default function App() {
+export default () => {
   return (
     <Provider store={store}>
       <Page />
     </Provider>
   );
-}
+};
