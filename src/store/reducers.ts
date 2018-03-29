@@ -3,7 +3,6 @@ import { combineReducers } from 'redux-immutable';
 import { List, Record } from 'immutable';
 import counter, { counterDefault, IncrementAction, DecrementAction } from 'DUCKS/counter';
 import adder, { adderDefault, AddAction } from 'DUCKS/adder';
-import ids, { idsDefault, FetchTodosRequestAction, FetchTodosResponseAction } from 'DUCKS/ids';
 
 // ACTIONS
 interface InitAction {
@@ -16,19 +15,41 @@ export type AppAction =
   AddAction |
   IncrementAction |
   InitAction |
-  DecrementAction |
-  FetchTodosRequestAction |
-  FetchTodosResponseAction;
+  DecrementAction;
+
+ // TEMP 
+const myDefaults = {
+  flag: false,
+};
+interface myStateParams {
+  flag: boolean;
+}
+class myState extends Record(myDefaults) {
+  constructor(params: myStateParams) {
+    super(params);
+  }
+  get<T extends keyof myStateParams>(value: T): myStateParams[T] { 
+    return super.get(value);
+  }
+}
+const myInitialState = new myState(myDefaults);
+const flag = (state: any) => {
+  console.log(state);
+  return state;
+};
+const my = combineReducers({
+  flag,
+});
 // STATE
 const appStateDefaults = {
   adder: adderDefault,
   counter: counterDefault,
-  ids: idsDefault,
+  my: myInitialState,
 };
 interface AppStateParams {
   adder: List<string>;
   counter: number;
-  ids: List<number>;
+  my: myState;
 }
 export class AppState extends Record(appStateDefaults) {
   constructor(params: AppStateParams) {
@@ -43,6 +64,6 @@ export const initialState = new AppState(appStateDefaults);
 const reducers = {
   adder,
   counter,
-  ids,
+  my,
 };
 export default combineReducers(reducers);
