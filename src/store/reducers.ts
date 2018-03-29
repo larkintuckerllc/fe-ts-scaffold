@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux-immutable';
 import { List, Record } from 'immutable';
-import counter, { IncrementAction, DecrementAction } from 'DUCKS/counter';
-import adder, { AddAction } from 'DUCKS/adder';
+import counter, { counterDefault, IncrementAction, DecrementAction } from 'DUCKS/counter';
+import adder, { adderDefault, AddAction } from 'DUCKS/adder';
 
 // ACTIONS
 interface InitAction {
@@ -19,8 +19,8 @@ export type AppAction =
   DecrementAction;
 // STATE
 const appStateDefaults = {
-  adder: List<string>([]),
-  counter: 0,
+  adder: adderDefault,
+  counter: counterDefault,
 };
 interface AppStateParams {
   adder: List<string>;

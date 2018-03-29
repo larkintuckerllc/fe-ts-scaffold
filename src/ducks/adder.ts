@@ -12,6 +12,7 @@ export function add(value: string): AddAction {
     payload: value,
   });
 }
+export const adderDefault = List<string>([]);
 export default function adder(state: List<string>, action: AppAction) {
   switch (action.type) {
     case ADD:
