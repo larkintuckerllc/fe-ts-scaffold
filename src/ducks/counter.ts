@@ -18,7 +18,7 @@ export function decrement(): DecrementAction {
     type: DECREMENT,
   });
 }
-export default function counter(state = 0, action: AppAction) {
+export default function counter(state: number, action: AppAction) {
   switch (action.type) {
     case INCREMENT:
       return state + 1;

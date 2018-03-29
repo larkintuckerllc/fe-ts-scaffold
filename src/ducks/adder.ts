@@ -12,7 +12,7 @@ export function add(value: string): AddAction {
     payload: value,
   });
 }
-export default function adder(state = List<string>([]), action: AppAction) {
+export default function adder(state: List<string>, action: AppAction) {
   switch (action.type) {
     case ADD:
       return state.push(action.payload);

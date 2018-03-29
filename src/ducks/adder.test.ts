@@ -7,14 +7,11 @@ describe('adder duck', () => {
   beforeEach(() => {
     jest.addMatchers(matchers);
   });
-  it('reducer should return the initial state', () => {
-    expect(adder(undefined, init())).toEqualImmutable(List<string>([]));
-  });
   it('reducer should ignore unknown actions', () => {
     expect(adder(List<string>([]), init())).toEqualImmutable(List<string>([]));
   });
   it('reducer should handle ADD', () => {
-    expect(adder(undefined, add('Test'))).toEqualImmutable(List<string>(['Test']));
+    expect(adder(List<string>([]), add('Test'))).toEqualImmutable(List<string>(['Test']));
   });
   it('add should create ADD action', () => {
     expect(add('Test')).toEqual({
