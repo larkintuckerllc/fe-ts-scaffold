@@ -1,7 +1,7 @@
-import { init } from 'STORE/reducers';
+import { init, initialState } from 'STORE/reducers';
 import { List } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
-import adder, { add } from './adder';
+import adder, { add, getAdder } from './adder';
 
 describe('adder duck', () => {
   beforeEach(() => {
@@ -19,9 +19,7 @@ describe('adder duck', () => {
       payload: 'Test',
     });
   });
-  /*
   it('getAdder should return', () => {
-    expect(getAdder(Map({ adder: true }))).toEqual(true);
+    expect(getAdder(initialState)).toEqualImmutable(List<string>([]));
   });
-  */
 });

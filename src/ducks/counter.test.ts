@@ -1,5 +1,5 @@
-import { init } from 'STORE/reducers';
-import counter, { decrement, increment } from './counter';
+import { init, initialState } from 'STORE/reducers';
+import counter, { decrement, getCounter, increment } from './counter';
 
 describe('counter duck', () => {
   it('reducer should ignore unknown actions', () => {
@@ -21,9 +21,7 @@ describe('counter duck', () => {
       type: 'DECREMENT',
     });
   });
-  /*
   it('getCounter should return', () => {
-    expect(getCounter(Map({ counter: true }))).toEqual(true);
+    expect(getCounter(initialState)).toEqual(0);
   });
-  */
 });
