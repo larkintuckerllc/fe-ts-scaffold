@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux-immutable';
-import { List, Record } from 'immutable';
+import { List, Map, Record } from 'immutable';
 import { AppAction } from 'STORE/reducers';
 import * as fromTodos from 'APIS/todos';
 
@@ -57,10 +57,12 @@ export const fetchTodos = () => (dispatch: (action: AppAction) => void) => {
 };
 // STATE
 const todosDefault = {
+  byId: Map<number, TodoState>({}),
   ids: List<number>([]),
   received: false,
 };
 interface TodosStateParams {
+  byId: Map<number, TodoState>;
   ids: List<number>;
   received: boolean;
 }
@@ -84,22 +86,18 @@ const received = (state: boolean, action: AppAction) => {
       return state;
   }
 };
-/*
-const byId = (state: Map<string, Todo> , action: AppAction) => {
+const byId = (state: Map<number, TodoState> , action: AppAction) => {
   switch (action.type) {
-    case FETCH_TODOS_RESPONSE: {
-      const entry = {}; // INTERNALLY NOT USING IMMUTABLE.JS
-      for (let i = 0; i < action.payload.size; i += 1) {
-        const item = action.payload.get(i);
-        entry[item.get('id')] = item;
-      }
-      return state.merge(entry);
-    }
+    case FETCH_TODOS_RESPONSE:
+      const reducer = (
+        accumulator: Map<number, TodoState>,
+        todo: TodoState,
+      ) => accumulator.set(todo.get('id'), todo);
+      return action.payload.reduce(reducer, state);
     default:
       return state;
   }
 };
-*/
 const ids = (state: List<number>, action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
@@ -109,6 +107,7 @@ const ids = (state: List<number>, action: AppAction) => {
   }
 };
 export default combineReducers({
+  byId,
   ids,
   received,
 });
