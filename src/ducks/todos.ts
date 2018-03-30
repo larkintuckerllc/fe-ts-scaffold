@@ -11,7 +11,7 @@ const todoDefault = {
   title: 'title',
   userID: 0,
 };
-interface TodoParams {
+export interface TodoParams {
   completed: boolean;
   id: number;
   title: string;

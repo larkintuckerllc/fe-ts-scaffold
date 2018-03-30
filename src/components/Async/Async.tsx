@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as fromTodos from 'DUCKS/todos';
 import { AppState } from 'STORE/reducers';
+import Todos from './Todos';
 
 interface StateProps {
   todos: List<fromTodos.Todo>;
@@ -20,10 +21,10 @@ export class Connected extends Component<ConnectedProps> {
   }
   render() {
     const { todos } = this.props;
-    window.console.log(todos.toJS());
     return (
       <div>
         <h2>Async</h2>
+        <Todos todos={todos.toJS()} />
       </div>
     );
   }
