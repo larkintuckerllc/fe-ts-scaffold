@@ -2,7 +2,6 @@ import { Button } from 'antd';
 /* tslint:disable-next-line */
 import React from 'react';
 
-/* tslint:disable-next-line */
 export default () => {
   return (
       <div>

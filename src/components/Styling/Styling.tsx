@@ -2,7 +2,6 @@
 import React from 'react';
 import stylesLess from  './styles.less';
 
-/* tslint:disable-next-line */
 export default () => {
   return (
       <div id={stylesLess.root}>

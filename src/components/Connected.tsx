@@ -13,7 +13,6 @@ interface DispatchProps {
 }
 interface ConnectedProps extends StateProps, DispatchProps {
 }
-/* tslint:disable-next-line */
 export class Connected extends Component<ConnectedProps> {
   render() {
     const { counter, decrement, increment } = this.props;

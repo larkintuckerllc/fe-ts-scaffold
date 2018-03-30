@@ -1,12 +1,16 @@
 /* tslint:disable-next-line */
 import React from 'react';
-import kittenJpg from './kitten.jpg';
 
+/*
+interface StateProps {
+}
+interface DispatchProps {
+}
+*/
 export default () => {
   return (
       <div>
-        <h2>Media</h2>
-        <img src={kittenJpg} />
+        <h2>Async</h2>
       </div>
   );
 };

@@ -6,6 +6,7 @@ import * as fromAdder from 'DUCKS/adder';
 import * as fromCounter from 'DUCKS/counter';
 import { AppState } from 'STORE/reducers';
 import Ant from './Ant';
+import Async from './Async';
 import Connected from './Connected';
 import Counter from './Counter';
 import Frame from './Frame';
@@ -35,6 +36,7 @@ export const Page =  ({
   return (
      <Frame>
        <Ant />
+       <Async />
        <Connected />
        <Counter
          counter={counter}

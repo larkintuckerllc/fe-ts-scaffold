@@ -6,7 +6,6 @@ interface CounterProps {
   decrement(): void;
   increment(): void;
 }
-/* tslint:disable-next-line */
 export default ({
   counter,
   decrement,

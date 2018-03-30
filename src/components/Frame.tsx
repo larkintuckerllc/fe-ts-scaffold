@@ -4,7 +4,6 @@ import React from 'react';
 interface FrameProps {
   children: JSX.Element[];
 }
-/* tslint:disable-next-line */
 export default ({
   children,
 }: FrameProps) => {
