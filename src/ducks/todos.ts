@@ -10,17 +10,17 @@ const todoDefault = {
   title: 'title',
   userID: 0,
 };
-interface todoStateParams {
+interface TodoStateParams {
   completed: boolean;
   id: number;
   title: string;
   userID: number;
 }
-export class todoState extends Record(todoDefault) {
-  constructor(params: todoStateParams) {
+export class TodoState extends Record(todoDefault) {
+  constructor(params: TodoStateParams) {
     super(params);
   }
-  get<T extends keyof todoStateParams>(value: T): todoStateParams[T] { 
+  get<T extends keyof TodoStateParams>(value: T): TodoStateParams[T] { 
     return super.get(value);
   }
 }
@@ -32,22 +32,26 @@ export interface FetchTodosRequestAction {
 }
 export interface FetchTodosResponseAction {
   type: 'FETCH_TODOS_RESPONSE';
-  payload: List<todoState>;
+  payload: List<TodoState>;
 }
 const fetchTodosRequest = (): FetchTodosRequestAction => ({
   type: FETCH_TODOS_REQUEST,
 });
-/*
-const fetchTodosResponse = (payload: List<todoState>): FetchTodosResponseAction => ({
+const fetchTodosResponse = (payload: List<TodoState>): FetchTodosResponseAction => ({
   payload,
   type: FETCH_TODOS_RESPONSE,
 });
-*/
 export const fetchTodos = () => (dispatch: (action: AppAction) => void) => {
   dispatch(fetchTodosRequest());
   fromTodos.fetchTodos()
     .then((json) => {
-      console.log(json);
+      const reducer =
+        (
+          accumulator: List<TodoState>,
+          jsonTodo: TodoStateParams,
+        ) => accumulator.push(new TodoState(jsonTodo));
+      const todos = json.reduce(reducer, List<TodoState>([]));
+      dispatch(fetchTodosResponse(todos));
     });
     // TODO: ERROR
 };
@@ -56,20 +60,19 @@ const todosDefault = {
   ids: List<number>([]),
   received: false,
 };
-interface todosStateParams {
+interface TodosStateParams {
   ids: List<number>;
   received: boolean;
 }
-export class todosState extends Record(todosDefault) {
-  constructor(params: todosStateParams) {
+export class TodosState extends Record(todosDefault) {
+  constructor(params: TodosStateParams) {
     super(params);
   }
-  get<T extends keyof todosStateParams>(value: T): todosStateParams[T] { 
+  get<T extends keyof TodosStateParams>(value: T): TodosStateParams[T] { 
     return super.get(value);
   }
 }
-// STATE
-export const todosInitialState = new todosState(todosDefault);
+export const todosInitialState = new TodosState(todosDefault);
 // REDUCER
 const received = (state: boolean, action: AppAction) => {
   switch (action.type) {
@@ -100,7 +103,7 @@ const byId = (state: Map<string, Todo> , action: AppAction) => {
 const ids = (state: List<number>, action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
-      return List(action.payload.map((o: todoState) => o.get('id')));
+      return List(action.payload.map((o: TodoState) => o.get('id')));
     default:
       return state;
   }

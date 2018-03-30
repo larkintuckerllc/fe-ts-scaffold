@@ -6,7 +6,7 @@ import todos, {
   FetchTodosRequestAction,
   FetchTodosResponseAction,
   todosInitialState,
-  todosState,
+  TodosState,
 } from 'DUCKS/todos';
 
 // ACTIONS
@@ -32,7 +32,7 @@ const appStateDefault = {
 interface AppStateParams {
   adder: List<string>;
   counter: number;
-  todos: todosState;
+  todos: TodosState;
 }
 export class AppState extends Record(appStateDefault) {
   constructor(params: AppStateParams) {
