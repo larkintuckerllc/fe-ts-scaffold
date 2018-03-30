@@ -1,9 +1,9 @@
 /* tslint:disable-next-line */
 import React from 'react';
-import { TodoParams } from 'DUCKS/todos';
+import { TodoJS } from 'DUCKS/todos';
 
 interface TodosProps {
-  todos: TodoParams[];
+  todos: TodoJS[];
 }
 export default ({ todos }: TodosProps) => {
   return (

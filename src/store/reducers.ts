@@ -29,16 +29,16 @@ const appStateDefault = {
   counter: counterInitialState,
   todos: todosInitialState,
 };
-interface AppStateParams {
+interface AppStateJS {
   adder: List<string>;
   counter: number;
   todos: TodosState;
 }
 export class AppState extends Record(appStateDefault) {
-  constructor(params: AppStateParams) {
+  constructor(params: AppStateJS) {
     super(params);
   }
-  get<T extends keyof AppStateParams>(value: T): AppStateParams[T] { 
+  get<T extends keyof AppStateJS>(value: T): AppStateJS[T] { 
     return super.get(value);
   }
 }

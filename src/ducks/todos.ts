@@ -11,17 +11,17 @@ const todoDefault = {
   title: 'title',
   userID: 0,
 };
-export interface TodoParams {
+export interface TodoJS {
   completed: boolean;
   id: number;
   title: string;
   userID: number;
 }
 export class Todo extends Record(todoDefault) {
-  constructor(params: TodoParams) {
+  constructor(params: TodoJS) {
     super(params);
   }
-  get<T extends keyof TodoParams>(value: T): TodoParams[T] { 
+  get<T extends keyof TodoJS>(value: T): TodoJS[T] { 
     return super.get(value);
   }
 }
@@ -58,7 +58,7 @@ export const fetchTodos = () => async (dispatch: (action: AppAction) => void) =>
     const reducer =
       (
         accumulator: List<Todo>,
-        jsonTodo: TodoParams,
+        jsonTodo: TodoJS,
       ) => accumulator.push(new Todo(jsonTodo));
     const todos = json.reduce(reducer, List<Todo>([]));
     dispatch(fetchTodosResponse(todos));
@@ -73,17 +73,17 @@ const todosDefault = {
   ids: List<number>([]),
   received: false,
 };
-interface TodosStateParams {
+interface TodosStateJS {
   byId: Map<number, Todo>;
   error: boolean;
   ids: List<number>;
   received: boolean;
 }
 export class TodosState extends Record(todosDefault) {
-  constructor(params: TodosStateParams) {
+  constructor(params: TodosStateJS) {
     super(params);
   }
-  get<T extends keyof TodosStateParams>(value: T): TodosStateParams[T] { 
+  get<T extends keyof TodosStateJS>(value: T): TodosStateJS[T] { 
     return super.get(value);
   }
 }
