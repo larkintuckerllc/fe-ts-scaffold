@@ -1,5 +1,6 @@
 import { AppAction, AppState } from 'STORE/reducers';
 
+// ACTIONS
 const INCREMENT = 'INCREMENT';
 const DECREMENT = 'DECREMENT';
 export interface IncrementAction {
@@ -14,7 +15,9 @@ export const increment = (): IncrementAction => ({
 export const decrement = (): DecrementAction => ({
   type: DECREMENT,
 });
-export const counterDefault = 0;
+// STATE
+export const counterInitialState = 0;
+// REDUCER
 export default (state: number, action: AppAction) => {
   switch (action.type) {
     case INCREMENT:
@@ -25,6 +28,7 @@ export default (state: number, action: AppAction) => {
       return state;
   }
 };
+// SELECTORS
 export const getCounter = (state: AppState) => {
   return state.get('counter');
 };

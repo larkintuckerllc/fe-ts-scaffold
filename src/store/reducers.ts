@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux-immutable';
 import { List, Record } from 'immutable';
-import counter, { counterDefault, IncrementAction, DecrementAction } from 'DUCKS/counter';
-import adder, { adderDefault, AddAction } from 'DUCKS/adder';
-import my, { myInitialState, myState } from 'DUCKS/my';
+import counter, { counterInitialState, IncrementAction, DecrementAction } from 'DUCKS/counter';
+import adder, { adderInitialState, AddAction } from 'DUCKS/adder';
+import todos, { todosInitialState, todosState } from 'DUCKS/todos';
 
 // ACTIONS
 interface InitAction {
@@ -17,17 +17,17 @@ export type AppAction =
   InitAction |
   DecrementAction;
 // STATE
-const appStateDefaults = {
-  adder: adderDefault,
-  counter: counterDefault,
-  my: myInitialState,
+const appStateDefault = {
+  adder: adderInitialState,
+  counter: counterInitialState,
+  todos: todosInitialState,
 };
 interface AppStateParams {
   adder: List<string>;
   counter: number;
-  my: myState;
+  todos: todosState;
 }
-export class AppState extends Record(appStateDefaults) {
+export class AppState extends Record(appStateDefault) {
   constructor(params: AppStateParams) {
     super(params);
   }
@@ -35,11 +35,11 @@ export class AppState extends Record(appStateDefaults) {
     return super.get(value);
   }
 }
-export const initialState = new AppState(appStateDefaults);
+export const initialState = new AppState(appStateDefault);
 // REDUCERS
 const reducers = {
   adder,
   counter,
-  my,
+  todos,
 };
 export default combineReducers(reducers);
