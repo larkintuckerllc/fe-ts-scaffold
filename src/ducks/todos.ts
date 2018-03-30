@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux-immutable';
-import { Record } from 'immutable';
+import { List, Record } from 'immutable';
 import { AppAction } from 'STORE/reducers';
 
 // ACTIONS
@@ -31,10 +31,12 @@ export const fetchTodos = () => (dispatch: (action: AppAction) => void) => {
 };
 // STATE
 const todosDefault = {
-  flag: false,
+  ids: List<Todo>([]),
+  received: false,
 };
 interface todosStateParams {
-  flag: boolean;
+  ids: List<Todo>;
+  received: boolean;
 }
 export class todosState extends Record(todosDefault) {
   constructor(params: todosStateParams) {
@@ -44,11 +46,29 @@ export class todosState extends Record(todosDefault) {
     return super.get(value);
   }
 }
+// STATE
 export const todosInitialState = new todosState(todosDefault);
 // REDUCER
-const flag = (state: any) => {
-  return state;
+const received = (state: boolean, action: AppAction) => {
+  switch (action.type) {
+    case FETCH_TODOS_REQUEST:
+      return true;
+    case FETCH_TODOS_RESPONSE:
+      return false;
+    default:
+      return state;
+  }
+};
+const ids = (state: List<number>, action: AppAction) => {
+  switch (action.type) {
+    case FETCH_TODOS_RESPONSE:
+      return List(action.payload.map((o: Todo) => o.id));
+    default:
+      return state;
+  }
 };
 export default combineReducers({
-  flag,
+  ids,
+  received,
 });
+// SELECTORS
