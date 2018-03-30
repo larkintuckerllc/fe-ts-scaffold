@@ -6,7 +6,7 @@ import * as fromTodos from 'DUCKS/todos';
 import { AppState } from 'STORE/reducers';
 
 interface StateProps {
-  todos: List<fromTodos.TodoState>;
+  todos: List<fromTodos.Todo>;
 }
 interface DispatchProps {
   fetchTodos(): void;

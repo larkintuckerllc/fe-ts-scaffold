@@ -1,5 +1,6 @@
-import { combineReducers } from 'redux-immutable';
 import { List, Map, Record } from 'immutable';
+import { combineReducers } from 'redux-immutable';
+import { createSelector } from 'reselect';
 import { AppAction, AppState } from 'STORE/reducers';
 import * as fromTodos from 'APIS/todos';
 
@@ -10,17 +11,17 @@ const todoDefault = {
   title: 'title',
   userID: 0,
 };
-interface TodoStateParams {
+interface TodoParams {
   completed: boolean;
   id: number;
   title: string;
   userID: number;
 }
-export class TodoState extends Record(todoDefault) {
-  constructor(params: TodoStateParams) {
+export class Todo extends Record(todoDefault) {
+  constructor(params: TodoParams) {
     super(params);
   }
-  get<T extends keyof TodoStateParams>(value: T): TodoStateParams[T] { 
+  get<T extends keyof TodoParams>(value: T): TodoParams[T] { 
     return super.get(value);
   }
 }
@@ -32,37 +33,38 @@ export interface FetchTodosRequestAction {
 }
 export interface FetchTodosResponseAction {
   type: 'FETCH_TODOS_RESPONSE';
-  payload: List<TodoState>;
+  payload: List<Todo>;
 }
 const fetchTodosRequest = (): FetchTodosRequestAction => ({
   type: FETCH_TODOS_REQUEST,
 });
-const fetchTodosResponse = (payload: List<TodoState>): FetchTodosResponseAction => ({
+const fetchTodosResponse = (payload: List<Todo>): FetchTodosResponseAction => ({
   payload,
   type: FETCH_TODOS_RESPONSE,
 });
+// TODO: ASYNC AWAIT
 export const fetchTodos = () => (dispatch: (action: AppAction) => void) => {
   dispatch(fetchTodosRequest());
   fromTodos.fetchTodos()
     .then((json) => {
       const reducer =
         (
-          accumulator: List<TodoState>,
-          jsonTodo: TodoStateParams,
-        ) => accumulator.push(new TodoState(jsonTodo));
-      const todos = json.reduce(reducer, List<TodoState>([]));
+          accumulator: List<Todo>,
+          jsonTodo: TodoParams,
+        ) => accumulator.push(new Todo(jsonTodo));
+      const todos = json.reduce(reducer, List<Todo>([]));
       dispatch(fetchTodosResponse(todos));
     });
     // TODO: ERROR
 };
 // STATE
 const todosDefault = {
-  byId: Map<number, TodoState>({}),
+  byId: Map<number, Todo>({}),
   ids: List<number>([]),
   received: false,
 };
 interface TodosStateParams {
-  byId: Map<number, TodoState>;
+  byId: Map<number, Todo>;
   ids: List<number>;
   received: boolean;
 }
@@ -86,12 +88,12 @@ const received = (state: boolean, action: AppAction) => {
       return state;
   }
 };
-const byId = (state: Map<number, TodoState> , action: AppAction) => {
+const byId = (state: Map<number, Todo> , action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
       const reducer = (
-        accumulator: Map<number, TodoState>,
-        todo: TodoState,
+        accumulator: Map<number, Todo>,
+        todo: Todo,
       ) => accumulator.set(todo.get('id'), todo);
       return action.payload.reduce(reducer, state);
     default:
@@ -101,7 +103,7 @@ const byId = (state: Map<number, TodoState> , action: AppAction) => {
 const ids = (state: List<number>, action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
-      return List(action.payload.map((o: TodoState) => o.get('id')));
+      return List(action.payload.map((o: Todo) => o.get('id')));
     default:
       return state;
   }
@@ -112,16 +114,12 @@ export default combineReducers({
   received,
 });
 // SELECTORS
-// TODO: GETTODOS
-// TODO: RESELECT
-// TODO: GETIN
-// TODO: TEST GETTODO
 export const getTodo = (state: AppState, id: number) => {
   return state.get('todos').get('byId').get(id);
 };
-export const getTodos = (state: AppState) => {
-  const byId = state.get('todos').get('byId');
-  const ids = state.get('todos').get('ids');
-  const final = <List<TodoState>>ids.map(o => byId.get(o));
-  return final;
-};
+const getTodosById = (state: AppState) => state.get('todos').get('byId');
+const getTodosIds = (state: AppState) => state.get('todos').get('ids');
+export const getTodos = createSelector(
+  [getTodosById, getTodosIds],
+  (byId, ids) => <List<Todo>>ids.map(o => byId.get(o)),
+);
