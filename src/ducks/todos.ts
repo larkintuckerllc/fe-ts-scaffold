@@ -3,6 +3,27 @@ import { fromJS, List, Record } from 'immutable';
 import { AppAction } from 'STORE/reducers';
 import * as fromTodos from 'APIS/todos';
 
+// TODO
+const todoDefault = {
+  completed: false,
+  id: 0,
+  title: 'title',
+  userID: 0,
+};
+interface todoStateParams {
+  completed: boolean;
+  id: number;
+  title: string;
+  userID: number;
+}
+export class todoState extends Record(todoDefault) {
+  constructor(params: todoStateParams) {
+    super(params);
+  }
+  get<T extends keyof todoStateParams>(value: T): todoStateParams[T] { 
+    return super.get(value);
+  }
+}
 // ACTIONS
 const FETCH_TODOS_REQUEST = 'FETCH_TODOS_REQUEST';
 const FETCH_TODOS_RESPONSE = 'FETCH_TODOS_RESPONSE';
