@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux-immutable';
-import { fromJS, List, Record } from 'immutable';
+import { List, Record } from 'immutable';
 import { AppAction } from 'STORE/reducers';
 import * as fromTodos from 'APIS/todos';
 
@@ -27,32 +27,28 @@ export class todoState extends Record(todoDefault) {
 // ACTIONS
 const FETCH_TODOS_REQUEST = 'FETCH_TODOS_REQUEST';
 const FETCH_TODOS_RESPONSE = 'FETCH_TODOS_RESPONSE';
-/*
-interface Todo {
-  completed: boolean;
-  id: number;
-  title: string;
-  userID: number;
-}
-*/
 export interface FetchTodosRequestAction {
   type: 'FETCH_TODOS_REQUEST';
 }
 export interface FetchTodosResponseAction {
   type: 'FETCH_TODOS_RESPONSE';
-  payload: List<Map<string, any>>;
+  payload: List<todoState>;
 }
 const fetchTodosRequest = (): FetchTodosRequestAction => ({
   type: FETCH_TODOS_REQUEST,
 });
-const fetchTodosResponse = (payload: List<Map<string,any>>): FetchTodosResponseAction => ({
+/*
+const fetchTodosResponse = (payload: List<todoState>): FetchTodosResponseAction => ({
   payload,
   type: FETCH_TODOS_RESPONSE,
 });
+*/
 export const fetchTodos = () => (dispatch: (action: AppAction) => void) => {
   dispatch(fetchTodosRequest());
   fromTodos.fetchTodos()
-    .then(json => dispatch(fetchTodosResponse(fromJS(json))));
+    .then((json) => {
+      console.log(json);
+    });
     // TODO: ERROR
 };
 // STATE
@@ -104,7 +100,7 @@ const byId = (state: Map<string, Todo> , action: AppAction) => {
 const ids = (state: List<number>, action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
-      return List(action.payload.map((o: Map<string,any>) => o.get('id')));
+      return List(action.payload.map((o: todoState) => o.get('id')));
     default:
       return state;
   }
