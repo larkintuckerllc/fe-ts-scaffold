@@ -1,5 +1,6 @@
 const ENDPOINT = 'https://jsonplaceholder.typicode.com/todos';
-export const fetchTodos = () => {
-  return fetch(ENDPOINT)
-  .then(response => response.json());
+export const fetchTodos = async () => {
+  const response = await fetch(ENDPOINT);
+  const json = await response.json();
+  return json;
 };

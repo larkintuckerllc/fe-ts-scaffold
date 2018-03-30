@@ -51,22 +51,20 @@ const fetchTodosResponse =
       payload,
       type: FETCH_TODOS_RESPONSE,
     });
-// TODO: ASYNC AWAIT
-export const fetchTodos = () => (dispatch: (action: AppAction) => void) => {
+export const fetchTodos = () => async (dispatch: (action: AppAction) => void) => {
   dispatch(fetchTodosRequest());
-  fromTodos.fetchTodos()
-    .then((json) => {
-      const reducer =
-        (
-          accumulator: List<Todo>,
-          jsonTodo: TodoParams,
-        ) => accumulator.push(new Todo(jsonTodo));
-      const todos = json.reduce(reducer, List<Todo>([]));
-      dispatch(fetchTodosResponse(todos));
-    })
-    .catch(() => {
-      dispatch(fetchTodosResponse('500', true));
-    });
+  try {
+    const json = await fromTodos.fetchTodos();
+    const reducer =
+      (
+        accumulator: List<Todo>,
+        jsonTodo: TodoParams,
+      ) => accumulator.push(new Todo(jsonTodo));
+    const todos = json.reduce(reducer, List<Todo>([]));
+    dispatch(fetchTodosResponse(todos));
+  } catch {
+    dispatch(fetchTodosResponse('500', true));
+  }
 };
 // STATE
 const todosDefault = {
