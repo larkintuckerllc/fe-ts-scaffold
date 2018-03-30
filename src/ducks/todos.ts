@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux-immutable';
 import { List, Map, Record } from 'immutable';
-import { AppAction } from 'STORE/reducers';
+import { AppAction, AppState } from 'STORE/reducers';
 import * as fromTodos from 'APIS/todos';
 
 // TODO
@@ -112,4 +112,16 @@ export default combineReducers({
   received,
 });
 // SELECTORS
-// TODO: SELECTORS
+// TODO: GETTODOS
+// TODO: RESELECT
+// TODO: GETIN
+// TODO: TEST GETTODO
+export const getTodo = (state: AppState, id: number) => {
+  return state.get('todos').get('byId').get(id);
+};
+export const getTodos = (state: AppState) => {
+  const byId = state.get('todos').get('byId');
+  const ids = state.get('todos').get('ids');
+  const final = <List<TodoState>>ids.map(o => byId.get(o));
+  return final;
+};

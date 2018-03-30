@@ -1,9 +1,12 @@
+import { List } from 'immutable';
 /* tslint:disable-next-line */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as fromTodos from 'DUCKS/todos';
+import { AppState } from 'STORE/reducers';
 
 interface StateProps {
+  todos: List<fromTodos.TodoState>;
 }
 interface DispatchProps {
   fetchTodos(): void;
@@ -16,6 +19,8 @@ export class Connected extends Component<ConnectedProps> {
     fetchTodos();
   }
   render() {
+    const { todos } = this.props;
+    window.console.log(todos.toJS());
     return (
       <div>
         <h2>Async</h2>
@@ -23,8 +28,9 @@ export class Connected extends Component<ConnectedProps> {
     );
   }
 }
-const mapStateToProps = () => {
+const mapStateToProps = (state: AppState) => {
   return ({
+    todos: fromTodos.getTodos(state),
   });
 };
 const mapDispatchToProps = {
