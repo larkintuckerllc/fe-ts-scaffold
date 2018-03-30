@@ -33,15 +33,24 @@ export interface FetchTodosRequestAction {
 }
 export interface FetchTodosResponseAction {
   type: 'FETCH_TODOS_RESPONSE';
-  payload: List<Todo>;
+  payload: List<Todo> | string;
+  error?: boolean;
 }
 const fetchTodosRequest = (): FetchTodosRequestAction => ({
   type: FETCH_TODOS_REQUEST,
 });
-const fetchTodosResponse = (payload: List<Todo>): FetchTodosResponseAction => ({
-  payload,
-  type: FETCH_TODOS_RESPONSE,
-});
+const fetchTodosResponse =
+  (payload: List<Todo> | string, error?: boolean): FetchTodosResponseAction => 
+  error ?
+    ({
+      payload,
+      type: FETCH_TODOS_RESPONSE,
+      error: true,
+    }) :
+    ({
+      payload,
+      type: FETCH_TODOS_RESPONSE,
+    });
 // TODO: ASYNC AWAIT
 export const fetchTodos = () => (dispatch: (action: AppAction) => void) => {
   dispatch(fetchTodosRequest());
@@ -54,17 +63,21 @@ export const fetchTodos = () => (dispatch: (action: AppAction) => void) => {
         ) => accumulator.push(new Todo(jsonTodo));
       const todos = json.reduce(reducer, List<Todo>([]));
       dispatch(fetchTodosResponse(todos));
+    })
+    .catch(() => {
+      dispatch(fetchTodosResponse('500', true));
     });
-    // TODO: ERROR
 };
 // STATE
 const todosDefault = {
   byId: Map<number, Todo>({}),
+  error: false,
   ids: List<number>([]),
   received: false,
 };
 interface TodosStateParams {
   byId: Map<number, Todo>;
+  error: boolean;
   ids: List<number>;
   received: boolean;
 }
@@ -91,11 +104,13 @@ const received = (state: boolean, action: AppAction) => {
 const byId = (state: Map<number, Todo> , action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
+      if (action.error) return state;
       const reducer = (
         accumulator: Map<number, Todo>,
         todo: Todo,
       ) => accumulator.set(todo.get('id'), todo);
-      return action.payload.reduce(reducer, state);
+      const payload = <List<Todo>>action.payload;
+      return payload.reduce(reducer, state);
     default:
       return state;
   }
@@ -103,13 +118,26 @@ const byId = (state: Map<number, Todo> , action: AppAction) => {
 const ids = (state: List<number>, action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
-      return List(action.payload.map((o: Todo) => o.get('id')));
+      if (action.error) return state;
+      const payload = <List<Todo>>action.payload;
+      return List(payload.map((o: Todo) => o.get('id')));
+    default:
+      return state;
+  }
+};
+const error = (state: boolean, action: AppAction) => {
+  switch (action.type) {
+    case FETCH_TODOS_REQUEST:
+      return false;
+    case FETCH_TODOS_RESPONSE:
+      return (action.error ? true : false);
     default:
       return state;
   }
 };
 export default combineReducers({
   byId,
+  error,
   ids,
   received,
 });
