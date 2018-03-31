@@ -39,4 +39,3 @@ describe('Async component', () => {
     expect(fetchTodos.mock.calls.length).toBe(1);
   });
 });
-

@@ -47,4 +47,3 @@ export default connect<StateProps, DispatchProps>(
   mapStateToProps,
   mapDispatchToProps,
 )(Async);
-
