@@ -27,6 +27,12 @@ describe('Async component', () => {
   it('shallow renders without crashing', () => {
     setup({});
   });
+  it('shallow renders with requested', () => {
+    setup({ requested: true });
+  });
+  it('shallow renders with error', () => {
+    setup({ error: true });
+  });
   it('calls fetchTodos on mount', () => {
     const fetchTodos = jest.fn();
     setup({ fetchTodos });
