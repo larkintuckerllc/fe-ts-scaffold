@@ -21,6 +21,8 @@ const setup = (propOverrides: any) => {
     wrapper: shallow(<Page {...props} />),
   });
 };
-it('shallow renders without crashing', () => {
-  setup({});
+describe('Page component', () => {
+  it('shallow renders without crashing', () => {
+    setup({});
+  });
 });

@@ -6,6 +6,17 @@ import React from 'react';
 import Media from './Media';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
-it('shallow renders without crashing', () => {
-  shallow(<Media />);
+const setup = (propOverrides: any) => {
+  const props = {
+    ...propOverrides,
+  };
+  return ({
+    props,
+    wrapper: shallow(<Media {...props} />),
+  });
+};
+describe('Media component', () => {
+  it('shallow renders without crashing', () => {
+    setup({});
+  });
 });

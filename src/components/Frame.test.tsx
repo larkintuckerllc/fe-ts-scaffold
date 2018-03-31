@@ -6,9 +6,24 @@ import React from 'react';
 import Frame from './Frame';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
-it('shallow renders without crashing', () => {
-  shallow(<Frame>
-    <div>One</div>
-    <div>Two</div>
-  </Frame>);
+const setup = (propOverrides: any) => {
+  const props = {
+    ...propOverrides,
+  };
+  return ({
+    props,
+    wrapper: shallow(
+      <Frame
+        {...props}
+      >
+       <div>one</div>
+       <div>two</div>
+      </Frame>,
+     ),
+  });
+};
+describe('Frame component', () => {
+  it('shallow renders without crashing', () => {
+    setup({});
+  });
 });

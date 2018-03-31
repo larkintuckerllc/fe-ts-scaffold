@@ -6,6 +6,17 @@ import React from 'react';
 import Styling from './Styling';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
-it('shallow renders without crashing', () => {
-  shallow(<Styling />);
+const setup = (propOverrides: any) => {
+  const props = {
+    ...propOverrides,
+  };
+  return ({
+    props,
+    wrapper: shallow(<Styling {...props} />),
+  });
+};
+describe('Styling component', () => {
+  it('shallow renders without crashing', () => {
+    setup({});
+  });
 });

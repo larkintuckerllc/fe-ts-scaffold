@@ -7,6 +7,18 @@ import Todos from './Todos';
 import { todoDefault } from 'DUCKS/todos';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
-it('shallow renders without crashing', () => {
-  shallow(<Todos todos={[todoDefault]}/>);
+const setup = (propOverrides: any) => {
+  const props = {
+    todos: [todoDefault],
+    ...propOverrides,
+  };
+  return ({
+    props,
+    wrapper: shallow(<Todos {...props} />),
+  });
+};
+describe('Todos component', () => {
+  it('shallow renders without crashing', () => {
+    setup({});
+  });
 });
