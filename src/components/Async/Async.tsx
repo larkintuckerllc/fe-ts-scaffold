@@ -14,9 +14,9 @@ interface StateProps {
 interface DispatchProps {
   fetchTodos(): void;
 }
-interface ConnectedProps extends StateProps, DispatchProps {
+interface AsyncProps extends StateProps, DispatchProps {
 }
-export class Connected extends Component<ConnectedProps> {
+export class Async extends Component<AsyncProps> {
   componentDidMount() {
     const { fetchTodos } = this.props;
     fetchTodos();
@@ -46,5 +46,5 @@ const mapDispatchToProps = {
 export default connect<StateProps, DispatchProps>(
   mapStateToProps,
   mapDispatchToProps,
-)(Connected);
+)(Async);
 
