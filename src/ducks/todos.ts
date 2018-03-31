@@ -5,7 +5,7 @@ import { AppAction, AppState } from 'STORE/reducers';
 import * as fromTodos from 'APIS/todos';
 
 // TODO
-const todoDefault = {
+export const todoDefault = {
   completed: false,
   id: 0,
   title: 'title',
@@ -36,10 +36,10 @@ export interface FetchTodosResponseAction {
   payload: List<Todo> | string;
   error?: boolean;
 }
-const fetchTodosRequest = (): FetchTodosRequestAction => ({
+export const fetchTodosRequest = (): FetchTodosRequestAction => ({
   type: FETCH_TODOS_REQUEST,
 });
-const fetchTodosResponse =
+export const fetchTodosResponse =
   (payload: List<Todo> | string, error?: boolean): FetchTodosResponseAction => 
   error ?
     ({
@@ -89,7 +89,7 @@ export class TodosState extends Record(todosDefault) {
 }
 export const todosInitialState = new TodosState(todosDefault);
 // REDUCER
-const requested = (state: boolean, action: AppAction) => {
+export const requested = (state: boolean, action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_REQUEST:
       return true;
@@ -99,7 +99,7 @@ const requested = (state: boolean, action: AppAction) => {
       return state;
   }
 };
-const byId = (state: Map<number, Todo> , action: AppAction) => {
+export const byId = (state: Map<number, Todo> , action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
       if (action.error) return state;
@@ -113,7 +113,7 @@ const byId = (state: Map<number, Todo> , action: AppAction) => {
       return state;
   }
 };
-const ids = (state: List<number>, action: AppAction) => {
+export const ids = (state: List<number>, action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
       if (action.error) return state;
@@ -123,7 +123,7 @@ const ids = (state: List<number>, action: AppAction) => {
       return state;
   }
 };
-const error = (state: boolean, action: AppAction) => {
+export const error = (state: boolean, action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_REQUEST:
       return false;
