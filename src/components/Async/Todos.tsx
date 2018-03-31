@@ -8,7 +8,7 @@ interface TodosProps {
 export default ({ todos }: TodosProps) => {
   return (
       <ul>
-        { todos.map(o => <li>{o.id}</li>)}
+        { todos.map(o => <li key={o.id}>{o.title}</li>)}
       </ul>
   );
 };

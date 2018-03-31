@@ -7,6 +7,8 @@ import { AppState } from 'STORE/reducers';
 import Todos from './Todos';
 
 interface StateProps {
+  error: boolean;
+  requested: boolean;
   todos: List<fromTodos.Todo>;
 }
 interface DispatchProps {
@@ -20,7 +22,9 @@ export class Connected extends Component<ConnectedProps> {
     fetchTodos();
   }
   render() {
-    const { todos } = this.props;
+    const { error, requested, todos } = this.props;
+    if (requested) return <div>Requested</div>;
+    if (error) return <div>Error</div>;
     return (
       <div>
         <h2>Async</h2>
@@ -31,6 +35,8 @@ export class Connected extends Component<ConnectedProps> {
 }
 const mapStateToProps = (state: AppState) => {
   return ({
+    error: fromTodos.getTodosError(state),
+    requested: fromTodos.getTodosRequested(state),
     todos: fromTodos.getTodos(state),
   });
 };

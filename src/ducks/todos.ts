@@ -71,13 +71,13 @@ const todosDefault = {
   byId: Map<number, Todo>({}),
   error: false,
   ids: List<number>([]),
-  received: false,
+  requested: false,
 };
 interface TodosStateJS {
   byId: Map<number, Todo>;
   error: boolean;
   ids: List<number>;
-  received: boolean;
+  requested: boolean;
 }
 export class TodosState extends Record(todosDefault) {
   constructor(params: TodosStateJS) {
@@ -89,7 +89,7 @@ export class TodosState extends Record(todosDefault) {
 }
 export const todosInitialState = new TodosState(todosDefault);
 // REDUCER
-const received = (state: boolean, action: AppAction) => {
+const requested = (state: boolean, action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_REQUEST:
       return true;
@@ -137,9 +137,11 @@ export default combineReducers({
   byId,
   error,
   ids,
-  received,
+  requested,
 });
 // SELECTORS
+export const getTodosRequested = (state: AppState) => state.get('todos').get('requested');
+export const getTodosError = (state: AppState) => state.get('todos').get('error');
 export const getTodo = (state: AppState, id: number) => {
   return state.get('todos').get('byId').get(id);
 };
