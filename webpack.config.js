@@ -2,7 +2,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const tsImportPluginFactory = require('ts-import-plugin');
-const webpack = require('webpack');
 const lessModifyVars = require('./less-modify-vars');
 
 module.exports = env => ({
@@ -106,9 +105,6 @@ module.exports = env => ({
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(env.NODE_ENV),
     }),
   ],
   resolve: {
