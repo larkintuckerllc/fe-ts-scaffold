@@ -46,9 +46,9 @@ export const Page =  ({
        <Listing
          add={add}
          items={adder.toJS()}
-        />
-        <Media />
-        <Styling />
+       />
+       <Media />
+       <Styling />
      </Frame>
   );
 };
