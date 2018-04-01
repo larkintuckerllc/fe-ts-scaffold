@@ -2,13 +2,14 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const tsImportPluginFactory = require('ts-import-plugin');
+const webpack = require('webpack');
 const lessModifyVars = require('./less-modify-vars');
 
 module.exports = env => ({
   devServer: {
     contentBase: './dist',
   },
-  devtool: 'source-map',
+  devtool: env.NODE_ENV === 'production' ? 'source-map' : 'cheap-eval-source-map',
   entry: './src/index.tsx',
   module: {
     rules: [
@@ -98,13 +99,16 @@ module.exports = env => ({
     ],
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: env.NODE_ENV === 'production' ? '[name].[chunkhash].bundle.js' : '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(env.NODE_ENV),
     }),
   ],
   resolve: {
