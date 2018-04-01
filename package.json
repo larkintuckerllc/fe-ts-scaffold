@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode=development --hot --inline --env.NODE_ENV=development",
     "build": "webpack --mode=production --env.NODE_ENV=production",
+    "analyze": "webpack --mode=production --env.NODE_ENV=production --env.analyze",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "test": "jest",
     "coverage": "jest --coverage"
@@ -44,6 +45,7 @@
     "typings-for-css-modules-loader": "^1.7.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.1.1",
+    "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.12",
     "webpack-dev-server": "^3.1.1"
   },
