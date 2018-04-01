@@ -1,5 +1,6 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const tsImportPluginFactory = require('ts-import-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -10,6 +11,10 @@ module.exports = (env) => {
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[id].css',
     }),
   ];
   if (env.analyze) plugins.push(new BundleAnalyzerPlugin());
@@ -45,7 +50,7 @@ module.exports = (env) => {
           test: /node_modules\/.*\.(css|less)$/,
           use: [
             {
-              loader: 'style-loader',
+              loader: MiniCssExtractPlugin.loader,
             },
             {
               loader: 'css-loader',
@@ -68,7 +73,7 @@ module.exports = (env) => {
           exclude: /node_modules/,
           use: [
             {
-              loader: 'style-loader',
+              loader: MiniCssExtractPlugin.loader,
             },
             {
               loader: 'typings-for-css-modules-loader',
