@@ -14,6 +14,12 @@ module.exports = env => ({
     rules: [
       {
         test: /\.(tsx?)$/,
+        enforce: 'pre',
+        exclude: /node_modules/,
+        loader: 'tslint-loader',
+      },
+      {
+        test: /\.(tsx?)$/,
         exclude: /node_modules/,
         loader: 'ts-loader',
         options: {

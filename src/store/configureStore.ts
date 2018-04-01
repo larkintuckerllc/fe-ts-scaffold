@@ -12,4 +12,4 @@ const enhancer = compose(
 );
 export default () => {
   return createStore(reducers, initialState, enhancer);
-}
+};

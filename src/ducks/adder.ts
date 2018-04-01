@@ -21,7 +21,7 @@ export default (state: List<string>, action: AppAction) => {
     default:
       return state;
   }
-}
+};
 // SELECTORS
 export const getAdder = (state: AppState) => {
   return state.get('adder');
