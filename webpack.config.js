@@ -52,7 +52,9 @@ module.exports = (env) => {
           test: /node_modules\/.*\.(css|less)$/,
           use: [
             {
-              loader: MiniCssExtractPlugin.loader,
+              loader: env.NODE_ENV === 'production' ?
+                MiniCssExtractPlugin.loader :
+                'style-loader',
             },
             {
               loader: 'css-loader',
@@ -75,7 +77,9 @@ module.exports = (env) => {
           exclude: /node_modules/,
           use: [
             {
-              loader: MiniCssExtractPlugin.loader,
+              loader: env.NODE_ENV === 'production' ?
+                MiniCssExtractPlugin.loader :
+                'style-loader',
             },
             {
               loader: 'typings-for-css-modules-loader',
