@@ -6,30 +6,56 @@ import React from 'react';
 import { Connected } from './Connected';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
-const setup = (propOverrides: any) => {
-  const props = {
-    counter: 0,
-    decrement: jest.fn(),
-    increment: jest.fn(),
-    ...propOverrides,
-  };
-  return ({
-    props,
-    wrapper: shallow(<Connected {...props} />),
-  });
-}; 
+const getDefaultProps = () => ({
+  counter: 0,
+  decrement: jest.fn(),
+  increment: jest.fn(),
+});
 describe('Connected component', () => {
   it('shallow renders without crashing', () => {
-    setup({});
+    const {
+      counter,
+      decrement,
+      increment,
+    } = getDefaultProps();
+    shallow((
+      <Connected
+        counter={counter}
+        decrement={decrement}
+        increment={increment}
+      />
+    ));
   });
-  it('calls decrement on rootDecrement click', () => {
-    const { props: { decrement }, wrapper } = setup({});
-    wrapper.find('#rootDecrement').simulate('click');
+  it('calls decrement on test_decrement click', () => {
+    const {
+      counter,
+      decrement,
+      increment,
+    } = getDefaultProps();
+    const wrapper = shallow((
+      <Connected
+        counter={counter}
+        decrement={decrement}
+        increment={increment}
+      />
+    ));
+    wrapper.find('#test_decrement').simulate('click');
     expect(decrement.mock.calls).toHaveLength(1);
   });
-  it('calls increment on rootIncrement click', () => {
-    const { props: { increment }, wrapper } = setup({});
-    wrapper.find('#rootIncrement').simulate('click');
+  it('calls increment on test_increment click', () => {
+    const {
+      counter,
+      decrement,
+      increment,
+    } = getDefaultProps();
+    const wrapper = shallow((
+      <Connected
+        counter={counter}
+        decrement={decrement}
+        increment={increment}
+      />
+    ));
+    wrapper.find('#test_increment').simulate('click');
     expect(increment.mock.calls).toHaveLength(1);
   });
 });

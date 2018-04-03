@@ -15,34 +15,34 @@ describe('Counter component', () => {
   it('shallow renders without crashing', () => {
     const { counter, decrement, increment } = getDefaultProps();
     shallow((
-     <Counter
-       counter={counter}
-       decrement={decrement}
-       increment={increment}
-     />),
-    );
+      <Counter
+        counter={counter}
+        decrement={decrement}
+        increment={increment}
+      />
+    ));
   });
-  it('calls decrement on rootDecrement click', () => {
+  it('calls decrement on root_decrement click', () => {
     const { counter, decrement, increment } = getDefaultProps();
     const wrapper = shallow((
-     <Counter
-       counter={counter}
-       decrement={decrement}
-       increment={increment}
-     />),
-    );
+      <Counter
+        counter={counter}
+        decrement={decrement}
+        increment={increment}
+      />
+    ));
     wrapper.find('#test_decrement').simulate('click');
     expect(decrement.mock.calls).toHaveLength(1);
   });
-  it('calls increment on rootIncrement click', () => {
+  it('calls increment on root_increment click', () => {
     const { counter, decrement, increment } = getDefaultProps();
     const wrapper = shallow((
-     <Counter
-       counter={counter}
-       decrement={decrement}
-       increment={increment}
-     />),
-    );
+      <Counter
+        counter={counter}
+        decrement={decrement}
+        increment={increment}
+      />
+    ));
     wrapper.find('#test_increment').simulate('click');
     expect(increment.mock.calls).toHaveLength(1);
   });

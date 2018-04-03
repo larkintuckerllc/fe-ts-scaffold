@@ -7,22 +7,31 @@ import React from 'react';
 import { Page } from './Page';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
-const setup = (propOverrides: any) => {
-  const props = {
-    add: jest.fn(),
-    adder: List<string>([]),
-    counter: 0,
-    decrement: jest.fn(),
-    increment: jest.fn(),
-    ...propOverrides,
-  };
-  return ({
-    props,
-    wrapper: shallow(<Page {...props} />),
-  });
-};
+const getDefaultProps = () => ({
+  add: jest.fn(),
+  adder: List<string>([]),
+  counter: 0,
+  decrement: jest.fn(),
+  increment: jest.fn(),
+});
 describe('Page component', () => {
   it('shallow renders without crashing', () => {
-    setup({});
+    const {
+      add,
+      adder,
+      counter,
+      decrement,
+      increment,
+    } = getDefaultProps();
+    shallow((
+      <Page
+        add={add}
+        adder={adder}
+        counter={counter}
+        decrement={decrement}
+        increment={increment}
+      />
+    ));
   });
 });
+

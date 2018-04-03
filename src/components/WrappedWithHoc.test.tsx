@@ -6,22 +6,27 @@ import React from 'react';
 import { Wrapped } from './WrappedWithHoc';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
-const setup = (propOverrides: any) => {
-  const props = {
-    clickCount: 0,
-    text: 'hello world',
-    ...propOverrides,
-  };
-  return ({
-    props,
-    wrapper: shallow(<Wrapped  {...props} />),
-  });
-};
+const getDefaultProps = () => ({
+  clickCount: 0,
+  text: 'hello world',
+});
 describe('Wrapped component', () => {
   it('shallow renders without crashing', () => {
-    setup({});
+    const { clickCount, text } = getDefaultProps();
+    shallow((
+      <Wrapped
+        clickCount={clickCount}
+        text={text}
+      />
+    ));
   });
   it('shallow renders with clickCount >= 5 without crashing', () => {
-    setup({ clickCount: 5 });
+    const { text } = getDefaultProps();
+    shallow((
+      <Wrapped
+        clickCount={5}
+        text={text}
+      />
+    ));
   });
 });

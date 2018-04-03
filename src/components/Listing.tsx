@@ -8,14 +8,14 @@ interface ListingProps {
 export default class Listing extends Component<ListingProps> {
   addItem = () => {
     const { add } = this.props;
-    add('Hello There');
+    add('Hello World');
   }
   render() {
     const { items } = this.props;
     return (
       <div>
         <h2>Listing</h2>
-        <button id="rootAdd" onClick={this.addItem}>Add</button>
+        <button id="test_add" onClick={this.addItem}>Add</button>
         <ul>
           {items.map((o, i) => <li key={i}>{o}</li>)}
         </ul>

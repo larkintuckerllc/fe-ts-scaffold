@@ -8,34 +8,76 @@ import { Todo, todoDefault } from 'DUCKS/todos';
 import { Async } from './Async';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
-const setup = (propOverrides: any) => {
-  const props = {
-    error: false,
-    fetchTodos: () => {},
-    requested: false,
-    todos: sampleTodos,
-    ...propOverrides,
-  };
-  return ({
-    props,
-    wrapper: shallow(<Async {...props} />),
-  });
-}; 
 const sampleTodo = new Todo(todoDefault);
 const sampleTodos = List([sampleTodo]);
+const getDefaultProps = () => ({
+  error: false,
+  fetchTodos: jest.fn(),
+  requested: false,
+  todos: sampleTodos,
+});
 describe('Async component', () => {
   it('shallow renders without crashing', () => {
-    setup({});
+    const {
+      error,
+      fetchTodos,
+      requested,
+      todos,
+    } = getDefaultProps();
+    shallow((
+      <Async
+        error={error}
+        fetchTodos={fetchTodos}
+        requested={requested}
+        todos={todos}
+      />
+    ));
   });
   it('shallow renders with requested', () => {
-    setup({ requested: true });
+    const {
+      error,
+      fetchTodos,
+      todos,
+    } = getDefaultProps();
+    shallow((
+      <Async
+        error={error}
+        fetchTodos={fetchTodos}
+        requested={false}
+        todos={todos}
+      />
+    ));
   });
   it('shallow renders with error', () => {
-    setup({ error: true });
+    const {
+      fetchTodos,
+      requested,
+      todos,
+    } = getDefaultProps();
+    shallow((
+      <Async
+        error={true}
+        fetchTodos={fetchTodos}
+        requested={requested}
+        todos={todos}
+      />
+    ));
   });
   it('calls fetchTodos on mount', () => {
-    const fetchTodos = jest.fn();
-    setup({ fetchTodos });
+    const {
+      error,
+      fetchTodos,
+      requested,
+      todos,
+    } = getDefaultProps();
+    shallow((
+      <Async
+        error={error}
+        fetchTodos={fetchTodos}
+        requested={requested}
+        todos={todos}
+      />
+    ));
     expect(fetchTodos.mock.calls.length).toBe(1);
   });
 });

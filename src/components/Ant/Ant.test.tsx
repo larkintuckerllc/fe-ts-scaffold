@@ -6,17 +6,14 @@ import React from 'react';
 import Ant from './Ant';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
-const setup = (propOverrides: any) => {
-  const props = {
-    ...propOverrides,
-  };
-  return ({
-    props,
-    wrapper: shallow(<Ant {...props} />),
-  });
-};
+const getDefaultProps = () => ({
+});
 describe('Ant component', () => {
   it('shallow renders without crashing', () => {
-    setup({});
+    const {} = getDefaultProps();
+    shallow((
+      <Ant
+      />
+    ));
   });
 });
