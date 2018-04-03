@@ -13,6 +13,7 @@ import Frame from './Frame';
 import Listing from './Listing';
 import Media from './Media';
 import Styling from './Styling';
+import WrappedWithHoc from './WrappedWithHoc';
 
 interface StateProps {
   adder: List<string>;
@@ -49,6 +50,7 @@ export const Page =  ({
        />
        <Media />
        <Styling />
+       <WrappedWithHoc style={{ color: 'red' }} text="wow" />
      </Frame>
   );
 };
