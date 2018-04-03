@@ -12,6 +12,7 @@ import Counter from './Counter';
 import Frame from './Frame';
 import Listing from './Listing';
 import Media from './Media';
+import Stateful from './Stateful';
 import Styling from './Styling';
 import WrappedWithHoc from './WrappedWithHoc';
 
@@ -49,6 +50,7 @@ export const Page =  ({
          items={adder.toJS()}
        />
        <Media />
+       <Stateful />
        <Styling />
        <WrappedWithHoc style={{ color: 'red' }} text="wow" />
      </Frame>
