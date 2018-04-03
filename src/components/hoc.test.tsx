@@ -5,40 +5,40 @@ import Enzyme, { shallow } from 'enzyme';
 import React from 'react';
 import { InjectedProps, hoc } from './hoc';
 
+Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 interface WrappedProps {
   text: string;
 }
-Enzyme.configure({ adapter: new enzymeAdapterReact16() });
-const setup = (optionsOverrides: any) => {
-  /* tslint:disable-next-line */
-  const Wrapped = (props: WrappedProps & InjectedProps) => {
-    const { clickCount, text } = props;
-    return (
-      <div>
-        <p>{text}</p>
-        {clickCount >= 5 ? 'Easy there!' : 'Bring it!'}
-      </div>
-    );
-  };
-  const options = {
-    ...optionsOverrides,
-  };
-  /* tslint:disable-next-line */
-  const WrappedWithHoc = hoc(options)(Wrapped);
-  return ({
-    options,
-    wrapper: shallow(<WrappedWithHoc text="wow" />),
-  });
+/* tslint:disable-next-line */
+const Wrapped = (props: WrappedProps & InjectedProps) => {
+  const { clickCount, text } = props;
+  return (
+    <div>
+      <div>{text}</div>
+      <div>{clickCount.toString()}</div>
+    </div>
+  );
 };
-describe('Wrapped component', () => {
+/* tslint:disable-next-line */
+const WrappedWithHoc = hoc()(Wrapped);
+/* tslint:disable-next-line */
+const WrappedWithHocDebug = hoc({ debug: true })(Wrapped);
+const getDefaultProps = () => ({
+  text: 'hello world',
+});
+describe('hoc HOC component', () => {
   it('shallow renders without crashing', () => {
-    setup({});
+    const { text } = getDefaultProps();
+    shallow(<WrappedWithHoc text={text} />);
   });
-  it('XXX', () => {
-    const { wrapper } = setup({});
-    wrapper.find('#root').simulate('click');
+  it('handles click', () => {
+    const { text } = getDefaultProps();
+    const wrapper = shallow(<WrappedWithHoc text={text} />);
+    wrapper.find('#test_root').simulate('click');
   });
-  it('XXX', () => {
-    const { wrapper } = setup({ debug: true });
-    wrapper.find('#root').simulate('click');
+  it('handles click with debug', () => {
+    const { text } = getDefaultProps();
+    const wrapper = shallow(<WrappedWithHocDebug text={text} />);
+    wrapper.find('#test_root').simulate('click');
+  });
 });
