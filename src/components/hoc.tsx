@@ -38,7 +38,7 @@ export const hoc = ({ debug = false }: Options = {}) =>
         const { style } = this.props;
         const { clickCount } = this.state;
         return (
-          <div onClick={this.handleClick} style={style}>
+          <div id="root" onClick={this.handleClick} style={style}>
             <span>Clicked {clickCount} times</span>
             <WrappedComponent {...this.props} {...this.state} />
           </div>

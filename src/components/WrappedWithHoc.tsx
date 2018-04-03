@@ -2,11 +2,11 @@
 import React from 'react';
 import { hoc, InjectedProps } from './hoc';
 
-interface WrappedProps {
+export interface WrappedProps {
   text: string;
 }
 /* tslint:disable-next-line */
-const Wrapped = (props: WrappedProps & InjectedProps) => {
+export const Wrapped = (props: WrappedProps & InjectedProps) => {
   const { clickCount, text } = props;
   return (
     <div>
