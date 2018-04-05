@@ -29,10 +29,10 @@ export class Todo extends Record(todoDefault) {
 const FETCH_TODOS_REQUEST = 'FETCH_TODOS_REQUEST';
 const FETCH_TODOS_RESPONSE = 'FETCH_TODOS_RESPONSE';
 export interface FetchTodosRequestAction {
-  type: 'FETCH_TODOS_REQUEST';
+  type: typeof FETCH_TODOS_REQUEST;
 }
 export interface FetchTodosResponseAction {
-  type: 'FETCH_TODOS_RESPONSE';
+  type: typeof FETCH_TODOS_RESPONSE;
   payload: List<Todo> | string;
   error?: boolean;
 }

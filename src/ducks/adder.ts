@@ -4,7 +4,7 @@ import { List } from 'immutable';
 // ACTIONS
 const ADD = 'ADD';
 export interface AddAction {
-  type: 'ADD';
+  type: typeof ADD;
   payload: string;
 }
 export const add = (value: string): AddAction => ({

@@ -4,10 +4,10 @@ import { AppAction, AppState } from 'STORE/reducers';
 const INCREMENT = 'INCREMENT';
 const DECREMENT = 'DECREMENT';
 export interface IncrementAction {
-  type: 'INCREMENT';
+  type: typeof INCREMENT;
 }
 export interface DecrementAction {
-  type: 'DECREMENT';
+  type: typeof DECREMENT;
 }
 export const increment = (): IncrementAction => ({
   type: INCREMENT,
