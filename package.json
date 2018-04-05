@@ -8,8 +8,8 @@
     "build": "webpack --mode=production --env.NODE_ENV=production",
     "analyze": "webpack --mode=production --env.NODE_ENV=production --env.analyze",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
-    "test": "jest",
-    "coverage": "jest --coverage"
+    "test": "NODE_ENV=production jest",
+    "coverage": "NODE_ENV=production jest --coverage"
   },
   "author": "",
   "license": "ISC",
@@ -55,7 +55,7 @@
     "@types/react-dom": "^16.0.4",
     "@types/react-redux": "^5.0.15",
     "@types/redux-immutable": "^3.0.38",
-    "antd": "^3.2.1",
+    "antd": "^3.4.0",
     "babel-polyfill": "^6.26.0",
     "immutable": "^3.8.2",
     "react": "^16.2.0",
