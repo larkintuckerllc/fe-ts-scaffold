@@ -15,9 +15,11 @@ import { combineReducers } from 'redux-immutable';
 interface InitAction {
   type: '@@INIT';
 }
+
 export const init = (): InitAction => ({
   type: '@@INIT',
 });
+
 export type AppAction =
   AddAction |
   DecrementAction |
@@ -25,17 +27,20 @@ export type AppAction =
   // FetchTodosResponseAction |
   IncrementAction |
   InitAction;
+
 // STATE
 const appStateDefault = {
   adder: adderInitialState,
   counter: counterInitialState,
   // todos: todosInitialState,
 };
+
 interface AppStateJS {
   adder: List<string>;
   counter: number;
   // todos: TodosState;
 }
+
 export class AppState extends Record(appStateDefault) {
   constructor(params: AppStateJS) {
     super(params);
@@ -44,6 +49,7 @@ export class AppState extends Record(appStateDefault) {
     return super.get(value);
   }
 }
+
 export const initialState = new AppState(appStateDefault);
 // REDUCERS
 const reducers = {
@@ -51,4 +57,5 @@ const reducers = {
   counter,
   // todos,
 };
+
 export default combineReducers(reducers);

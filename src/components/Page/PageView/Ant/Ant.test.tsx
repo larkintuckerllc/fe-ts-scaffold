@@ -4,9 +4,12 @@ import React from 'react';
 import Ant from './Ant';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
+
 const getDefaultProps = () => ({
 });
+
 describe('Ant component', () => {
+
   it('shallow renders without crashing', () => {
     const {} = getDefaultProps();
     shallow((
@@ -14,4 +17,5 @@ describe('Ant component', () => {
       />
     ));
   });
+
 });

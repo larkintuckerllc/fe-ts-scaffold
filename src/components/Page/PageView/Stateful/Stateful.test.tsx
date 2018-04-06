@@ -4,9 +4,12 @@ import React from 'react';
 import Stateful from './Stateful';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
+
 const getDefaultProps = () => ({
 });
+
 describe('Stateful component', () => {
+
   it('shallow renders without crashing', () => {
     const {} = getDefaultProps();
     shallow((
@@ -14,6 +17,7 @@ describe('Stateful component', () => {
       />
     ));
   });
+
   it('handles test_increment click', () => {
     const {} = getDefaultProps();
     const wrapper = shallow((
@@ -22,6 +26,7 @@ describe('Stateful component', () => {
     ));
     wrapper.find('#test_increment').simulate('click');
   });
+
   it('handles test_decrement click', () => {
     const {} = getDefaultProps();
     const wrapper = shallow((
@@ -30,4 +35,5 @@ describe('Stateful component', () => {
     ));
     wrapper.find('#test_decrement').simulate('click');
   });
+
 });

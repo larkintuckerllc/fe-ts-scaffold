@@ -3,6 +3,7 @@ import React from 'react';
 interface FrameProps {
   children: JSX.Element[];
 }
+
 export default ({
   children,
 }: FrameProps) => {

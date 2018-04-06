@@ -5,6 +5,7 @@ interface CounterProps {
   decrement(): void;
   increment(): void;
 }
+
 export default ({
   counter,
   decrement,

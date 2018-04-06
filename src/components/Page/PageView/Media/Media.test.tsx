@@ -4,9 +4,12 @@ import React from 'react';
 import Media from './Media';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
+
 const getDefaultProps = () => ({
 });
+
 describe('Media component', () => {
+
   it('shallow renders without crashing', () => {
     const {} = getDefaultProps();
     shallow((
@@ -14,4 +17,5 @@ describe('Media component', () => {
       />
     ));
   });
+
 });

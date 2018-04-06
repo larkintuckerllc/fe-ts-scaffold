@@ -4,11 +4,14 @@ import React from 'react';
 import Listing from './Listing';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
+
 const getDefaultProps = () => ({
   add: jest.fn(),
   items: ['Hello World'],
 });
+
 describe('Listing component', () => {
+
   it('shallow renders without crashing', () => {
     const { add, items } = getDefaultProps();
     shallow((
@@ -18,6 +21,7 @@ describe('Listing component', () => {
       />
     ));
   });
+
   it('shallow renders without crashing', () => {
     const { add, items } = getDefaultProps();
     const wrapper = shallow((
@@ -30,4 +34,5 @@ describe('Listing component', () => {
     expect(add.mock.calls).toHaveLength(1);
     expect(add.mock.calls[0][0]).toBe('Hello World');
   });
+
 });

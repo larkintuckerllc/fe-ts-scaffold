@@ -3,15 +3,19 @@ import React, { Component } from 'react';
 interface ExternalProps {
   style?: React.CSSProperties;
 }
+
 export interface InjectedProps {
   clickCount: number;
 }
+
 interface State {
   clickCount: number;
 }
+
 interface Options {
   debug?: boolean;
 }
+
 export const hoc = ({ debug = false }: Options = {}) =>
   <TOriginalProps extends {}>(
     WrappedComponent: (React.ComponentClass<TOriginalProps & InjectedProps>
@@ -19,6 +23,7 @@ export const hoc = ({ debug = false }: Options = {}) =>
   ) => {
     type ResultProps = TOriginalProps & ExternalProps;
     const result = class ClickCounted extends Component<ResultProps, State> {
+
       public static displayName = `ClickCounted(${WrappedComponent.displayName || WrappedComponent.name})`;
 
       constructor(props: ResultProps) {
@@ -27,6 +32,7 @@ export const hoc = ({ debug = false }: Options = {}) =>
           clickCount: 0,
         };
       }
+
       public render() {
         const { style } = this.props;
         const { clickCount } = this.state;
@@ -40,6 +46,7 @@ export const hoc = ({ debug = false }: Options = {}) =>
           </div>
         );
       }
+
       private handleClick = () => {
         if (debug) {
           /* tslint:disable-next-line */
@@ -47,6 +54,9 @@ export const hoc = ({ debug = false }: Options = {}) =>
         }
         this.setState((state) => ({ clickCount: state.clickCount + 1 }));
       }
+
     };
+
     return result;
+
   };

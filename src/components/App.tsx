@@ -4,6 +4,7 @@ import configureStore from 'STORE/configureStore';
 import Page from './Page';
 
 const store = configureStore();
+
 export default () => {
   return (
     <Provider store={store}>

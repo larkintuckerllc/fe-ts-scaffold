@@ -4,12 +4,15 @@ import React from 'react';
 import AnotherCounterView from './AnotherCounterView';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
+
 const getDefaultProps = () => ({
   counter: 0,
   decrement: jest.fn(),
   increment: jest.fn(),
 });
+
 describe('Counter component', () => {
+
   it('shallow renders without crashing', () => {
     const {
       counter,
@@ -24,6 +27,7 @@ describe('Counter component', () => {
       />
     ));
   });
+
   it('calls decrement on test_decrement click', () => {
     const {
       counter,
@@ -40,6 +44,7 @@ describe('Counter component', () => {
     wrapper.find('#test_decrement').simulate('click');
     expect(decrement.mock.calls).toHaveLength(1);
   });
+
   it('calls increment on test_increment click', () => {
     const {
       counter,
@@ -56,4 +61,5 @@ describe('Counter component', () => {
     wrapper.find('#test_increment').simulate('click');
     expect(increment.mock.calls).toHaveLength(1);
   });
+
 });

@@ -18,6 +18,7 @@ interface PageViewProps {
   decrement(): void;
   increment(): void;
 }
+
 export default ({
   add,
   adder,

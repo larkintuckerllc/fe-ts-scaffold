@@ -4,9 +4,11 @@ import React from 'react';
 import { hoc, InjectedProps } from './hoc';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
+
 interface WrappedProps {
   text: string;
 }
+
 const Wrapped = (props: WrappedProps & InjectedProps) => {
   const { clickCount, text } = props;
   return (
@@ -16,12 +18,17 @@ const Wrapped = (props: WrappedProps & InjectedProps) => {
     </div>
   );
 };
+
 const WrappedWithHoc = hoc()(Wrapped);
+
 const WrappedWithHocDebug = hoc({ debug: true })(Wrapped);
+
 const getDefaultProps = () => ({
   text: 'hello world',
 });
+
 describe('hoc HOC component', () => {
+
   it('shallow renders without crashing', () => {
     const { text } = getDefaultProps();
     shallow((
@@ -30,6 +37,7 @@ describe('hoc HOC component', () => {
       />
     ));
   });
+
   it('handles click', () => {
     const { text } = getDefaultProps();
     const wrapper = shallow((
@@ -39,6 +47,7 @@ describe('hoc HOC component', () => {
     ));
     wrapper.find('#test_root').simulate('click');
   });
+
   it('handles click with debug', () => {
     const { text } = getDefaultProps();
     const wrapper = shallow((
@@ -48,4 +57,5 @@ describe('hoc HOC component', () => {
     ));
     wrapper.find('#test_root').simulate('click');
   });
+
 });

@@ -4,7 +4,9 @@ interface ListingProps {
   items: string[];
   add(value: string): void;
 }
+
 export default class Listing extends Component<ListingProps> {
+
   public render() {
     const { items } = this.props;
     return (
@@ -17,8 +19,10 @@ export default class Listing extends Component<ListingProps> {
       </div>
     );
   }
+
   private addItem = () => {
     const { add } = this.props;
     add('Hello World');
   }
+
 }

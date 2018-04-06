@@ -4,6 +4,7 @@ import App from './App';
 
 // jest.mock('APIS/todos');
 describe('App component', () => {
+
   it('renders without crashing', () => {
     // const todos = require('APIS/todos');
     // todos.setError(false);
@@ -11,4 +12,5 @@ describe('App component', () => {
     render(<App />, div);
     unmountComponentAtNode(div);
   });
+
 });

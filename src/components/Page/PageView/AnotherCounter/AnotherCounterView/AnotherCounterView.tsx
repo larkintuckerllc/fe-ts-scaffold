@@ -5,7 +5,9 @@ interface CounterProps {
   decrement(): void;
   increment(): void;
 }
+
 export default class Counter extends Component<CounterProps> {
+
   public render() {
     const { counter, decrement, increment } = this.props;
     return (
@@ -17,4 +19,5 @@ export default class Counter extends Component<CounterProps> {
       </div>
     );
   }
+
 }

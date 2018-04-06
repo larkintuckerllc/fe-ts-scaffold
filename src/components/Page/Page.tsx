@@ -9,22 +9,26 @@ interface StateProps {
   adder: List<string>;
   counter: number;
 }
+
 interface DispatchProps {
   add(value: string): void;
   decrement(): void;
   increment(): void;
 }
+
 const mapStateToProps = (state: AppState) => {
   return ({
     adder: fromAdder.getAdder(state),
     counter: fromCounter.getCounter(state),
   });
 };
+
 const mapDispatchToProps = {
   add: fromAdder.add,
   decrement: fromCounter.decrement,
   increment: fromCounter.increment,
 };
+
 export default connect<StateProps, DispatchProps>(
   mapStateToProps,
   mapDispatchToProps,

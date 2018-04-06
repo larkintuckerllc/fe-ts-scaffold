@@ -3,10 +3,13 @@ import React, { Component } from 'react';
 interface StatefulState {
   counter: number;
 }
+
 export default class Stateful extends Component<{}, StatefulState> {
+
   public state: StatefulState = {
     counter: 0,
   };
+
   public render() {
     const { counter } = this.state;
     return (
@@ -18,16 +21,19 @@ export default class Stateful extends Component<{}, StatefulState> {
       </div>
     );
   }
+
   private handleIncrementClick = () => {
     const { counter } = this.state;
     this.setState({
       counter: counter + 1,
     });
   }
+
   private handleDecrementClick = () => {
     const { counter } = this.state;
     this.setState({
       counter: counter - 1,
     });
   }
+
 }

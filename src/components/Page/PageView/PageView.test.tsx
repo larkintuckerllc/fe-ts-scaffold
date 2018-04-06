@@ -5,6 +5,7 @@ import React from 'react';
 import PageView from './PageView';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
+
 const getDefaultProps = () => ({
   add: jest.fn(),
   adder: List<string>([]),
@@ -12,7 +13,9 @@ const getDefaultProps = () => ({
   decrement: jest.fn(),
   increment: jest.fn(),
 });
+
 describe('PageView component', () => {
+
   it('shallow renders without crashing', () => {
     const {
       add,
@@ -31,4 +34,5 @@ describe('PageView component', () => {
       />
     ));
   });
+
 });
