@@ -2,7 +2,7 @@ import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import { List } from 'immutable';
 import React from 'react';
-import { Page } from './Page';
+import PageView from './PageView';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 const getDefaultProps = () => ({
@@ -12,7 +12,7 @@ const getDefaultProps = () => ({
   decrement: jest.fn(),
   increment: jest.fn(),
 });
-describe('Page component', () => {
+describe('PageView component', () => {
   it('shallow renders without crashing', () => {
     const {
       add,
@@ -22,7 +22,7 @@ describe('Page component', () => {
       increment,
     } = getDefaultProps();
     shallow((
-      <Page
+      <PageView
         add={add}
         adder={adder}
         counter={counter}
