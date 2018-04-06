@@ -1,18 +1,4 @@
-import { hoc, InjectedProps } from 'COMPONENTS/hoc';
-import React from 'react';
+import { hoc } from 'COMPONENTS/hoc';
+import Wrapped from './Wrapped';
 
-export interface WrappedProps {
-  text: string;
-}
-export const Wrapped = (props: WrappedProps & InjectedProps) => {
-  const { clickCount, text } = props;
-  return (
-    <div>
-      <p>{text}</p>
-      <p>
-        {clickCount >= 5 ? 'Easy there!' : 'Bring it!'}
-      </p>
-    </div>
-  );
-};
 export default hoc()(Wrapped);
