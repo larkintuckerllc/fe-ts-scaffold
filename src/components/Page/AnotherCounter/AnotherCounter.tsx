@@ -1,7 +1,7 @@
 import * as fromCounter from 'DUCKS/counter';
 import { connect } from 'react-redux';
 import { AppState } from 'STORE/reducers';
-import Counter from './Counter';
+import AnotherCounterView from './AnotherCounterView';
 
 interface StateProps {
   counter: number;
@@ -22,4 +22,4 @@ const mapDispatchToProps = {
 export default connect<StateProps, DispatchProps>(
   mapStateToProps,
   mapDispatchToProps,
-)(Counter);
+)(AnotherCounterView);

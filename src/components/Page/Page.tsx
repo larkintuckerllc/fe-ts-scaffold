@@ -4,16 +4,16 @@ import { List } from 'immutable';
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from 'STORE/reducers';
+import AnotherCounter from './AnotherCounter';
 import Ant from './Ant';
 // import Async from './Async';
-import Connected from './Connected';
 import Counter from './Counter';
 import Frame from './Frame';
 import Listing from './Listing';
 import Media from './Media';
 import Stateful from './Stateful';
 import Styling from './Styling';
-import WrappedWithHoc from './WrappedWithHoc';
+// import Wrapped from './Wrapped';
 
 interface StateProps {
   adder: List<string>;
@@ -37,7 +37,7 @@ export const Page =  ({
   return (
      <Frame>
        <Ant />
-       <Connected />
+       <AnotherCounter />
        <Counter
          counter={counter}
          decrement={decrement}
@@ -50,7 +50,6 @@ export const Page =  ({
        <Media />
        <Stateful />
        <Styling />
-       <WrappedWithHoc style={{ color: 'red' }} text="wow" />
      </Frame>
   );
 };

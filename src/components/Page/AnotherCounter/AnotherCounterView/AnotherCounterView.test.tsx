@@ -1,7 +1,7 @@
 import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import React from 'react';
-import Counter from './Counter';
+import AnotherCounterView from './AnotherCounterView';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 const getDefaultProps = () => ({
@@ -17,7 +17,7 @@ describe('Counter component', () => {
       increment,
     } = getDefaultProps();
     shallow((
-      <Counter
+      <AnotherCounterView
         counter={counter}
         decrement={decrement}
         increment={increment}
@@ -31,7 +31,7 @@ describe('Counter component', () => {
       increment,
     } = getDefaultProps();
     const wrapper = shallow((
-      <Counter
+      <AnotherCounterView
         counter={counter}
         decrement={decrement}
         increment={increment}
@@ -47,7 +47,7 @@ describe('Counter component', () => {
       increment,
     } = getDefaultProps();
     const wrapper = shallow((
-      <Counter
+      <AnotherCounterView
         counter={counter}
         decrement={decrement}
         increment={increment}
