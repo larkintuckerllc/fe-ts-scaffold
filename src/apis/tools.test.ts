@@ -1,6 +1,7 @@
 import { fetchTodos } from './todos';
 
 describe('todos api', () => {
+
   it('fetchTodos resolves', () => {
     const todos = [{
       completed: false,
@@ -16,4 +17,5 @@ describe('todos api', () => {
       expect(response).toBe(todos);
     });
   });
+
 });
