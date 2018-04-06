@@ -1,10 +1,9 @@
 import * as fromTodos from 'APIS/todos';
-import { List, Map, Record } from 'immutable';
+import { List, Map } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import { createSelector } from 'reselect';
 import { AppAction, AppState } from 'STORE/reducers';
 import Todo, { TodoJS } from './Todo';
-import TodosState, { todosDefault } from './TodosState';
 
 // ACTIONS
 const FETCH_TODOS_REQUEST = 'FETCH_TODOS_REQUEST';
@@ -53,8 +52,6 @@ export const fetchTodos = () => async (dispatch: (action: AppAction) => void) =>
     dispatch(fetchTodosResponse('500', true));
   }
 };
-
-export const todosInitialState = new TodosState(todosDefault);
 
 // REDUCER
 const requested = (state: boolean, action: AppAction) => {
@@ -124,6 +121,7 @@ export const getTodo = (state: AppState, id: number) => {
 const getTodosById = (state: AppState) => state.get('todos').get('byId');
 
 const getTodosIds = (state: AppState) => state.get('todos').get('ids');
+
 export const getTodos = createSelector(
   [getTodosById, getTodosIds],
   (pById, pIds) => pIds.map((o) => pById.get(o)) as List<Todo>,

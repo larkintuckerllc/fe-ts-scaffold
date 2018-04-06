@@ -1,4 +1,4 @@
-import { TodoJS } from 'DUCKS/todos';
+import { TodoJS } from 'DUCKS/todos/Todo';
 import React from 'react';
 
 interface TodosProps {

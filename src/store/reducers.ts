@@ -3,9 +3,8 @@ import counter, { counterInitialState, DecrementAction, IncrementAction } from '
 import todos, {
   FetchTodosRequestAction,
   FetchTodosResponseAction,
-  todosInitialState,
 } from 'DUCKS/todos';
-import TodosState from 'DUCKS/todos/TodosState';
+import TodosState, { todosInitialState } from 'DUCKS/todos/TodosState';
 import { List, Record } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 

@@ -1,4 +1,5 @@
 import * as fromTodos from 'DUCKS/todos';
+import Todo from 'DUCKS/todos/Todo';
 import { List } from 'immutable';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -8,18 +9,23 @@ import Todos from './Todos';
 interface StateProps {
   error: boolean;
   requested: boolean;
-  todos: List<fromTodos.Todo>;
+  todos: List<Todo>;
 }
+
 interface DispatchProps {
   fetchTodos(): void;
 }
+
 interface AsyncProps extends StateProps, DispatchProps {
 }
+
 export class Async extends Component<AsyncProps> {
+
   public componentDidMount() {
     const { fetchTodos } = this.props;
     fetchTodos();
   }
+
   public render() {
     const { error, requested, todos } = this.props;
     if (requested) { return <div>Requested</div>; }
@@ -31,6 +37,7 @@ export class Async extends Component<AsyncProps> {
       </div>
     );
   }
+
 }
 const mapStateToProps = (state: AppState) => {
   return ({
@@ -39,9 +46,11 @@ const mapStateToProps = (state: AppState) => {
     todos: fromTodos.getTodos(state),
   });
 };
+
 const mapDispatchToProps = {
   fetchTodos: fromTodos.fetchTodos,
 };
+
 export default connect<StateProps, DispatchProps>(
   mapStateToProps,
   mapDispatchToProps,

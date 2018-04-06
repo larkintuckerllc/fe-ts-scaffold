@@ -1,4 +1,4 @@
-import { List, Map, Record } from 'immutable';
+import { Record } from 'immutable';
 
 export const todoDefault = {
   completed: false,
