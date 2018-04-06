@@ -20,6 +20,9 @@
           "APIS/*": [
             "src/apis/*"
           ],
+          "COMPONENTS/*": [
+            "src/components/*"
+          ],
           "DUCKS/*": [
             "src/ducks/*"
           ],

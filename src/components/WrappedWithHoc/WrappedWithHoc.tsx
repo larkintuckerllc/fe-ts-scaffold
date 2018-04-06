@@ -1,6 +1,6 @@
 /* tslint:disable-next-line */
 import React from 'react';
-import { hoc, InjectedProps } from './hoc';
+import { hoc, InjectedProps } from 'COMPONENTS/hoc';
 
 export interface WrappedProps {
   text: string;
