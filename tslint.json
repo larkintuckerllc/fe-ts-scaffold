@@ -1,6 +1,16 @@
 {
   "extends": [
-    "tslint-config-airbnb",
+    "tslint:recommended",
     "tslint-react"
-  ]
+  ],
+  "rules": {
+    "interface-name": false,
+    "quotemark": {
+      "options": [
+        "single",
+        "jsx-double",
+        "avoid-escape"
+      ]
+    }
+  }
 }

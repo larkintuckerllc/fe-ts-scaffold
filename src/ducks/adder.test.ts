@@ -1,6 +1,6 @@
-import { init, initialState } from 'STORE/reducers';
 import { List } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
+import { init, initialState } from 'STORE/reducers';
 import adder, { add, getAdder } from './adder';
 
 describe('adder duck', () => {
@@ -15,8 +15,8 @@ describe('adder duck', () => {
   });
   it('add should create ADD action', () => {
     expect(add('Test')).toEqual({
-      type: 'ADD',
       payload: 'Test',
+      type: 'ADD',
     });
   });
   it('getAdder should return', () => {

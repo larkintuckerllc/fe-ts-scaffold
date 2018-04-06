@@ -1,8 +1,6 @@
-import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
-/* tslint:disable-next-line */
 import Enzyme, { shallow } from 'enzyme';
+import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import { List } from 'immutable';
-/* tslint:disable-next-line */
 import React from 'react';
 import { Page } from './Page';
 
@@ -34,4 +32,3 @@ describe('Page component', () => {
     ));
   });
 });
-

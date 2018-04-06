@@ -1,6 +1,5 @@
-/* tslint:disable-next-line */
 import React from 'react';
-import stylesLess from  './styles.less';
+import stylesLess from './styles.less';
 
 export default () => {
   return (

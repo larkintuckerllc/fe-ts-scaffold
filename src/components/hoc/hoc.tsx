@@ -1,4 +1,3 @@
-/* tslint:disable-next-line */
 import React, { Component } from 'react';
 
 interface ExternalProps {
@@ -15,26 +14,20 @@ interface Options {
 }
 export const hoc = ({ debug = false }: Options = {}) =>
   <TOriginalProps extends {}>(
-    /* tslint:disable-next-line */
     WrappedComponent: (React.ComponentClass<TOriginalProps & InjectedProps>
       | React.StatelessComponent<TOriginalProps & InjectedProps>),
   ) => {
     type ResultProps = TOriginalProps & ExternalProps;
     const result = class ClickCounted extends Component<ResultProps, State> {
-      static displayName = `ClickCounted(${WrappedComponent.displayName || WrappedComponent.name})`;
+      public static displayName = `ClickCounted(${WrappedComponent.displayName || WrappedComponent.name})`;
+
       constructor(props: ResultProps) {
         super(props);
         this.state = {
           clickCount: 0,
         };
       }
-      handleClick = () => {
-        if (debug) {
-          console.log('Clicked');
-        }
-        this.setState(state => ({ clickCount: state.clickCount + 1 }));
-      }
-      render() {
+      public render() {
         const { style } = this.props;
         const { clickCount } = this.state;
         return (
@@ -46,6 +39,13 @@ export const hoc = ({ debug = false }: Options = {}) =>
             </div>
           </div>
         );
+      }
+      private handleClick = () => {
+        if (debug) {
+          /* tslint:disable-next-line */
+          console.log('Clicked');
+        }
+        this.setState((state) => ({ clickCount: state.clickCount + 1 }));
       }
     };
     return result;

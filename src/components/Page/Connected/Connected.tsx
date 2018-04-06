@@ -1,7 +1,6 @@
-/* tslint:disable-next-line */
+import * as fromCounter from 'DUCKS/counter';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as fromCounter from 'DUCKS/counter';
 import { AppState } from 'STORE/reducers';
 
 interface StateProps {
@@ -14,7 +13,7 @@ interface DispatchProps {
 interface ConnectedProps extends StateProps, DispatchProps {
 }
 export class Connected extends Component<ConnectedProps> {
-  render() {
+  public render() {
     const { counter, decrement, increment } = this.props;
     return (
       <div>

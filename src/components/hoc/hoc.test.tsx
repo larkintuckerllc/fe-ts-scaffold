@@ -1,15 +1,12 @@
-import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
-/* tslint:disable-next-line */
 import Enzyme, { shallow } from 'enzyme';
-/* tslint:disable-next-line */
+import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import React from 'react';
-import { InjectedProps, hoc } from './hoc';
+import { hoc, InjectedProps } from './hoc';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 interface WrappedProps {
   text: string;
 }
-/* tslint:disable-next-line */
 const Wrapped = (props: WrappedProps & InjectedProps) => {
   const { clickCount, text } = props;
   return (
@@ -19,9 +16,7 @@ const Wrapped = (props: WrappedProps & InjectedProps) => {
     </div>
   );
 };
-/* tslint:disable-next-line */
 const WrappedWithHoc = hoc()(Wrapped);
-/* tslint:disable-next-line */
 const WrappedWithHocDebug = hoc({ debug: true })(Wrapped);
 const getDefaultProps = () => ({
   text: 'hello world',

@@ -1,8 +1,7 @@
+import * as fromTodos from 'DUCKS/todos';
 import { List } from 'immutable';
-/* tslint:disable-next-line */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as fromTodos from 'DUCKS/todos';
 import { AppState } from 'STORE/reducers';
 import Todos from './Todos';
 
@@ -17,14 +16,14 @@ interface DispatchProps {
 interface AsyncProps extends StateProps, DispatchProps {
 }
 export class Async extends Component<AsyncProps> {
-  componentDidMount() {
+  public componentDidMount() {
     const { fetchTodos } = this.props;
     fetchTodos();
   }
-  render() {
+  public render() {
     const { error, requested, todos } = this.props;
-    if (requested) return <div>Requested</div>;
-    if (error) return <div>Error</div>;
+    if (requested) { return <div>Requested</div>; }
+    if (error) { return <div>Error</div>; }
     return (
       <div>
         <h2>Async</h2>

@@ -1,7 +1,5 @@
-import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
-/* tslint:disable-next-line */
 import Enzyme, { shallow } from 'enzyme';
-/* tslint:disable-next-line */
+import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import React from 'react';
 import { Connected } from './Connected';
 

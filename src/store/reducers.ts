@@ -1,13 +1,15 @@
-import { combineReducers } from 'redux-immutable';
-import { List, Record } from 'immutable';
-import counter, { counterInitialState, IncrementAction, DecrementAction } from 'DUCKS/counter';
-import adder, { adderInitialState, AddAction } from 'DUCKS/adder';
+import adder, { AddAction, adderInitialState } from 'DUCKS/adder';
+import counter, { counterInitialState, DecrementAction, IncrementAction } from 'DUCKS/counter';
+/*
 import todos, {
   FetchTodosRequestAction,
   FetchTodosResponseAction,
   todosInitialState,
   TodosState,
 } from 'DUCKS/todos';
+*/
+import { List, Record } from 'immutable';
+import { combineReducers } from 'redux-immutable';
 
 // ACTIONS
 interface InitAction {
@@ -19,26 +21,26 @@ export const init = (): InitAction => ({
 export type AppAction =
   AddAction |
   DecrementAction |
-  FetchTodosRequestAction |
-  FetchTodosResponseAction |
+  // FetchTodosRequestAction |
+  // FetchTodosResponseAction |
   IncrementAction |
   InitAction;
 // STATE
 const appStateDefault = {
   adder: adderInitialState,
   counter: counterInitialState,
-  todos: todosInitialState,
+  // todos: todosInitialState,
 };
 interface AppStateJS {
   adder: List<string>;
   counter: number;
-  todos: TodosState;
+  // todos: TodosState;
 }
 export class AppState extends Record(appStateDefault) {
   constructor(params: AppStateJS) {
     super(params);
   }
-  get<T extends keyof AppStateJS>(value: T): AppStateJS[T] { 
+  public get<T extends keyof AppStateJS>(value: T): AppStateJS[T] {
     return super.get(value);
   }
 }
@@ -47,6 +49,6 @@ export const initialState = new AppState(appStateDefault);
 const reducers = {
   adder,
   counter,
-  todos,
+  // todos,
 };
 export default combineReducers(reducers);

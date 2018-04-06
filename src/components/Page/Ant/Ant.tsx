@@ -1,5 +1,4 @@
 import { Button } from 'antd';
-/* tslint:disable-next-line */
 import React from 'react';
 
 export default () => {

@@ -1,10 +1,8 @@
-import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
-/* tslint:disable-next-line */
-import Enzyme, { shallow } from 'enzyme';
-import { List } from 'immutable';
-/* tslint:disable-next-line */
-import React from 'react';
 import { Todo, todoDefault } from 'DUCKS/todos';
+import Enzyme, { shallow } from 'enzyme';
+import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
+import { List } from 'immutable';
+import React from 'react';
 import { Async } from './Async';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });

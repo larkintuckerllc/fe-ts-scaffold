@@ -2,7 +2,7 @@ import { List, Map } from 'immutable';
 import { init, initialState } from 'STORE/reducers';
 import todos, {
   byId,
-  error,
+  errored,
   fetchTodos,
   fetchTodosRequest,
   fetchTodosResponse,
@@ -42,9 +42,9 @@ describe('todos duck', () => {
   it('fetchTodoResponse error should create FETCH_TODOS_RESPONSE error action', () => {
     const error = '500';
     expect(fetchTodosResponse(error, true)).toEqual({
-      type: 'FETCH_TODOS_RESPONSE',
-      payload: error,
       error: true,
+      payload: error,
+      type: 'FETCH_TODOS_RESPONSE',
     });
   });
   it('fetchTodos success should dispatch request and response - success actions', () => {
@@ -109,18 +109,18 @@ describe('todos duck', () => {
       expect(ids(idsInitialState, fetchTodosResponse('500', true))).toEqual(idsInitialState);
     });
   });
-  describe('error reducer', () => {
+  describe('errored reducer', () => {
     it('should ignore unknown actions', () => {
-      expect(error(false, init())).toBe(false);
+      expect(errored(false, init())).toBe(false);
     });
     it('should handle FETCH_TODOS_REQUEST', () => {
-      expect(error(true, fetchTodosRequest())).toBe(false);
+      expect(errored(true, fetchTodosRequest())).toBe(false);
     });
     it('should handle FETCH_TODOS_RESPONSE success', () => {
-      expect(error(false, fetchTodosResponse(List<Todo>([])))).toBe(false);
+      expect(errored(false, fetchTodosResponse(List<Todo>([])))).toBe(false);
     });
     it('should handle FETCH_TODOS_RESPONSE error', () => {
-      expect(error(false, fetchTodosResponse('500', true))).toBe(true);
+      expect(errored(false, fetchTodosResponse('500', true))).toBe(true);
     });
   });
   // SELECTORS

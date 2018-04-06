@@ -1,9 +1,8 @@
-/* tslint:disable-next-line */
+import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-import App from './components/App';
-import 'babel-polyfill';
 import 'whatwg-fetch';
+import App from './components/App';
 import './styles.less';
 
 render(

@@ -8,7 +8,7 @@ const middlewares = [
 const enhancer = compose(
   applyMiddleware(...middlewares),
   /* istanbul ignore next */
-  (<any>window).devToolsExtension ? (<any>window).devToolsExtension() : (f: any) => f,
+  (window as any).devToolsExtension ? (window as any).devToolsExtension() : (f: any) => f,
 );
 export default () => {
   return createStore(reducers, initialState, enhancer);

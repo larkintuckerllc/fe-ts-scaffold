@@ -1,4 +1,3 @@
-/* tslint:disable-next-line */
 import React from 'react';
 import kittenJpg from './kitten.jpg';
 

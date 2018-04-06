@@ -1,31 +1,13 @@
-/* tslint:disable-next-line */
 import React, { Component } from 'react';
 
-interface StatefulProps {
-}
 interface StatefulState {
   counter: number;
 }
-export default class stateful extends Component<StatefulProps, StatefulState> {
-  constructor(props: StatefulProps) {
-    super(props);
-  }
-  state: StatefulState = {
+export default class Stateful extends Component<{}, StatefulState> {
+  public state: StatefulState = {
     counter: 0,
   };
-  handleIncrementClick = () => {
-    const { counter } = this.state;
-    this.setState({
-      counter: counter + 1,
-    });
-  }
-  handleDecrementClick = () => {
-    const { counter } = this.state;
-    this.setState({
-      counter: counter - 1,
-    });
-  }
-  render() {
+  public render() {
     const { counter } = this.state;
     return (
       <div>
@@ -35,5 +17,17 @@ export default class stateful extends Component<StatefulProps, StatefulState> {
         <button id="test_decrement" onClick={this.handleDecrementClick}>-</button>
       </div>
     );
+  }
+  private handleIncrementClick = () => {
+    const { counter } = this.state;
+    this.setState({
+      counter: counter + 1,
+    });
+  }
+  private handleDecrementClick = () => {
+    const { counter } = this.state;
+    this.setState({
+      counter: counter - 1,
+    });
   }
 }

@@ -1,4 +1,5 @@
-import { hoc as hHoc, InjectedProps as hInjectedProps } from './hoc';
+import { hoc as iHoc, InjectedProps as iInjectedProps } from './hoc';
 
-export const hoc = hHoc; 
-export interface InjectedProps extends hInjectedProps {}
+export const hoc = iHoc;
+/* tslint:disable-next-line */
+export interface InjectedProps extends iInjectedProps {}

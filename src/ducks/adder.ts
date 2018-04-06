@@ -1,5 +1,5 @@
-import { AppAction, AppState } from 'STORE/reducers';
 import { List } from 'immutable';
+import { AppAction, AppState } from 'STORE/reducers';
 
 // ACTIONS
 const ADD = 'ADD';
@@ -8,8 +8,8 @@ export interface AddAction {
   payload: string;
 }
 export const add = (value: string): AddAction => ({
-  type: ADD,
   payload: value,
+  type: ADD,
 });
 // STATE
 export const adderInitialState = List<string>([]);

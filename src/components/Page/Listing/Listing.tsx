@@ -1,16 +1,11 @@
-/* tslint:disable-next-line */
 import React, { Component } from 'react';
 
 interface ListingProps {
-  add(value: string): void;
   items: string[];
+  add(value: string): void;
 }
 export default class Listing extends Component<ListingProps> {
-  addItem = () => {
-    const { add } = this.props;
-    add('Hello World');
-  }
-  render() {
+  public render() {
     const { items } = this.props;
     return (
       <div>
@@ -21,5 +16,9 @@ export default class Listing extends Component<ListingProps> {
         </ul>
       </div>
     );
+  }
+  private addItem = () => {
+    const { add } = this.props;
+    add('Hello World');
   }
 }
