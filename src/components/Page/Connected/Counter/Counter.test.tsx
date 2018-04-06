@@ -1,7 +1,7 @@
 import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import React from 'react';
-import { Connected } from './Connected';
+import Counter from './Counter';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 const getDefaultProps = () => ({
@@ -9,7 +9,7 @@ const getDefaultProps = () => ({
   decrement: jest.fn(),
   increment: jest.fn(),
 });
-describe('Connected component', () => {
+describe('Counter component', () => {
   it('shallow renders without crashing', () => {
     const {
       counter,
@@ -17,7 +17,7 @@ describe('Connected component', () => {
       increment,
     } = getDefaultProps();
     shallow((
-      <Connected
+      <Counter
         counter={counter}
         decrement={decrement}
         increment={increment}
@@ -31,7 +31,7 @@ describe('Connected component', () => {
       increment,
     } = getDefaultProps();
     const wrapper = shallow((
-      <Connected
+      <Counter
         counter={counter}
         decrement={decrement}
         increment={increment}
@@ -47,7 +47,7 @@ describe('Connected component', () => {
       increment,
     } = getDefaultProps();
     const wrapper = shallow((
-      <Connected
+      <Counter
         counter={counter}
         decrement={decrement}
         increment={increment}

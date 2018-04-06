@@ -1,7 +1,7 @@
 import * as fromCounter from 'DUCKS/counter';
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { AppState } from 'STORE/reducers';
+import Counter from './Counter';
 
 interface StateProps {
   counter: number;
@@ -9,21 +9,6 @@ interface StateProps {
 interface DispatchProps {
   decrement(): void;
   increment(): void;
-}
-interface ConnectedProps extends StateProps, DispatchProps {
-}
-export class Connected extends Component<ConnectedProps> {
-  public render() {
-    const { counter, decrement, increment } = this.props;
-    return (
-      <div>
-        <h2>Connected</h2>
-        <div>{counter.toString()}</div>
-        <button id="test_increment" onClick={increment}>+</button>
-        <button id="test_decrement" onClick={decrement}>-</button>
-      </div>
-    );
-  }
 }
 const mapStateToProps = (state: AppState) => {
   return ({
@@ -37,4 +22,4 @@ const mapDispatchToProps = {
 export default connect<StateProps, DispatchProps>(
   mapStateToProps,
   mapDispatchToProps,
-)(Connected);
+)(Counter);
