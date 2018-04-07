@@ -1,7 +1,7 @@
 import { List, Map, Record } from 'immutable';
 import Todo from './Todo';
 
-const todosDefault = {
+const todosStateDefault = {
   byId: Map<number, Todo>({}),
   errored: false,
   ids: List<number>([]),
@@ -15,7 +15,7 @@ interface TodosStateJS {
   requested: boolean;
 }
 
-export default class TodosState extends Record(todosDefault) {
+export default class TodosState extends Record(todosStateDefault) {
   constructor(params: TodosStateJS) {
     super(params);
   }
@@ -24,4 +24,4 @@ export default class TodosState extends Record(todosDefault) {
   }
 }
 
-export const todosInitialState = new TodosState(todosDefault);
+export const todosInitialState = new TodosState(todosStateDefault);

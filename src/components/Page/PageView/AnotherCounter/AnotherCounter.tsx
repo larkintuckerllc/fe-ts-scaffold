@@ -1,6 +1,6 @@
 import * as fromCounter from 'DUCKS/counter';
 import { connect } from 'react-redux';
-import { AppState } from 'STORE/reducers';
+import AppState from 'STORE/AppState';
 import AnotherCounterView from './AnotherCounterView';
 
 interface StateProps {

@@ -1,6 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import reduxThunk from 'redux-thunk';
-import reducers, { initialState } from './reducers';
+import { appStateInitial } from './AppState';
+import reducers from './reducers';
 
 const middlewares = [
   reduxThunk,
@@ -13,5 +14,5 @@ const enhancer = compose(
 );
 
 export default () => {
-  return createStore(reducers, initialState, enhancer);
+  return createStore(reducers, appStateInitial, enhancer);
 };

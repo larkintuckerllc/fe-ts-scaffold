@@ -2,7 +2,7 @@ import * as fromAdder from 'DUCKS/adder';
 import * as fromCounter from 'DUCKS/counter';
 import { List } from 'immutable';
 import { connect } from 'react-redux';
-import { AppState } from 'STORE/reducers';
+import AppState from 'STORE/AppState';
 import PageView from './PageView';
 
 interface StateProps {

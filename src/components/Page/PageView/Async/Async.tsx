@@ -3,7 +3,7 @@ import Todo from 'DUCKS/todos/Todo';
 import { List } from 'immutable';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { AppState } from 'STORE/reducers';
+import AppState from 'STORE/AppState';
 import Todos from './Todos';
 
 interface StateProps {

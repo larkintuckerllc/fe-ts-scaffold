@@ -2,7 +2,8 @@ import * as fromTodos from 'APIS/todos';
 import { List, Map } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import { createSelector } from 'reselect';
-import { AppAction, AppState } from 'STORE/reducers';
+import AppState from 'STORE/AppState';
+import { AppAction } from 'STORE/reducers';
 import Todo, { TodoJS } from './Todo';
 
 // ACTIONS

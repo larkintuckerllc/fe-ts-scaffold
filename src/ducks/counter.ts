@@ -1,4 +1,5 @@
-import { AppAction, AppState } from 'STORE/reducers';
+import AppState from 'STORE/AppState';
+import { AppAction } from 'STORE/reducers';
 
 // ACTIONS
 const INCREMENT = 'INCREMENT';
