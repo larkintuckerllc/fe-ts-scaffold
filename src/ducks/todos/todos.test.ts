@@ -1,20 +1,9 @@
-// import { List, Map } from 'immutable';
-// import { init, initialState } from 'STORE/reducers';
-// import Todo from './Todo';
-/*
-import todos, {
-  fetchTodos,
-  getTodo,
-  getTodos,
-  getTodosError,
-  getTodosRequested,
-} from './todos';
-*/
 import { List, Map } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
+import { unknown } from 'STORE/AppAction';
 import { appStateInitial } from 'STORE/AppState';
 import Todo from './Todo';
-import {
+import todos, {
   fetchTodos,
   getTodo,
   getTodos,
@@ -81,64 +70,31 @@ describe('todos duck', () => {
     });
   });
 
-  /*
   // REDUCERS
-  it('reducer should ignore unknown actions', () => {
-    expect(todos(todosInitialState, init())).toBe(todosInitialState);
-  });
-  describe('requested reducer', () => {
+  describe('reducer', () => {
+
     it('should ignore unknown actions', () => {
-      expect(requested(false, init())).toBe(false);
+      const action = unknown();
+      expect(todos(todosInitialState, action)).toBe(todosInitialState);
     });
+
     it('should handle FETCH_TODOS_REQUEST', () => {
-      expect(requested(false, fetchTodosRequest())).toBe(true);
+      const result = todosInitialState.set('requested', true);
+      expect(todos(todosInitialState, request)).toEqualImmutable(result);
     });
+
     it('should handle FETCH_TODOS_RESPONSE success', () => {
-      expect(requested(true, fetchTodosResponse(List<Todo>([])))).toBe(false);
+      const state = todosInitialState.set('requested', true);
+      expect(todos(state, responseSuccess)).toEqualImmutable(todosStateSample);
     });
+
     it('should handle FETCH_TODOS_RESPONSE error', () => {
-      expect(requested(true, fetchTodosResponse('500', true))).toBe(false);
+      const state = todosInitialState.set('requested', true);
+      const nextState = todosInitialState.set('errored', true);
+      expect(todos(state, responseError)).toEqualImmutable(nextState);
     });
+
   });
-  describe('byId reducer', () => {
-    const byIdInitialState = todosInitialState.get('byId');
-    it('should ignore unknown actions', () => {
-      expect(byId(byIdInitialState, init())).toBe(byIdInitialState);
-    });
-    it('should handle FETCH_TODOS_RESPONSE success', () => {
-      expect(byId(byIdInitialState, fetchTodosResponse(sampleTodos))).toEqual(sampleById);
-    });
-    it('should handle FETCH_TODOS_RESPONSE error', () => {
-      expect(byId(byIdInitialState, fetchTodosResponse('500', true))).toEqual(byIdInitialState);
-    });
-  });
-  describe('ids reducer', () => {
-    const idsInitialState = todosInitialState.get('ids');
-    it('should ignore unknown actions', () => {
-      expect(ids(idsInitialState, init())).toBe(idsInitialState);
-    });
-    it('should handle FETCH_TODOS_RESPONSE success', () => {
-      expect(ids(idsInitialState, fetchTodosResponse(sampleTodos))).toEqual(sampleIds);
-    });
-    it('should handle FETCH_TODOS_RESPONSE error', () => {
-      expect(ids(idsInitialState, fetchTodosResponse('500', true))).toEqual(idsInitialState);
-    });
-  });
-  describe('errored reducer', () => {
-    it('should ignore unknown actions', () => {
-      expect(errored(false, init())).toBe(false);
-    });
-    it('should handle FETCH_TODOS_REQUEST', () => {
-      expect(errored(true, fetchTodosRequest())).toBe(false);
-    });
-    it('should handle FETCH_TODOS_RESPONSE success', () => {
-      expect(errored(false, fetchTodosResponse(List<Todo>([])))).toBe(false);
-    });
-    it('should handle FETCH_TODOS_RESPONSE error', () => {
-      expect(errored(false, fetchTodosResponse('500', true))).toBe(true);
-    });
-  });
-  */
 
   // SELECTORS
   it('getTodosRequested should return', () => {
