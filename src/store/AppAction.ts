@@ -5,20 +5,11 @@ import {
   FetchTodosResponseAction,
 } from 'DUCKS/todos';
 
-interface InitAction {
-  type: '@@INIT';
-}
-
-export const init = (): InitAction => ({
-  type: '@@INIT',
-});
-
 type AppAction =
   AddAction |
   DecrementAction |
   FetchTodosRequestAction |
   FetchTodosResponseAction |
-  IncrementAction |
-  InitAction;
+  IncrementAction;
 
 export default AppAction;

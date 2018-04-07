@@ -13,6 +13,4 @@ const enhancer = compose(
   (window as any).devToolsExtension ? (window as any).devToolsExtension() : (f: any) => f,
 );
 
-export default () => {
-  return createStore(reducers, appStateInitial, enhancer);
-};
+export default createStore(reducers, appStateInitial, enhancer);
