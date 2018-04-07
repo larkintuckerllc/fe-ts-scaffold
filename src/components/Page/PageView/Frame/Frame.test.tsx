@@ -5,19 +5,16 @@ import Frame from './Frame';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 
-const getDefaultProps = () => ({
-});
+const getDefaultProps = () => ({});
 
 describe('Frame component', () => {
-
   it('shallow renders without crashing', () => {
     const {} = getDefaultProps();
-    shallow((
+    shallow(
       <Frame>
         <div>one</div>
         <div>two</div>
       </Frame>
-    ));
+    );
   });
-
 });

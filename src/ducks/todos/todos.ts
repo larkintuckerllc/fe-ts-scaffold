@@ -25,28 +25,27 @@ const fetchTodosRequest = (): FetchTodosRequestAction => ({
   type: FETCH_TODOS_REQUEST,
 });
 
-const fetchTodosResponse =
-  (payload: List<Todo> | string, error?: boolean): FetchTodosResponseAction =>
-  error ?
-    ({
-      error: true,
-      payload,
-      type: FETCH_TODOS_RESPONSE,
-    }) :
-    ({
-      payload,
-      type: FETCH_TODOS_RESPONSE,
-    });
+const fetchTodosResponse = (
+  payload: List<Todo> | string,
+  error?: boolean
+): FetchTodosResponseAction =>
+  error
+    ? {
+        error: true,
+        payload,
+        type: FETCH_TODOS_RESPONSE,
+      }
+    : {
+        payload,
+        type: FETCH_TODOS_RESPONSE,
+      };
 
 export const fetchTodos = () => async (dispatch: (action: AppAction) => void) => {
   dispatch(fetchTodosRequest());
   try {
     const json = await fromTodos.fetchTodos();
-    const reducer =
-      (
-        accumulator: List<Todo>,
-        jsonTodo: TodoJS,
-      ) => accumulator.push(new Todo(jsonTodo));
+    const reducer = (accumulator: List<Todo>, jsonTodo: TodoJS) =>
+      accumulator.push(new Todo(jsonTodo));
     const todos = json.reduce(reducer, List<Todo>([]));
     dispatch(fetchTodosResponse(todos));
   } catch {
@@ -66,14 +65,14 @@ const requested = (state: boolean, action: AppAction) => {
   }
 };
 
-const byId = (state: Map<number, Todo> , action: AppAction) => {
+const byId = (state: Map<number, Todo>, action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
-      if (action.error) { return state; }
-      const reducer = (
-        accumulator: Map<number, Todo>,
-        todo: Todo,
-      ) => accumulator.set(todo.get('id'), todo);
+      if (action.error) {
+        return state;
+      }
+      const reducer = (accumulator: Map<number, Todo>, todo: Todo) =>
+        accumulator.set(todo.get('id'), todo);
       const payload = action.payload as List<Todo>;
       return payload.reduce(reducer, state);
     default:
@@ -84,7 +83,9 @@ const byId = (state: Map<number, Todo> , action: AppAction) => {
 const ids = (state: List<number>, action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
-      if (action.error) { return state; }
+      if (action.error) {
+        return state;
+      }
       const payload = action.payload as List<Todo>;
       return List(payload.map((o: Todo) => o.get('id')));
     default:
@@ -97,7 +98,7 @@ const errored = (state: boolean, action: AppAction) => {
     case FETCH_TODOS_REQUEST:
       return false;
     case FETCH_TODOS_RESPONSE:
-      return (action.error ? true : false);
+      return action.error ? true : false;
     default:
       return state;
   }
@@ -116,7 +117,10 @@ export const getTodosRequested = (state: AppState) => state.get('todos').get('re
 export const getTodosError = (state: AppState) => state.get('todos').get('errored');
 
 export const getTodo = (state: AppState, id: number) => {
-  return state.get('todos').get('byId').get(id);
+  return state
+    .get('todos')
+    .get('byId')
+    .get(id);
 };
 
 const getTodosById = (state: AppState) => state.get('todos').get('byId');
@@ -125,5 +129,5 @@ const getTodosIds = (state: AppState) => state.get('todos').get('ids');
 
 export const getTodos = createSelector(
   [getTodosById, getTodosIds],
-  (pById, pIds) => pIds.map((o) => pById.get(o)) as List<Todo>,
+  (pById, pIds) => pIds.map(o => pById.get(o)) as List<Todo>
 );

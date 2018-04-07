@@ -6,7 +6,6 @@ import Todos from './Todos';
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 
 describe('Todos component', () => {
-
   it('shallow renders without crashing', () => {
     const todoDefault = {
       completed: false,
@@ -18,11 +17,6 @@ describe('Todos component', () => {
       todos: [todoDefault],
     });
     const { todos } = getDefaultProps();
-    shallow((
-      <Todos
-        todos={todos}
-      />
-    ));
+    shallow(<Todos todos={todos} />);
   });
-
 });

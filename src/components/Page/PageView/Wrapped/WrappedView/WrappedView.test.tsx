@@ -11,25 +11,13 @@ const getDefaultProps = () => ({
 });
 
 describe('WrappedView component', () => {
-
   it('shallow renders without crashing', () => {
     const { clickCount, text } = getDefaultProps();
-    shallow((
-      <WrappedView
-        clickCount={clickCount}
-        text={text}
-      />
-    ));
+    shallow(<WrappedView clickCount={clickCount} text={text} />);
   });
 
   it('shallow renders with clickCount >= 5 without crashing', () => {
     const { text } = getDefaultProps();
-    shallow((
-      <WrappedView
-        clickCount={5}
-        text={text}
-      />
-    ));
+    shallow(<WrappedView clickCount={5} text={text} />);
   });
-
 });

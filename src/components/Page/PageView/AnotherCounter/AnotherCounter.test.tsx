@@ -7,21 +7,15 @@ import AnotherCounter from './AnotherCounter';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 
-const getDefaultProps = () => ({
-});
+const getDefaultProps = () => ({});
 
 describe('AnotherCounter component', () => {
-
   it('shallow renders without crashing', () => {
     const {} = getDefaultProps();
     const store = createMockStore(appStateInitial);
     const context = {
       store,
     };
-    shallow((
-      <AnotherCounter
-      />
-    ), { context });
+    shallow(<AnotherCounter />, { context });
   });
-
 });

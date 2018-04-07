@@ -16,18 +16,15 @@ interface DispatchProps {
 }
 
 const mapStateToProps = (state: AppState) => {
-  return ({
+  return {
     error: fromTodos.getTodosError(state),
     requested: fromTodos.getTodosRequested(state),
     todos: fromTodos.getTodos(state),
-  });
+  };
 };
 
 const mapDispatchToProps = {
   fetchTodos: fromTodos.fetchTodos,
 };
 
-export default connect<StateProps, DispatchProps>(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AsyncView);
+export default connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(AsyncView);

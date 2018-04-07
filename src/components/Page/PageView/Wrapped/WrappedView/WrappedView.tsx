@@ -9,9 +9,7 @@ export default (props: WrappedViewProps & InjectedProps) => {
   return (
     <div>
       <p>{text}</p>
-      <p>
-        {clickCount >= 5 ? 'Easy there!' : 'Bring it!'}
-      </p>
+      <p>{clickCount >= 5 ? 'Easy there!' : 'Bring it!'}</p>
     </div>
   );
 };

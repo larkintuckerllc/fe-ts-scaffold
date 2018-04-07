@@ -17,10 +17,10 @@ interface DispatchProps {
 }
 
 const mapStateToProps = (state: AppState) => {
-  return ({
+  return {
     adder: fromAdder.getAdder(state),
     counter: fromCounter.getCounter(state),
-  });
+  };
 };
 
 const mapDispatchToProps = {
@@ -29,7 +29,4 @@ const mapDispatchToProps = {
   increment: fromCounter.increment,
 };
 
-export default connect<StateProps, DispatchProps>(
-  mapStateToProps,
-  mapDispatchToProps,
-)(PageView);
+export default connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(PageView);

@@ -5,7 +5,6 @@ import { appStateInitial } from 'STORE/AppState';
 import adder, { add, getAdder } from './adder';
 
 describe('adder duck', () => {
-
   beforeEach(() => {
     jest.addMatchers(matchers);
   });
@@ -35,5 +34,4 @@ describe('adder duck', () => {
     const result = List<string>([]);
     expect(getAdder(appStateInitial)).toEqualImmutable(result);
   });
-
 });

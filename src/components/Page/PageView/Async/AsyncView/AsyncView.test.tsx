@@ -22,75 +22,28 @@ const getDefaultProps = () => ({
   todos: sampleTodos,
 });
 describe('Async component', () => {
-
   it('shallow renders without crashing', () => {
-    const {
-      error,
-      fetchTodos,
-      requested,
-      todos,
-    } = getDefaultProps();
-    shallow((
-      <AsyncView
-        error={error}
-        fetchTodos={fetchTodos}
-        requested={requested}
-        todos={todos}
-      />
-    ));
+    const { error, fetchTodos, requested, todos } = getDefaultProps();
+    shallow(
+      <AsyncView error={error} fetchTodos={fetchTodos} requested={requested} todos={todos} />
+    );
   });
 
   it('shallow renders with requested', () => {
-
-    const {
-      error,
-      fetchTodos,
-      todos,
-    } = getDefaultProps();
-    shallow((
-      <AsyncView
-        error={error}
-        fetchTodos={fetchTodos}
-        requested={true}
-        todos={todos}
-      />
-    ));
-
+    const { error, fetchTodos, todos } = getDefaultProps();
+    shallow(<AsyncView error={error} fetchTodos={fetchTodos} requested={true} todos={todos} />);
   });
 
   it('shallow renders with error', () => {
-    const {
-      fetchTodos,
-      requested,
-      todos,
-    } = getDefaultProps();
-    shallow((
-      <AsyncView
-        error={true}
-        fetchTodos={fetchTodos}
-        requested={requested}
-        todos={todos}
-      />
-    ));
-
+    const { fetchTodos, requested, todos } = getDefaultProps();
+    shallow(<AsyncView error={true} fetchTodos={fetchTodos} requested={requested} todos={todos} />);
   });
 
   it('calls fetchTodos on mount', () => {
-    const {
-      error,
-      fetchTodos,
-      requested,
-      todos,
-    } = getDefaultProps();
-    shallow((
-      <AsyncView
-        error={error}
-        fetchTodos={fetchTodos}
-        requested={requested}
-        todos={todos}
-      />
-    ));
+    const { error, fetchTodos, requested, todos } = getDefaultProps();
+    shallow(
+      <AsyncView error={error} fetchTodos={fetchTodos} requested={requested} todos={todos} />
+    );
     expect(fetchTodos.mock.calls.length).toBe(1);
   });
-
 });

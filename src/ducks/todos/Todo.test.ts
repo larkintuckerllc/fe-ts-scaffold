@@ -1,7 +1,6 @@
 import Todo from './Todo';
 
 describe('Todo', () => {
-
   const todoDefault = {
     completed: false,
     id: 0,
@@ -15,5 +14,4 @@ describe('Todo', () => {
     const result = 0;
     expect(id).toBe(result);
   });
-
 });

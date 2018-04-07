@@ -3,13 +3,7 @@ import * as matchers from 'jest-immutable-matchers';
 import { unknown } from 'STORE/AppAction';
 import { appStateInitial } from 'STORE/AppState';
 import Todo from './Todo';
-import todos, {
-  fetchTodos,
-  getTodo,
-  getTodos,
-  getTodosError,
-  getTodosRequested,
-} from './todos';
+import todos, { fetchTodos, getTodo, getTodos, getTodosError, getTodosRequested } from './todos';
 import { todosInitialState } from './TodosState';
 
 jest.mock('APIS/todos');
@@ -72,7 +66,6 @@ describe('todos duck', () => {
 
   // REDUCERS
   describe('reducer', () => {
-
     it('should ignore unknown actions', () => {
       const action = unknown();
       expect(todos(todosInitialState, action)).toBe(todosInitialState);
@@ -93,7 +86,6 @@ describe('todos duck', () => {
       const nextState = todosInitialState.set('errored', true);
       expect(todos(state, responseError)).toEqualImmutable(nextState);
     });
-
   });
 
   // SELECTORS
@@ -115,5 +107,4 @@ describe('todos duck', () => {
     const result = List([todoSample]);
     expect(getTodos(appStateSample)).toEqualImmutable(result);
   });
-
 });

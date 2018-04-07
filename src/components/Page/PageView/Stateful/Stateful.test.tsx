@@ -5,45 +5,33 @@ import Stateful from './Stateful';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 
-const getDefaultProps = () => ({
-});
+const getDefaultProps = () => ({});
 
 describe('Stateful component', () => {
-
   it('shallow renders without crashing', () => {
     const {} = getDefaultProps();
-    shallow((
-      <Stateful
-      />
-    ));
+    shallow(<Stateful />);
   });
 
   it('with StateView increments counter when increment called', () => {
     const {} = getDefaultProps();
-    const wrapper = shallow((
-      <Stateful
-      />
-    ));
+    const wrapper = shallow(<Stateful />);
     const result = 1;
-    let testStatefulView = wrapper.findWhere((node) => node.key() === 'test_stateful_view');
+    let testStatefulView = wrapper.findWhere(node => node.key() === 'test_stateful_view');
     testStatefulView.props().increment();
     wrapper.update();
-    testStatefulView = wrapper.findWhere((node) => node.key() === 'test_stateful_view');
+    testStatefulView = wrapper.findWhere(node => node.key() === 'test_stateful_view');
     expect(testStatefulView.props().counter).toEqual(result);
   });
 
   it('with StateView increments counter when decrement called', () => {
     const {} = getDefaultProps();
-    const wrapper = shallow((
-      <Stateful
-      />
-    ));
+    const wrapper = shallow(<Stateful />);
     const result = -1;
-    let testStatefulView = wrapper.findWhere((node) => node.key() === 'test_stateful_view');
+    let testStatefulView = wrapper.findWhere(node => node.key() === 'test_stateful_view');
     testStatefulView.props().decrement();
     wrapper.update();
-    testStatefulView = wrapper.findWhere((node) => node.key() === 'test_stateful_view');
+    testStatefulView = wrapper.findWhere(node => node.key() === 'test_stateful_view');
     expect(testStatefulView.props().counter).toEqual(result);
   });
-
 });

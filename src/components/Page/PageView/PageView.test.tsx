@@ -15,16 +15,9 @@ const getDefaultProps = () => ({
 });
 
 describe('PageView component', () => {
-
   it('shallow renders without crashing', () => {
-    const {
-      add,
-      adder,
-      counter,
-      decrement,
-      increment,
-    } = getDefaultProps();
-    shallow((
+    const { add, adder, counter, decrement, increment } = getDefaultProps();
+    shallow(
       <PageView
         add={add}
         adder={adder}
@@ -32,7 +25,6 @@ describe('PageView component', () => {
         decrement={decrement}
         increment={increment}
       />
-    ));
+    );
   });
-
 });

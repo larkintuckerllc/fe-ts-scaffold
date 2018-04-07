@@ -12,54 +12,26 @@ const getDefaultProps = () => ({
 });
 
 describe('Counter component', () => {
-
   it('shallow renders without crashing', () => {
-    const {
-      counter,
-      decrement,
-      increment,
-    } = getDefaultProps();
-    shallow((
-      <StatefulView
-        counter={counter}
-        decrement={decrement}
-        increment={increment}
-      />
-    ));
+    const { counter, decrement, increment } = getDefaultProps();
+    shallow(<StatefulView counter={counter} decrement={decrement} increment={increment} />);
   });
 
   it('calls decrement on test_decrement click', () => {
-    const {
-      counter,
-      decrement,
-      increment,
-    } = getDefaultProps();
-    const wrapper = shallow((
-      <StatefulView
-        counter={counter}
-        decrement={decrement}
-        increment={increment}
-      />
-    ));
+    const { counter, decrement, increment } = getDefaultProps();
+    const wrapper = shallow(
+      <StatefulView counter={counter} decrement={decrement} increment={increment} />
+    );
     wrapper.find('#test_decrement').simulate('click');
     expect(decrement.mock.calls).toHaveLength(1);
   });
 
   it('calls increment on test_increment click', () => {
-    const {
-      counter,
-      decrement,
-      increment,
-    } = getDefaultProps();
-    const wrapper = shallow((
-      <StatefulView
-        counter={counter}
-        decrement={decrement}
-        increment={increment}
-      />
-    ));
+    const { counter, decrement, increment } = getDefaultProps();
+    const wrapper = shallow(
+      <StatefulView counter={counter} decrement={decrement} increment={increment} />
+    );
     wrapper.find('#test_increment').simulate('click');
     expect(increment.mock.calls).toHaveLength(1);
   });
-
 });

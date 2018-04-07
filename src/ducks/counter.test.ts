@@ -4,7 +4,6 @@ import { appStateInitial } from 'STORE/AppState';
 import counter, { decrement, getCounter, increment } from './counter';
 
 describe('counter duck', () => {
-
   it('reducer should ignore unknown actions', () => {
     const initialState = 0;
     const action = unknown();
@@ -43,5 +42,4 @@ describe('counter duck', () => {
     const result = 0;
     expect(getCounter(appStateInitial)).toEqual(result);
   });
-
 });

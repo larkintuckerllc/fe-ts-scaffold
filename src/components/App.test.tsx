@@ -5,17 +5,11 @@ import App from './App';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 
-const getDefaultProps = () => ({
-});
+const getDefaultProps = () => ({});
 
 describe('Ant component', () => {
-
   it('shallow renders without crashing', () => {
     const {} = getDefaultProps();
-    shallow((
-      <App
-      />
-    ));
+    shallow(<App />);
   });
-
 });

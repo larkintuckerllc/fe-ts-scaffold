@@ -11,15 +11,18 @@ interface AsyncViewProps {
 }
 
 export default class AsyncView extends Component<AsyncViewProps> {
-
   public componentDidMount() {
     const { fetchTodos } = this.props;
     fetchTodos();
   }
   public render() {
     const { error, requested, todos } = this.props;
-    if (requested) { return <div>Requested</div>; }
-    if (error) { return <div>Error</div>; }
+    if (requested) {
+      return <div>Requested</div>;
+    }
+    if (error) {
+      return <div>Error</div>;
+    }
     return (
       <div>
         <h2>Async</h2>
@@ -27,5 +30,4 @@ export default class AsyncView extends Component<AsyncViewProps> {
       </div>
     );
   }
-
 }

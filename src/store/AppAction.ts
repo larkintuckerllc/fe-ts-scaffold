@@ -1,9 +1,6 @@
 import { AddAction } from 'DUCKS/adder';
 import { DecrementAction, IncrementAction } from 'DUCKS/counter';
-import {
-  FetchTodosRequestAction,
-  FetchTodosResponseAction,
-} from 'DUCKS/todos';
+import { FetchTodosRequestAction, FetchTodosResponseAction } from 'DUCKS/todos';
 
 const UNKNOWN = 'UNKNOWN';
 
@@ -16,11 +13,11 @@ export const unknown = (): UnknownAction => ({
 });
 
 type AppAction =
-  AddAction |
-  DecrementAction |
-  FetchTodosRequestAction |
-  FetchTodosResponseAction |
-  IncrementAction |
-  UnknownAction;
+  | AddAction
+  | DecrementAction
+  | FetchTodosRequestAction
+  | FetchTodosResponseAction
+  | IncrementAction
+  | UnknownAction;
 
 export default AppAction;

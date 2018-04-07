@@ -6,17 +6,17 @@ import todos, {
   getTodos as iGetTodos,
   getTodosError as iGetTodosError,
   getTodosRequested as iGetTodosRequested,
- } from './todos';
+} from './todos';
 
 export default todos;
 
 export const fetchTodos = iFetchTodos;
 
 /* tslint:disable-next-line */
-export interface FetchTodosRequestAction extends iFetchTodosRequestAction {};
+export interface FetchTodosRequestAction extends iFetchTodosRequestAction {}
 
 /* tslint:disable-next-line */
-export interface FetchTodosResponseAction extends iFetchTodosResponseAction {};
+export interface FetchTodosResponseAction extends iFetchTodosResponseAction {}
 
 export const getTodo = iGetTodo;
 

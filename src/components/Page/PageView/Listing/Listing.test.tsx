@@ -11,30 +11,18 @@ const getDefaultProps = () => ({
 });
 
 describe('Listing component', () => {
-
   it('shallow renders without crashing', () => {
     const { add, items } = getDefaultProps();
-    shallow((
-      <Listing
-        add={add}
-        items={items}
-      />
-    ));
+    shallow(<Listing add={add} items={items} />);
   });
 
   it('shallow renders without crashing', () => {
     const { add, items } = getDefaultProps();
-    const wrapper = shallow((
-      <Listing
-        add={add}
-        items={items}
-      />
-    ));
+    const wrapper = shallow(<Listing add={add} items={items} />);
     const callsLength = 1;
     const call0Result = 'Hello World';
     wrapper.find('#test_add').simulate('click');
     expect(add.mock.calls).toHaveLength(callsLength);
     expect(add.mock.calls[0][0]).toBe(call0Result);
   });
-
 });
