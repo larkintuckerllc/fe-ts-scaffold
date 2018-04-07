@@ -2,7 +2,7 @@ import { List } from 'immutable';
 import React from 'react';
 import AnotherCounter from './AnotherCounter';
 import Ant from './Ant';
-// import Async from './Async';
+import Async from './Async';
 import Counter from './Counter';
 import Frame from './Frame';
 import Listing from './Listing';
@@ -30,6 +30,7 @@ export default ({
      <Frame>
        <Ant />
        <AnotherCounter />
+       <Async />
        <Counter
          counter={counter}
          decrement={decrement}

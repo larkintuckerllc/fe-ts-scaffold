@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-interface CounterProps {
+interface AnotherCounterProps {
   counter: number;
   decrement(): void;
   increment(): void;
 }
 
-export default class Counter extends Component<CounterProps> {
+export default class AnotherCounter extends Component<AnotherCounterProps> {
 
   public render() {
     const { counter, decrement, increment } = this.props;

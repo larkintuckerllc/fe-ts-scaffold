@@ -1,11 +1,18 @@
-import { Todo, todoDefault } from 'DUCKS/todos';
+import Todo from 'DUCKS/todos/Todo';
 import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import { List } from 'immutable';
 import React from 'react';
-import { Async } from './Async';
+import AsyncView from './AsyncView';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
+
+const todoDefault = {
+  completed: false,
+  id: 0,
+  title: 'title',
+  userID: 0,
+};
 const sampleTodo = new Todo(todoDefault);
 const sampleTodos = List([sampleTodo]);
 const getDefaultProps = () => ({
@@ -15,6 +22,7 @@ const getDefaultProps = () => ({
   todos: sampleTodos,
 });
 describe('Async component', () => {
+
   it('shallow renders without crashing', () => {
     const {
       error,
@@ -23,7 +31,7 @@ describe('Async component', () => {
       todos,
     } = getDefaultProps();
     shallow((
-      <Async
+      <AsyncView
         error={error}
         fetchTodos={fetchTodos}
         requested={requested}
@@ -31,21 +39,25 @@ describe('Async component', () => {
       />
     ));
   });
+
   it('shallow renders with requested', () => {
+
     const {
       error,
       fetchTodos,
       todos,
     } = getDefaultProps();
     shallow((
-      <Async
+      <AsyncView
         error={error}
         fetchTodos={fetchTodos}
-        requested={false}
+        requested={true}
         todos={todos}
       />
     ));
+
   });
+
   it('shallow renders with error', () => {
     const {
       fetchTodos,
@@ -53,14 +65,16 @@ describe('Async component', () => {
       todos,
     } = getDefaultProps();
     shallow((
-      <Async
+      <AsyncView
         error={true}
         fetchTodos={fetchTodos}
         requested={requested}
         todos={todos}
       />
     ));
+
   });
+
   it('calls fetchTodos on mount', () => {
     const {
       error,
@@ -69,7 +83,7 @@ describe('Async component', () => {
       todos,
     } = getDefaultProps();
     shallow((
-      <Async
+      <AsyncView
         error={error}
         fetchTodos={fetchTodos}
         requested={requested}
@@ -78,4 +92,5 @@ describe('Async component', () => {
     ));
     expect(fetchTodos.mock.calls.length).toBe(1);
   });
+
 });
