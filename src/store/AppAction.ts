@@ -5,11 +5,22 @@ import {
   FetchTodosResponseAction,
 } from 'DUCKS/todos';
 
+const UNKNOWN = 'UNKNOWN';
+
+export interface UnknownAction {
+  type: typeof UNKNOWN;
+}
+
+export const unknown = (): UnknownAction => ({
+  type: UNKNOWN,
+});
+
 type AppAction =
   AddAction |
   DecrementAction |
   FetchTodosRequestAction |
   FetchTodosResponseAction |
-  IncrementAction;
+  IncrementAction |
+  UnknownAction;
 
 export default AppAction;
