@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import StatefulView from './StatefulView';
 
 interface StatefulState {
   counter: number;
@@ -13,12 +14,11 @@ export default class Stateful extends Component<{}, StatefulState> {
   public render() {
     const { counter } = this.state;
     return (
-      <div>
-        <h2>Stateful</h2>
-        <div>{counter.toString()}</div>
-        <button id="test_increment" onClick={this.handleIncrementClick}>+</button>
-        <button id="test_decrement" onClick={this.handleDecrementClick}>-</button>
-      </div>
+      <StatefulView
+        counter={counter}
+        decrement={this.handleDecrementClick}
+        increment={this.handleIncrementClick}
+      />
     );
   }
 
