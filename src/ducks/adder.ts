@@ -16,6 +16,8 @@ export const add = (value: string): AddAction => ({
 });
 
 // STATE
+export type AdderState = List<string>;
+
 export const adderInitialState = List<string>([]);
 
 // REDUCER

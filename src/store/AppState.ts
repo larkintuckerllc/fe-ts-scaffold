@@ -1,7 +1,7 @@
-import { adderInitialState } from 'DUCKS/adder';
-import { counterInitialState } from 'DUCKS/counter';
+import { adderInitialState, AdderState } from 'DUCKS/adder';
+import { counterInitialState, CounterState } from 'DUCKS/counter';
 import TodosState, { todosInitialState } from 'DUCKS/todos/TodosState';
-import { List, Record } from 'immutable';
+import { Record } from 'immutable';
 
 const appStateDefault = {
   adder: adderInitialState,
@@ -10,8 +10,8 @@ const appStateDefault = {
 };
 
 interface AppStateJS {
-  adder: List<string>;
-  counter: number;
+  adder: AdderState;
+  counter: CounterState;
   todos: TodosState;
 }
 

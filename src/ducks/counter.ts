@@ -23,6 +23,8 @@ export const decrement = (): DecrementAction => ({
 });
 
 // STATE
+export type CounterState = number;
+
 export const counterInitialState = 0;
 
 // REDUCER

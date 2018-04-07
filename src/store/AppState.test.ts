@@ -1,8 +1,8 @@
 import { appStateInitial } from './AppState';
 
-describe('todos api', () => {
+describe('AppState', () => {
 
-  it('XXXXX', () => {
+  it('get counter', () => {
     const counter = appStateInitial.get('counter');
     expect(counter).toBe(0);
   });
