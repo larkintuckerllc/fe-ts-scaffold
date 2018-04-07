@@ -24,7 +24,7 @@ describe('Counter component', () => {
     ));
   });
 
-  it('calls decrement on root_decrement click', () => {
+  it('calls decrement on test_decrement click', () => {
     const { counter, decrement, increment } = getDefaultProps();
     const wrapper = shallow((
       <Counter
@@ -33,12 +33,13 @@ describe('Counter component', () => {
         increment={increment}
       />
     ));
-    wrapper.find('#test_decrement').simulate('click');
+    const testDecrement = wrapper.findWhere((node) => node.key() === 'test_decrement');
+    testDecrement.simulate('click');
     const callsLength = 1;
     expect(decrement.mock.calls).toHaveLength(callsLength);
   });
 
-  it('calls increment on root_increment click', () => {
+  it('calls increment on test_increment click', () => {
     const { counter, decrement, increment } = getDefaultProps();
     const wrapper = shallow((
       <Counter
@@ -47,7 +48,8 @@ describe('Counter component', () => {
         increment={increment}
       />
     ));
-    wrapper.find('#test_increment').simulate('click');
+    const testIncrement = wrapper.findWhere((node) => node.key() === 'test_increment');
+    testIncrement.simulate('click');
     const callsLength = 1;
     expect(increment.mock.calls).toHaveLength(callsLength);
   });

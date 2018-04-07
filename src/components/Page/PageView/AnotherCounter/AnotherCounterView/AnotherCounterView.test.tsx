@@ -41,8 +41,10 @@ describe('Counter component', () => {
         increment={increment}
       />
     ));
-    wrapper.find('#test_decrement').simulate('click');
-    expect(decrement.mock.calls).toHaveLength(1);
+    const callsLength = 1;
+    const testDecrement = wrapper.findWhere((node) => node.key() === 'test_decrement');
+    testDecrement.simulate('click');
+    expect(decrement.mock.calls).toHaveLength(callsLength);
   });
 
   it('calls increment on test_increment click', () => {
@@ -58,8 +60,10 @@ describe('Counter component', () => {
         increment={increment}
       />
     ));
-    wrapper.find('#test_increment').simulate('click');
-    expect(increment.mock.calls).toHaveLength(1);
+    const callsLength = 1;
+    const testIncrement = wrapper.findWhere((node) => node.key() === 'test_increment');
+    testIncrement.simulate('click');
+    expect(increment.mock.calls).toHaveLength(callsLength);
   });
 
 });
