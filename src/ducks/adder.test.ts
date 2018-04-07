@@ -1,6 +1,5 @@
 import { List } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
-// import { init, initialState } from 'STORE/reducers';
 import { unknown } from 'STORE/AppAction';
 import { appStateInitial } from 'STORE/AppState';
 import adder, { add, getAdder } from './adder';

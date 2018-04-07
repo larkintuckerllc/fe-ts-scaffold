@@ -1,72 +1,87 @@
-import { List, Map } from 'immutable';
-import { init, initialState } from 'STORE/reducers';
+// import { List, Map } from 'immutable';
+// import { init, initialState } from 'STORE/reducers';
+// import Todo from './Todo';
+/*
 import todos, {
-  byId,
-  errored,
   fetchTodos,
-  fetchTodosRequest,
-  fetchTodosResponse,
   getTodo,
   getTodos,
   getTodosError,
   getTodosRequested,
-  ids,
-  requested,
-  Todo,
-  todoDefault,
-  todosInitialState,
 } from './todos';
+*/
+import { List, Map } from 'immutable';
+import * as matchers from 'jest-immutable-matchers';
+import { appStateInitial } from 'STORE/AppState';
+import Todo from './Todo';
+import {
+  fetchTodos,
+  getTodo,
+  getTodos,
+  getTodosError,
+  getTodosRequested,
+} from './todos';
+import { todosInitialState } from './TodosState';
 
 jest.mock('APIS/todos');
+
 describe('todos duck', () => {
-  const sampleTodo = new Todo(todoDefault);
-  const sampleTodos = List([sampleTodo]);
-  let sampleById = Map<number, Todo>({});
-  sampleById = sampleById.set(sampleTodo.get('id'), sampleTodo);
-  const sampleIds = List([sampleTodo.get('id')]);
-  let sampleTodosState = todosInitialState.set('byId', sampleById);
-  sampleTodosState = sampleTodosState.set('ids', sampleIds);
-  const sampleState = initialState.set('todos', sampleTodosState);
+  const todoDefault = {
+    completed: false,
+    id: 0,
+    title: 'title',
+    userID: 0,
+  };
+  const todoSample = new Todo(todoDefault);
+  const todosSample = List([todoSample]);
+  const request = {
+    type: 'FETCH_TODOS_REQUEST',
+  };
+  const responseSuccess = {
+    payload: todosSample,
+    type: 'FETCH_TODOS_RESPONSE',
+  };
+  const responseError = {
+    error: true,
+    payload: '500',
+    type: 'FETCH_TODOS_RESPONSE',
+  };
+  let byIdSample = Map<number, Todo>({});
+  byIdSample = byIdSample.set(todoSample.get('id'), todoSample);
+  const idsSample = List([todoSample.get('id')]);
+  let todosStateSample = todosInitialState.set('byId', byIdSample);
+  todosStateSample = todosStateSample.set('ids', idsSample);
+  const appStateSample = appStateInitial.set('todos', todosStateSample);
+
+  beforeEach(() => {
+    jest.addMatchers(matchers);
+  });
+
   // ACTIONS
-  it('fetchTodosRequest should create FETCH_TODOS_REQUEST action', () => {
-    expect(fetchTodosRequest()).toEqual({
-      type: 'FETCH_TODOS_REQUEST',
-    });
-  });
-  it('fetchTodosResponse success should create FETCH_TODOS_RESPONSE success action', () => {
-    expect(fetchTodosResponse(sampleTodos)).toEqual({
-      type: 'FETCH_TODOS_RESPONSE',
-      payload: sampleTodos,
-    });
-  });
-  it('fetchTodoResponse error should create FETCH_TODOS_RESPONSE error action', () => {
-    const error = '500';
-    expect(fetchTodosResponse(error, true)).toEqual({
-      error: true,
-      payload: error,
-      type: 'FETCH_TODOS_RESPONSE',
-    });
-  });
   it('fetchTodos success should dispatch request and response - success actions', () => {
     const dispatch = jest.fn();
-    const todos = require('APIS/todos');
-    todos.setError(false);
+    const apisTodos = require('APIS/todos');
+    apisTodos.setError(false);
     return fetchTodos()(dispatch).then(() => {
-      expect(dispatch.mock.calls.length).toBe(2);
-      expect(dispatch.mock.calls[0][0]).toEqual(fetchTodosRequest());
-      expect(dispatch.mock.calls[1][0]).toEqual(fetchTodosResponse(sampleTodos));
+      const callsLength = 2;
+      expect(dispatch.mock.calls.length).toBe(callsLength);
+      expect(dispatch.mock.calls[0][0]).toEqual(request);
+      expect(dispatch.mock.calls[1][0]).toEqual(responseSuccess);
     });
   });
+
   it('fetchTodos success should dispatch request and response - error actions', () => {
-    const todos = require('APIS/todos');
-    todos.setError(true);
     const dispatch = jest.fn();
+    const apisTodos = require('APIS/todos');
+    apisTodos.setError(true);
     return fetchTodos()(dispatch).then(() => {
       expect(dispatch.mock.calls.length).toBe(2);
-      expect(dispatch.mock.calls[0][0]).toEqual(fetchTodosRequest());
-      expect(dispatch.mock.calls[1][0]).toEqual(fetchTodosResponse('500', true));
+      expect(dispatch.mock.calls[0][0]).toEqual(request);
+      expect(dispatch.mock.calls[1][0]).toEqual(responseError);
     });
   });
+
+  /*
   // REDUCERS
   it('reducer should ignore unknown actions', () => {
     expect(todos(todosInitialState, init())).toBe(todosInitialState);
@@ -123,17 +138,26 @@ describe('todos duck', () => {
       expect(errored(false, fetchTodosResponse('500', true))).toBe(true);
     });
   });
+  */
+
   // SELECTORS
   it('getTodosRequested should return', () => {
-    expect(getTodosRequested(initialState)).toEqual(false);
+    const result = false;
+    expect(getTodosRequested(appStateInitial)).toEqual(result);
   });
+
   it('getTodosError should return', () => {
-    expect(getTodosError(initialState)).toEqual(false);
+    const result = false;
+    expect(getTodosError(appStateInitial)).toEqual(result);
   });
   it('getTodo should return', () => {
-    expect(getTodo(sampleState, sampleTodo.get('id'))).toEqual(sampleTodo);
+    const id = todoSample.get('id');
+    expect(getTodo(appStateSample, id)).toEqualImmutable(todoSample);
   });
+
   it('getTodos should return', () => {
-    expect(getTodos(sampleState)).toEqual(List([sampleTodo]));
+    const result = List([todoSample]);
+    expect(getTodos(appStateSample)).toEqualImmutable(result);
   });
+
 });

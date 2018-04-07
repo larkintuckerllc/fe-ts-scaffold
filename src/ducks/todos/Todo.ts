@@ -1,6 +1,6 @@
 import { Record } from 'immutable';
 
-export const todoDefault = {
+const todoDefault = {
   completed: false,
   id: 0,
   title: 'title',
