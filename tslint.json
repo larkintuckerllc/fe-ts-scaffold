@@ -1,16 +1,14 @@
 {
   "extends": [
     "tslint:recommended",
-    "tslint-react"
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "rulesDirectory": [
+    "tslint-plugin-prettier"
   ],
   "rules": {
-    "interface-name": false,
-    "quotemark": {
-      "options": [
-        "single",
-        "jsx-double",
-        "avoid-escape"
-      ]
-    }
+    "prettier": true,
+    "interface-name": false
   }
 }
