@@ -4,11 +4,14 @@ import React from 'react';
 import WrappedView from './WrappedView';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
+
 const getDefaultProps = () => ({
   clickCount: 0,
   text: 'hello world',
 });
+
 describe('WrappedView component', () => {
+
   it('shallow renders without crashing', () => {
     const { clickCount, text } = getDefaultProps();
     shallow((
@@ -18,6 +21,7 @@ describe('WrappedView component', () => {
       />
     ));
   });
+
   it('shallow renders with clickCount >= 5 without crashing', () => {
     const { text } = getDefaultProps();
     shallow((
@@ -27,4 +31,5 @@ describe('WrappedView component', () => {
       />
     ));
   });
+
 });

@@ -9,7 +9,7 @@ import Listing from './Listing';
 import Media from './Media';
 import Stateful from './Stateful';
 import Styling from './Styling';
-// import Wrapped from './Wrapped';
+import Wrapped from './Wrapped';
 
 interface PageViewProps {
   adder: List<string>;
@@ -43,6 +43,7 @@ export default ({
        <Media />
        <Stateful />
        <Styling />
+       <Wrapped text="test" />
      </Frame>
   );
 };
