@@ -1,27 +1,7 @@
-import adder, { AddAction } from 'DUCKS/adder';
-import counter, { DecrementAction, IncrementAction } from 'DUCKS/counter';
-import todos, {
-  FetchTodosRequestAction,
-  FetchTodosResponseAction,
-} from 'DUCKS/todos';
+import adder from 'DUCKS/adder';
+import counter from 'DUCKS/counter';
+import todos from 'DUCKS/todos';
 import { combineReducers } from 'redux-immutable';
-
-// ACTIONS
-interface InitAction {
-  type: '@@INIT';
-}
-
-export const init = (): InitAction => ({
-  type: '@@INIT',
-});
-
-export type AppAction =
-  AddAction |
-  DecrementAction |
-  FetchTodosRequestAction |
-  FetchTodosResponseAction |
-  IncrementAction |
-  InitAction;
 
 const reducers = {
   adder,

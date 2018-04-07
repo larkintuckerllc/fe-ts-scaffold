@@ -1,6 +1,6 @@
 import { List } from 'immutable';
+import AppAction from 'STORE/AppAction';
 import AppState from 'STORE/AppState';
-import { AppAction } from 'STORE/reducers';
 
 // ACTIONS
 const ADD = 'ADD';
