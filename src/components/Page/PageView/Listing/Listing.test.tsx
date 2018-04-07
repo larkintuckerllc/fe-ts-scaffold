@@ -30,9 +30,11 @@ describe('Listing component', () => {
         items={items}
       />
     ));
+    const callsLength = 1;
+    const call0Result = 'Hello World';
     wrapper.find('#test_add').simulate('click');
-    expect(add.mock.calls).toHaveLength(1);
-    expect(add.mock.calls[0][0]).toBe('Hello World');
+    expect(add.mock.calls).toHaveLength(callsLength);
+    expect(add.mock.calls[0][0]).toBe(call0Result);
   });
 
 });

@@ -34,7 +34,8 @@ describe('Counter component', () => {
       />
     ));
     wrapper.find('#test_decrement').simulate('click');
-    expect(decrement.mock.calls).toHaveLength(1);
+    const callsLength = 1;
+    expect(decrement.mock.calls).toHaveLength(callsLength);
   });
 
   it('calls increment on root_increment click', () => {
@@ -47,7 +48,8 @@ describe('Counter component', () => {
       />
     ));
     wrapper.find('#test_increment').simulate('click');
-    expect(increment.mock.calls).toHaveLength(1);
+    const callsLength = 1;
+    expect(increment.mock.calls).toHaveLength(callsLength);
   });
 
 });
