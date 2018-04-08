@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface FrameProps {
-  children: JSX.Element[];
+  children: JSX.Element | JSX.Element[];
 }
 
 export default ({ children }: FrameProps) => {
