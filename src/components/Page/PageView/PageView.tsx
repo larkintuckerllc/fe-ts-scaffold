@@ -7,6 +7,7 @@ import Counter from './Counter';
 import Frame from './Frame';
 import Listing from './Listing';
 import Media from './Media';
+import Risky from './Risky';
 import Stateful from './Stateful';
 import Styling from './Styling';
 import Wrapped from './Wrapped';
@@ -28,6 +29,7 @@ export default ({ add, adder, counter, decrement, increment }: PageViewProps) =>
       <Counter counter={counter} decrement={decrement} increment={increment} />
       <Listing add={add} items={adder.toJS()} />
       <Media />
+      <Risky />
       <Stateful />
       <Styling />
       <Wrapped text="test" />

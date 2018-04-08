@@ -15,7 +15,8 @@ module.exports = {
     'node',
   ],
   moduleNameMapper: {
-    '\\.(css|jpg|less|png)$': '<rootDir>/empty-module.js',
+    '\\.(css|less)$': '<rootDir>/styleMock.js',
+    '\\.(jpg|png)$': '<rootDir>/empty-module.js',
     '^APIS/(.*)': '<rootDir>/src/apis/$1',
     '^COMPONENTS/(.*)': '<rootDir>/src/components/$1',
     '^DUCKS/(.*)': '<rootDir>/src/ducks/$1',
@@ -25,5 +26,8 @@ module.exports = {
     'src/**/*.{ts,tsx}',
     '!src/**/index.{ts,tsx}',
     '!src/**/*.d.ts',
+  ],
+  snapshotSerializers: [
+    'enzyme-to-json/serializer',
   ],
 };
