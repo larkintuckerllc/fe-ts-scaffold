@@ -1,4 +1,4 @@
-import Enzyme, { mount, render, shallow } from 'enzyme';
+import Enzyme, { render, shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import React from 'react';
 import Risky from './Risky';
