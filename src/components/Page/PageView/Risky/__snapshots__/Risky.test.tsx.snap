@@ -20,12 +20,3 @@ exports[`Risky component render snapshot 1`] = `
   </div>
 </div>
 `;
-
-exports[`Risky component shallow snapshot 1`] = `
-<div>
-  <h2>
-    Risky
-  </h2>
-  <Component />
-</div>
-`;

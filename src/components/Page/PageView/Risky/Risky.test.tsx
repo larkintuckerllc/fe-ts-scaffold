@@ -13,12 +13,6 @@ describe('Risky component', () => {
     shallow(<Risky />);
   });
 
-  it('shallow snapshot', () => {
-    const {} = getDefaultProps();
-    const wrapper = shallow(<Risky />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('render snapshot', () => {
     const {} = getDefaultProps();
     const wrapper = render(<Risky />);
