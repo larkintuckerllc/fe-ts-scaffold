@@ -22,7 +22,8 @@ describe('Counter component', () => {
     const wrapper = shallow(
       <StatefulView counter={counter} decrement={decrement} increment={increment} />
     );
-    wrapper.find('#test_decrement').simulate('click');
+    const testDecrement = wrapper.findWhere(node => node.key() === 'test_decrement');
+    testDecrement.simulate('click');
     expect(decrement.mock.calls).toHaveLength(1);
   });
 
@@ -31,7 +32,8 @@ describe('Counter component', () => {
     const wrapper = shallow(
       <StatefulView counter={counter} decrement={decrement} increment={increment} />
     );
-    wrapper.find('#test_increment').simulate('click');
+    const testIncrement = wrapper.findWhere(node => node.key() === 'test_increment');
+    testIncrement.simulate('click');
     expect(increment.mock.calls).toHaveLength(1);
   });
 });

@@ -13,10 +13,10 @@ export default class Counter extends Component<CounterProps> {
       <div>
         <h2>Connected</h2>
         <div>{counter.toString()}</div>
-        <button id="test_increment" onClick={increment}>
+        <button key="test_increment" onClick={increment}>
           +
         </button>
-        <button id="test_decrement" onClick={decrement}>
+        <button key="test_decrement" onClick={decrement}>
           -
         </button>
       </div>
