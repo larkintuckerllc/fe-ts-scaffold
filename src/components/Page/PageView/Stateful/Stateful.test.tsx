@@ -13,6 +13,14 @@ describe('Stateful component', () => {
     shallow(<Stateful />);
   });
 
+  it('with StateView initalized counter to 0', () => {
+    const {} = getDefaultProps();
+    const wrapper = shallow(<Stateful />);
+    const result = 0;
+    const testStatefulView = wrapper.findWhere(node => node.key() === 'test_stateful_view');
+    expect(testStatefulView.props().counter).toEqual(result);
+  });
+
   it('with StateView increments counter when increment called', () => {
     const {} = getDefaultProps();
     const wrapper = shallow(<Stateful />);
