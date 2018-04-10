@@ -31,6 +31,9 @@ module.exports = (env) => {
           enforce: 'pre',
           exclude: /node_modules/,
           loader: 'tslint-loader',
+          options: {
+            failOnHint: true,
+          },
         },
         {
           test: /\.(tsx?)$/,
@@ -44,6 +47,7 @@ module.exports = (env) => {
                 style: true,
               })],
             }),
+            onlyCompileBundledFiles: true,
           },
         },
         {
