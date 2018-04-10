@@ -20,7 +20,7 @@ interface PageViewProps {
   increment(): void;
 }
 
-export default ({ add, adder, counter, decrement, increment }: PageViewProps) => {
+const PageView = ({ add, adder, counter, decrement, increment }: PageViewProps) => {
   return (
     <Frame>
       <Ant />
@@ -36,3 +36,4 @@ export default ({ add, adder, counter, decrement, increment }: PageViewProps) =>
     </Frame>
   );
 };
+export default PageView;

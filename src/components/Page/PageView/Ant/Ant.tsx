@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import React from 'react';
 
-export default () => {
+const Ant = () => {
   return (
     <div>
       <h2>Ant</h2>
@@ -9,3 +9,4 @@ export default () => {
     </div>
   );
 };
+export default Ant;

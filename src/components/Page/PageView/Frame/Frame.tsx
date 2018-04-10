@@ -4,6 +4,7 @@ interface FrameProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export default ({ children }: FrameProps) => {
+const Frame = ({ children }: FrameProps) => {
   return <div style={{ border: 'solid' }}>{children}</div>;
 };
+export default Frame;

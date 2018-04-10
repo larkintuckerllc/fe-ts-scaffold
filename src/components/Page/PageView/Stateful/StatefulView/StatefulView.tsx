@@ -1,25 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-interface CounterProps {
+interface StatefulViewProps {
   counter: number;
   decrement(): void;
   increment(): void;
 }
 
-export default class Counter extends Component<CounterProps> {
-  public render() {
-    const { counter, decrement, increment } = this.props;
-    return (
-      <div>
-        <h2>Connected</h2>
-        <div>{counter.toString()}</div>
-        <button key="test_increment" onClick={increment}>
-          +
-        </button>
-        <button key="test_decrement" onClick={decrement}>
-          -
-        </button>
-      </div>
-    );
-  }
-}
+const StatefulView = ({ counter, decrement, increment }: StatefulViewProps) => (
+  <div>
+    <h2>Connected</h2>
+    <div>{counter.toString()}</div>
+    <button key="test_increment" onClick={increment}>
+      +
+    </button>
+    <button key="test_decrement" onClick={decrement}>
+      -
+    </button>
+  </div>
+);
+export default StatefulView;

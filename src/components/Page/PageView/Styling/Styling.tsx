@@ -1,7 +1,7 @@
 import React from 'react';
 import stylesLess from './styles.less';
 
-export default () => {
+const Styling = () => {
   return (
     <div id={stylesLess.root}>
       <h2 className="my_global">Styling</h2>
@@ -13,3 +13,4 @@ export default () => {
     </div>
   );
 };
+export default Styling;

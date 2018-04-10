@@ -6,7 +6,7 @@ interface CounterProps {
   increment(): void;
 }
 
-export default ({ counter, decrement, increment }: CounterProps) => {
+const Counter = ({ counter, decrement, increment }: CounterProps) => {
   return (
     <div>
       <h2>Counter</h2>
@@ -20,3 +20,4 @@ export default ({ counter, decrement, increment }: CounterProps) => {
     </div>
   );
 };
+export default Counter;

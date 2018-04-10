@@ -1,7 +1,7 @@
 import React from 'react';
 import styleLess from './style.less';
 
-export default () => {
+const Fragile = () => {
   return (
     <div>
       <div id={styleLess.root} style={{ backgroundColor: 'black' }}>
@@ -11,3 +11,4 @@ export default () => {
     </div>
   );
 };
+export default Fragile;

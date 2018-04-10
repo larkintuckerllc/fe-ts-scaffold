@@ -4,7 +4,7 @@ import React from 'react';
 export interface WrappedViewProps {
   text: string;
 }
-export default (props: WrappedViewProps & InjectedProps) => {
+const WrappedView = (props: WrappedViewProps & InjectedProps) => {
   const { clickCount, text } = props;
   return (
     <div>
@@ -13,3 +13,4 @@ export default (props: WrappedViewProps & InjectedProps) => {
     </div>
   );
 };
+export default WrappedView;

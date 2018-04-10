@@ -1,7 +1,7 @@
 import Fragile from 'COMPONENTS/Fragile';
 import React from 'react';
 
-export default () => {
+const Risky = () => {
   return (
     <div>
       <h2>Risky</h2>
@@ -9,3 +9,4 @@ export default () => {
     </div>
   );
 };
+export default Risky;
