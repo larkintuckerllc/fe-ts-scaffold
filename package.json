@@ -22,6 +22,7 @@
     "ajv": "^5.0.0",
     "autoprefixer": "^8.2.0",
     "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",

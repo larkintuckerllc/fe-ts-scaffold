@@ -1,4 +1,5 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
@@ -9,6 +10,10 @@ const lessModifyVars = require('./less-modify-vars');
 module.exports = (env) => {
   const plugins = [
     new CleanWebpackPlugin(['dist']),
+    new CopyWebpackPlugin([
+      { from: 'public/favicon.ico' },
+      { from: 'public/*.md' },
+    ]),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
     }),
