@@ -12,7 +12,6 @@ module.exports = (env) => {
     new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
       { from: 'public/favicon.ico' },
-      { from: 'public/*.md' },
     ]),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
