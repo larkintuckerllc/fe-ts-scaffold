@@ -1,7 +1,7 @@
 import { fetchTodos } from './todos';
 
 describe('todos api', () => {
-  it('fetchTodos resolves', () => {
+  it('fetchTodos success with fetch success', async () => {
     const todos = [
       {
         completed: false,
@@ -16,8 +16,53 @@ describe('todos api', () => {
         json,
       })
     );
-    return fetchTodos().then(response => {
-      expect(response).toBe(todos);
-    });
+    expect.assertions(1);
+    const response = await fetchTodos();
+    expect(response).toBe(todos);
+  });
+
+  it('fetchTodos error with fetch error', async () => {
+    window.fetch = jest.fn().mockImplementation(() => Promise.reject(true));
+    expect.assertions(1);
+    try {
+      await fetchTodos();
+    } catch (e) {
+      expect(true).toEqual(true); // JUST EXPECT CATCH TO BE CALLED
+    }
+  });
+
+  it('fetchTodos error with fetch success but not json', async () => {
+    const json = jest.fn().mockImplementation(() => Promise.reject(true));
+    window.fetch = jest.fn().mockImplementation(() =>
+      Promise.resolve({
+        json,
+      })
+    );
+    expect.assertions(1);
+    try {
+      await fetchTodos();
+    } catch (e) {
+      expect(true).toEqual(true);
+    }
+  });
+
+  it('fetchTodos error with fetch success with json but invalid', async () => {
+    const todos = [
+      {
+        bogus: true,
+      },
+    ];
+    const json = jest.fn().mockImplementation(() => Promise.resolve(todos));
+    window.fetch = jest.fn().mockImplementation(() =>
+      Promise.resolve({
+        json,
+      })
+    );
+    expect.assertions(1);
+    try {
+      await fetchTodos();
+    } catch (e) {
+      expect(true).toEqual(true);
+    }
   });
 });
