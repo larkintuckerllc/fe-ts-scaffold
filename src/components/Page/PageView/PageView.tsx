@@ -20,20 +20,18 @@ interface PageViewProps {
   increment(): void;
 }
 
-const PageView = ({ add, adder, counter, decrement, increment }: PageViewProps) => {
-  return (
-    <Frame>
-      <Ant />
-      <AnotherCounter />
-      <Async />
-      <Counter counter={counter} decrement={decrement} increment={increment} />
-      <Listing add={add} items={adder.toJS()} />
-      <Media />
-      <Risky />
-      <Stateful />
-      <Styling />
-      <Wrapped text="test" />
-    </Frame>
-  );
-};
+const PageView = ({ add, adder, counter, decrement, increment }: PageViewProps) => (
+  <Frame>
+    <Ant />
+    <AnotherCounter />
+    <Async />
+    <Counter counter={counter} decrement={decrement} increment={increment} />
+    <Listing add={add} items={adder.toJS()} />
+    <Media />
+    <Risky />
+    <Stateful />
+    <Styling />
+    <Wrapped text="test" />
+  </Frame>
+);
 export default PageView;
