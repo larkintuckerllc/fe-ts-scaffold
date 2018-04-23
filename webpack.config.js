@@ -55,7 +55,7 @@ module.exports = (env) => {
           },
         },
         {
-          test: /node_modules[//\/].*\.(css|less)$/,
+          test: /node_modules[\\\/].*\.(css|less)$/,
           use: [
             {
               loader: env.NODE_ENV === 'production' ?
