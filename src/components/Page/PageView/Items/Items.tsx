@@ -1,15 +1,28 @@
-import { fetchItems } from 'APIS/items';
-import React, { Component } from 'react';
+import * as fromItems from 'DUCKS/items';
+import Item from 'DUCKS/items/Item';
+import { List } from 'immutable';
+import { connect } from 'react-redux';
+import AppState from 'STORE/AppState';
+import ItemsView from './ItemsView';
 
-export default class AsyncView extends Component<{}> {
-  public componentDidMount() {
-    fetchItems().then(response => window.console.log(response));
-  }
-  public render() {
-    return (
-      <div>
-        <h2>Items</h2>
-      </div>
-    );
-  }
+interface StateProps {
+  error: boolean;
+  requested: boolean;
+  items: List<Item>;
 }
+
+interface DispatchProps {
+  fetchItems(): void;
+}
+
+const mapStateToProps = (state: AppState) => ({
+  error: fromItems.getItemsError(state),
+  items: fromItems.getItems(state),
+  requested: fromItems.getItemsRequested(state),
+});
+
+const mapDispatchToProps = {
+  fetchItems: fromItems.fetchItems,
+};
+
+export default connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(ItemsView);
