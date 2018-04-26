@@ -1,5 +1,6 @@
 import { AddAction } from 'DUCKS/adder';
 import { DecrementAction, IncrementAction } from 'DUCKS/counter';
+import { ToggleInfiniteAction } from 'DUCKS/infinite';
 import {
   FetchItemsRequestAction,
   FetchItemsResponseAction,
@@ -26,6 +27,7 @@ type AppAction =
   | FetchTodosResponseAction
   | IncrementAction
   | SetItemsCurrentPageAction
+  | ToggleInfiniteAction
   | UnknownAction;
 
 export default AppAction;
