@@ -14,7 +14,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  fetchItems(): void;
+  fetchItems(page: number): void;
 }
 
 const mapStateToProps = (state: AppState) => ({

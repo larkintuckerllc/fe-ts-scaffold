@@ -9,13 +9,13 @@ interface PaginatedViewProps {
   requested: boolean;
   lastPage: number;
   items: List<Item>;
-  fetchItems(): void;
+  fetchItems(page: number): void;
 }
 
 export default class AsyncView extends Component<PaginatedViewProps> {
   public componentDidMount() {
-    const { fetchItems } = this.props;
-    fetchItems();
+    const { currentPage, fetchItems } = this.props;
+    fetchItems(currentPage);
   }
   public render() {
     const { currentPage, error, lastPage, requested, items } = this.props;
@@ -32,7 +32,27 @@ export default class AsyncView extends Component<PaginatedViewProps> {
         <Items items={items.toJS()} />
         <div>CurrentPage: {currentPage.toString()}</div>
         <div>LastPage: {lastPage.toString()}</div>
+        {currentPage !== 0 && (
+          <div>
+            <button onClick={this.handlePreviousPage}>Previous Page</button>
+          </div>
+        )}
+        {currentPage !== lastPage && (
+          <div>
+            <button onClick={this.handleNextPage}>Next Page</button>
+          </div>
+        )}
       </div>
     );
   }
+
+  private handleNextPage = () => {
+    const { currentPage, fetchItems } = this.props;
+    fetchItems(currentPage + 1);
+  };
+
+  private handlePreviousPage = () => {
+    const { currentPage, fetchItems } = this.props;
+    fetchItems(currentPage - 1);
+  };
 }

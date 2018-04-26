@@ -13,6 +13,8 @@ const FETCH_ITEMS_REQUEST = 'FETCH_ITEMS_REQUEST';
 
 const FETCH_ITEMS_RESPONSE = 'FETCH_ITEMS_RESPONSE';
 
+const SET_ITEMS_CURRENT_PAGE = 'SET_ITEMS_CURRENT_PAGE';
+
 interface FetchItemsResponseActionPayload {
   items: List<Item>;
   page: number;
@@ -29,8 +31,18 @@ export interface FetchItemsResponseAction {
   error?: boolean;
 }
 
+export interface SetItemsCurrentPageAction {
+  type: typeof SET_ITEMS_CURRENT_PAGE;
+  payload: number;
+}
+
 const fetchItemsRequest = (): FetchItemsRequestAction => ({
   type: FETCH_ITEMS_REQUEST,
+});
+
+const setItemsCurrentPage = (page: number): SetItemsCurrentPageAction => ({
+  payload: page,
+  type: SET_ITEMS_CURRENT_PAGE,
 });
 
 const fetchItemsResponse = (
@@ -48,14 +60,16 @@ const fetchItemsResponse = (
         type: FETCH_ITEMS_RESPONSE,
       };
 
-// TODO: THINK ABOUT ALREADY GOT PAGE
-export const fetchItems = () => async (
+export const fetchItems = (page: number) => async (
   dispatch: (action: AppAction) => void,
   getState: () => AppState
 ) => {
   const state = getState();
-  const page = getCurrentPage(state);
   const offset = page * PAGE_SIZE;
+  dispatch(setItemsCurrentPage(page));
+  if (getIsPageFetched(state, page)) {
+    return;
+  }
   dispatch(fetchItemsRequest());
   try {
     const json = await fromItems.fetchItems({
@@ -106,7 +120,7 @@ const ids = (state: List<number>, action: AppAction) => {
         return state;
       }
       const payload = action.payload as FetchItemsResponseActionPayload;
-      return List(payload.items.map((o: Item) => o.get('id')));
+      return state.merge(List(payload.items.map((o: Item) => o.get('id'))));
     default:
       return state;
   }
@@ -125,6 +139,8 @@ const errored = (state: boolean, action: AppAction) => {
 
 const currentPage = (state: number, action: AppAction) => {
   switch (action.type) {
+    case SET_ITEMS_CURRENT_PAGE:
+      return action.payload;
     default:
       return state;
   }
@@ -189,6 +205,14 @@ export const getCurrentPage = (state: AppState) => state.get('items').get('curre
 
 export const getLastPage = (state: AppState) => state.get('items').get('lastPage');
 
+const getIsPageFetched = (state: AppState, page: number) => {
+  return (
+    state
+      .get('items')
+      .get('pages')
+      .get(page) !== undefined
+  );
+};
 const getItemsIdsPaged = (state: AppState) => {
   const page = state.get('items').get('currentPage');
   const pageIds = state

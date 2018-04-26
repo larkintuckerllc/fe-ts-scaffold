@@ -10,4 +10,5 @@ export {
   getItemsPaged,
   getItemsRequested,
   getLastPage,
+  SetItemsCurrentPageAction,
 } from './items';
