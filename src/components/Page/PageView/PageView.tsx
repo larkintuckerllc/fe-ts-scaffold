@@ -5,6 +5,7 @@ import Ant from './Ant';
 import Async from './Async';
 import Counter from './Counter';
 import Frame from './Frame';
+import Items from './Items';
 import Listing from './Listing';
 import Media from './Media';
 import Risky from './Risky';
@@ -26,6 +27,7 @@ const PageView = ({ add, adder, counter, decrement, increment }: PageViewProps) 
     <AnotherCounter />
     <Async />
     <Counter counter={counter} decrement={decrement} increment={increment} />
+    <Items />
     <Listing add={add} items={adder.toJS()} />
     <Media />
     <Risky />
