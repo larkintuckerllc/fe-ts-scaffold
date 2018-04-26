@@ -6,7 +6,9 @@ import AppState from 'STORE/AppState';
 import PaginatedView from './PaginatedView';
 
 interface StateProps {
+  currentPage: number;
   error: boolean;
+  lastPage: number;
   requested: boolean;
   items: List<Item>;
 }
@@ -16,8 +18,10 @@ interface DispatchProps {
 }
 
 const mapStateToProps = (state: AppState) => ({
+  currentPage: fromItems.getCurrentPage(state),
   error: fromItems.getItemsError(state),
   items: fromItems.getItemsPaged(state),
+  lastPage: fromItems.getLastPage(state),
   requested: fromItems.getItemsRequested(state),
 });
 

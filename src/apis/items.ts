@@ -69,7 +69,7 @@ export const fetchItems = (params?: FetchItemsParams) => {
   const offset = params.offset !== undefined ? params.offset : 0;
   const items = ITEMS.slice(offset, offset + limit);
   response = {
-    count: items.length,
+    count: ITEMS.length,
     results: items,
   };
   return Promise.resolve(response);

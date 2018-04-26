@@ -4,8 +4,10 @@ import React, { Component } from 'react';
 import Items from './Items';
 
 interface PaginatedViewProps {
+  currentPage: number;
   error: boolean;
   requested: boolean;
+  lastPage: number;
   items: List<Item>;
   fetchItems(): void;
 }
@@ -16,7 +18,7 @@ export default class AsyncView extends Component<PaginatedViewProps> {
     fetchItems();
   }
   public render() {
-    const { error, requested, items } = this.props;
+    const { currentPage, error, lastPage, requested, items } = this.props;
     if (requested) {
       return <div>Requested</div>;
     } else if (error) {
@@ -28,6 +30,8 @@ export default class AsyncView extends Component<PaginatedViewProps> {
       <div>
         <h2>Paginated</h2>
         <Items items={items.toJS()} />
+        <div>CurrentPage: {currentPage.toString()}</div>
+        <div>LastPage: {lastPage.toString()}</div>
       </div>
     );
   }

@@ -16,6 +16,7 @@ const FETCH_ITEMS_RESPONSE = 'FETCH_ITEMS_RESPONSE';
 interface FetchItemsResponseActionPayload {
   items: List<Item>;
   page: number;
+  pageCount: number;
 }
 
 export interface FetchItemsRequestAction {
@@ -64,7 +65,8 @@ export const fetchItems = () => async (
     const reducer = (accumulator: List<Item>, jsonItem: ItemJS) =>
       accumulator.push(new Item(jsonItem));
     const items = json.results.reduce(reducer, List<Item>([])) as List<Item>;
-    dispatch(fetchItemsResponse({ items, page }));
+    const pageCount = Math.ceil(json.count / PAGE_SIZE);
+    dispatch(fetchItemsResponse({ items, page, pageCount }));
   } catch {
     dispatch(fetchItemsResponse('500', true));
   }
@@ -128,6 +130,16 @@ const currentPage = (state: number, action: AppAction) => {
   }
 };
 
+const lastPage = (state: number, action: AppAction) => {
+  switch (action.type) {
+    case FETCH_ITEMS_RESPONSE:
+      const payload = action.payload as FetchItemsResponseActionPayload;
+      return payload.pageCount - 1;
+    default:
+      return state;
+  }
+};
+
 const pages = (state: Map<number, List<number>>, action: AppAction) => {
   switch (action.type) {
     case FETCH_ITEMS_RESPONSE:
@@ -147,6 +159,7 @@ export default combineReducers({
   currentPage,
   errored,
   ids,
+  lastPage,
   pages,
   requested,
 });
@@ -172,7 +185,9 @@ export const getItems = createSelector(
   (pById, pIds) => pIds.map(o => pById.get(o)) as List<Item>
 );
 
-const getCurrentPage = (state: AppState) => state.get('items').get('currentPage');
+export const getCurrentPage = (state: AppState) => state.get('items').get('currentPage');
+
+export const getLastPage = (state: AppState) => state.get('items').get('lastPage');
 
 const getItemsIdsPaged = (state: AppState) => {
   const page = state.get('items').get('currentPage');

@@ -6,6 +6,7 @@ const itemsStateDefault = {
   currentPage: 0,
   errored: false,
   ids: List<number>([]),
+  lastPage: 0,
   pages: Map<number, List<number>>(),
   requested: false,
 };
@@ -15,6 +16,7 @@ interface ItemsStateJS {
   currentPage: number;
   errored: boolean;
   ids: List<number>;
+  lastPage: number;
   pages: Map<number, List<number>>;
   requested: boolean;
 }
