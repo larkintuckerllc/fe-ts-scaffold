@@ -3,15 +3,19 @@ import Item from './Item';
 
 const itemsStateDefault = {
   byId: Map<number, Item>(),
+  currentPage: 0,
   errored: false,
   ids: List<number>([]),
+  pages: Map<number, List<number>>(),
   requested: false,
 };
 
 interface ItemsStateJS {
   byId: Map<number, Item>;
+  currentPage: number;
   errored: boolean;
   ids: List<number>;
+  pages: Map<number, List<number>>;
   requested: boolean;
 }
 

@@ -6,10 +6,17 @@ import AppAction from 'STORE/AppAction';
 import AppState from 'STORE/AppState';
 import Item, { ItemJS } from './Item';
 
+const PAGE_SIZE = 2;
+
 // ACTIONS
 const FETCH_ITEMS_REQUEST = 'FETCH_ITEMS_REQUEST';
 
 const FETCH_ITEMS_RESPONSE = 'FETCH_ITEMS_RESPONSE';
+
+interface FetchItemsResponseActionPayload {
+  items: List<Item>;
+  page: number;
+}
 
 export interface FetchItemsRequestAction {
   type: typeof FETCH_ITEMS_REQUEST;
@@ -17,7 +24,7 @@ export interface FetchItemsRequestAction {
 
 export interface FetchItemsResponseAction {
   type: typeof FETCH_ITEMS_RESPONSE;
-  payload: List<Item> | string;
+  payload: FetchItemsResponseActionPayload | string;
   error?: boolean;
 }
 
@@ -26,7 +33,7 @@ const fetchItemsRequest = (): FetchItemsRequestAction => ({
 });
 
 const fetchItemsResponse = (
-  payload: List<Item> | string,
+  payload: FetchItemsResponseActionPayload | string,
   error?: boolean
 ): FetchItemsResponseAction =>
   error
@@ -40,14 +47,24 @@ const fetchItemsResponse = (
         type: FETCH_ITEMS_RESPONSE,
       };
 
-export const fetchItems = () => async (dispatch: (action: AppAction) => void) => {
+// TODO: THINK ABOUT ALREADY GOT PAGE
+export const fetchItems = () => async (
+  dispatch: (action: AppAction) => void,
+  getState: () => AppState
+) => {
+  const state = getState();
+  const page = getCurrentPage(state);
+  const offset = page * PAGE_SIZE;
   dispatch(fetchItemsRequest());
   try {
-    const json = await fromItems.fetchItems();
+    const json = await fromItems.fetchItems({
+      limit: PAGE_SIZE,
+      offset,
+    });
     const reducer = (accumulator: List<Item>, jsonItem: ItemJS) =>
       accumulator.push(new Item(jsonItem));
     const items = json.results.reduce(reducer, List<Item>([])) as List<Item>;
-    dispatch(fetchItemsResponse(items));
+    dispatch(fetchItemsResponse({ items, page }));
   } catch {
     dispatch(fetchItemsResponse('500', true));
   }
@@ -73,8 +90,8 @@ const byId = (state: Map<number, Item>, action: AppAction) => {
       }
       const reducer = (accumulator: Map<number, Item>, item: Item) =>
         accumulator.set(item.get('id'), item);
-      const payload = action.payload as List<Item>;
-      return payload.reduce(reducer, state);
+      const payload = action.payload as FetchItemsResponseActionPayload;
+      return payload.items.reduce(reducer, state);
     default:
       return state;
   }
@@ -86,8 +103,8 @@ const ids = (state: List<number>, action: AppAction) => {
       if (action.error) {
         return state;
       }
-      const payload = action.payload as List<Item>;
-      return List(payload.map((o: Item) => o.get('id')));
+      const payload = action.payload as FetchItemsResponseActionPayload;
+      return List(payload.items.map((o: Item) => o.get('id')));
     default:
       return state;
   }
@@ -104,10 +121,33 @@ const errored = (state: boolean, action: AppAction) => {
   }
 };
 
+const currentPage = (state: number, action: AppAction) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
+const pages = (state: Map<number, List<number>>, action: AppAction) => {
+  switch (action.type) {
+    case FETCH_ITEMS_RESPONSE:
+      if (action.error) {
+        return state;
+      }
+      const payload = action.payload as FetchItemsResponseActionPayload;
+      const pageIds = List<number>(payload.items.map((o: Item) => o.get('id')));
+      return state.set(payload.page, pageIds);
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   byId,
+  currentPage,
   errored,
   ids,
+  pages,
   requested,
 });
 
@@ -129,5 +169,24 @@ const getItemsIds = (state: AppState) => state.get('items').get('ids');
 
 export const getItems = createSelector(
   [getItemsById, getItemsIds],
+  (pById, pIds) => pIds.map(o => pById.get(o)) as List<Item>
+);
+
+const getCurrentPage = (state: AppState) => state.get('items').get('currentPage');
+
+const getItemsIdsPaged = (state: AppState) => {
+  const page = state.get('items').get('currentPage');
+  const pageIds = state
+    .get('items')
+    .get('pages')
+    .get(page);
+  if (pageIds === undefined) {
+    return List<number>([]);
+  }
+  return pageIds;
+};
+
+export const getItemsPaged = createSelector(
+  [getItemsById, getItemsIdsPaged],
   (pById, pIds) => pIds.map(o => pById.get(o)) as List<Item>
 );
