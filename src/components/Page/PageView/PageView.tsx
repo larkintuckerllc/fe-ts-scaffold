@@ -5,9 +5,9 @@ import Ant from './Ant';
 import Async from './Async';
 import Counter from './Counter';
 import Frame from './Frame';
-import Items from './Items';
 import Listing from './Listing';
 import Media from './Media';
+import Paginated from './Paginated';
 import Risky from './Risky';
 import Stateful from './Stateful';
 import Styling from './Styling';
@@ -27,9 +27,9 @@ const PageView = ({ add, adder, counter, decrement, increment }: PageViewProps) 
     <AnotherCounter />
     <Async />
     <Counter counter={counter} decrement={decrement} increment={increment} />
-    <Items />
     <Listing add={add} items={adder.toJS()} />
     <Media />
+    <Paginated />
     <Risky />
     <Stateful />
     <Styling />

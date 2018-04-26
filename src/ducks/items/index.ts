@@ -6,5 +6,6 @@ export {
   getItem,
   getItems,
   getItemsError,
+  getItemsPaged,
   getItemsRequested,
 } from './items';

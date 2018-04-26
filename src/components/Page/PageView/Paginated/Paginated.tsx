@@ -3,7 +3,7 @@ import Item from 'DUCKS/items/Item';
 import { List } from 'immutable';
 import { connect } from 'react-redux';
 import AppState from 'STORE/AppState';
-import ItemsView from './ItemsView';
+import PaginatedView from './PaginatedView';
 
 interface StateProps {
   error: boolean;
@@ -17,7 +17,7 @@ interface DispatchProps {
 
 const mapStateToProps = (state: AppState) => ({
   error: fromItems.getItemsError(state),
-  items: fromItems.getItems(state),
+  items: fromItems.getItemsPaged(state),
   requested: fromItems.getItemsRequested(state),
 });
 
@@ -25,4 +25,6 @@ const mapDispatchToProps = {
   fetchItems: fromItems.fetchItems,
 };
 
-export default connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(ItemsView);
+export default connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(
+  PaginatedView
+);
