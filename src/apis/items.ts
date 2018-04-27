@@ -1,5 +1,3 @@
-import Ajv from 'ajv';
-
 const ITEMS = [
   {
     id: 0,
@@ -22,52 +20,31 @@ const ITEMS = [
     name: 'E',
   },
 ];
-const SCHEMA = {
-  $schema: 'http://json-schema.org/draft-07/schema#',
-  description: 'Item set',
-  items: {
-    description: 'Item',
-    properties: {
-      id: {
-        description: 'The unique identifier',
-        type: 'integer',
-      },
-      name: {
-        description: 'The name',
-        type: 'string',
-      },
-    },
-    required: ['id', 'name'],
-    title: 'Item',
-    type: 'object',
-  },
-  title: 'Item set',
-  type: 'array',
-};
-const ajv = new Ajv();
-const validate = ajv.compile(SCHEMA);
 interface FetchItemsParams {
   limit?: number;
   offset?: number;
 }
 export const fetchItems = (params?: FetchItemsParams) => {
-  const valid = validate(ITEMS);
-  if (!valid) {
-    return Promise.reject('500');
-  }
-  let response = {
-    count: ITEMS.length,
-    results: ITEMS,
-  };
+  let items;
+  let response;
   if (params === undefined) {
+    response = {
+      count: ITEMS.length,
+      results: ITEMS,
+    };
     return Promise.resolve(response);
   }
   const limit = params.limit;
+  const offset = params.offset !== undefined ? params.offset : 0;
   if (limit === undefined) {
+    items = ITEMS.slice(offset);
+    response = {
+      count: ITEMS.length,
+      results: items,
+    };
     return Promise.resolve(response);
   }
-  const offset = params.offset !== undefined ? params.offset : 0;
-  const items = ITEMS.slice(offset, offset + limit);
+  items = ITEMS.slice(offset, offset + limit);
   response = {
     count: ITEMS.length,
     results: items,
