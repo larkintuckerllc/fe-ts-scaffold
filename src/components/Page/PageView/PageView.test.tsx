@@ -12,11 +12,21 @@ const getDefaultProps = () => ({
   counter: 0,
   decrement: jest.fn(),
   increment: jest.fn(),
+  infinite: false,
+  toggleInfinite: jest.fn(),
 });
 
 describe('PageView component', () => {
   it('shallow renders without crashing', () => {
-    const { add, adder, counter, decrement, increment } = getDefaultProps();
+    const {
+      add,
+      adder,
+      counter,
+      decrement,
+      increment,
+      infinite,
+      toggleInfinite,
+    } = getDefaultProps();
     shallow(
       <PageView
         add={add}
@@ -24,7 +34,25 @@ describe('PageView component', () => {
         counter={counter}
         decrement={decrement}
         increment={increment}
+        infinite={infinite}
+        toggleInfinite={toggleInfinite}
       />
     );
+  });
+
+  it('renders differently with infinite', () => {
+    const { add, adder, counter, decrement, increment, toggleInfinite } = getDefaultProps();
+    const wrapper = shallow(
+      <PageView
+        add={add}
+        adder={adder}
+        counter={counter}
+        decrement={decrement}
+        increment={increment}
+        infinite={true}
+        toggleInfinite={toggleInfinite}
+      />
+    );
+    expect(wrapper).toMatchSnapshot();
   });
 });

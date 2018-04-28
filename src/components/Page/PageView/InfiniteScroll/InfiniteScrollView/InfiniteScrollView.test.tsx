@@ -1,5 +1,5 @@
 import Item from 'DUCKS/items/Item';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { mount, shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import { List } from 'immutable';
 import React from 'react';
@@ -24,11 +24,6 @@ const getDefaultProps = () => ({
 
 describe('InfiniteScrollView component', () => {
   window.scroll = jest.fn();
-  window.addEventListener = (type: string, handler, flag: boolean) => {
-    
-  };
-  
-  ('scroll', this.handleScroll, false);
 
   it('shallow renders without crashing', () => {
     const { currentPage, error, fetchItems, lastPage, requested, items } = getDefaultProps();
@@ -59,7 +54,7 @@ describe('InfiniteScrollView component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('calls fetchTodos on mount', () => {
+  it('calls fetchItems on mount', () => {
     const { currentPage, error, fetchItems, items, lastPage, requested } = getDefaultProps();
     shallow(
       <InfiniteScrollView
@@ -74,46 +69,4 @@ describe('InfiniteScrollView component', () => {
     expect(fetchItems.mock.calls.length).toBe(1);
     expect(fetchItems.mock.calls[0][0]).toBe(currentPage);
   });
-
-  /*
-  it('calls fetchItems on next click', () => {
-    const { currentPage, error, fetchItems, items, requested } = getDefaultProps();
-    const wrapper = shallow(
-      <PaginatedView
-        currentPage={currentPage}
-        error={error}
-        fetchItems={fetchItems}
-        items={items}
-        lastPage={1}
-        requested={requested}
-      />
-    );
-    const testNext = wrapper.find(`#${styles.next}`);
-    testNext.simulate('click');
-    const callsLength = 2;
-    const nextPage = 1;
-    expect(fetchItems.mock.calls).toHaveLength(callsLength);
-    expect(fetchItems.mock.calls[1][0]).toBe(nextPage);
-  });
-
-  it('calls fetchItems on previous click', () => {
-    const { error, fetchItems, items, requested } = getDefaultProps();
-    const wrapper = shallow(
-      <PaginatedView
-        currentPage={1}
-        error={error}
-        fetchItems={fetchItems}
-        items={items}
-        lastPage={1}
-        requested={requested}
-      />
-    );
-    const testPrevious = wrapper.find(`#${styles.previous}`);
-    testPrevious.simulate('click');
-    const callsLength = 2;
-    const previousPage = 0;
-    expect(fetchItems.mock.calls).toHaveLength(callsLength);
-    expect(fetchItems.mock.calls[1][0]).toBe(previousPage);
-  });
-  */
 });
