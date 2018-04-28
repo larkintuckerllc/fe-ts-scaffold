@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaginatedView component renders differently with currentPage not 0 1`] = `
+<div>
+  <h2>
+    Paginated
+  </h2>
+  <Items
+    items={
+      Array [
+        Object {
+          "id": 0,
+          "name": "name",
+        },
+      ]
+    }
+  />
+  <div>
+    CurrentPage: 
+    1
+  </div>
+  <div>
+    LastPage: 
+    0
+  </div>
+  <div>
+    <button
+      id="previous"
+      onClick={[Function]}
+    >
+      Previous Page
+    </button>
+  </div>
+  <div>
+    <button
+      id="next"
+      onClick={[Function]}
+    >
+      Next Page
+    </button>
+  </div>
+</div>
+`;
+
+exports[`PaginatedView component renders differently with currentPage not 0 and lastPage 1`] = `
+<div>
+  <h2>
+    Paginated
+  </h2>
+  <Items
+    items={
+      Array [
+        Object {
+          "id": 0,
+          "name": "name",
+        },
+      ]
+    }
+  />
+  <div>
+    CurrentPage: 
+    1
+  </div>
+  <div>
+    LastPage: 
+    1
+  </div>
+  <div>
+    <button
+      id="previous"
+      onClick={[Function]}
+    >
+      Previous Page
+    </button>
+  </div>
+</div>
+`;
+
+exports[`PaginatedView component renders differently with not requested and error 1`] = `
+<div>
+  Error
+</div>
+`;
+
+exports[`PaginatedView component renders differently with not requested not error and 0 todos 1`] = `
+<div>
+  No Items
+</div>
+`;
+
+exports[`PaginatedView component renders differently with requested 1`] = `
+<div>
+  Requested
+</div>
+`;

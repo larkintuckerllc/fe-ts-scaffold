@@ -1,18 +1,16 @@
 import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import React from 'react';
-import Todos from './Todos';
+import Items from './Items';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 
-describe('Todos component', () => {
+describe('Items component', () => {
   it('shallow renders without crashing', () => {
-    const todoDefault = {
-      completed: false,
+    const itemDefault = {
       id: 0,
-      title: 'title',
-      userID: 0,
+      name: 'name',
     };
-    shallow(<Todos todos={[todoDefault]} />);
+    shallow(<Items items={[itemDefault]} />);
   });
 });

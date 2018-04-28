@@ -2,6 +2,7 @@ import Item from 'DUCKS/items/Item';
 import { List } from 'immutable';
 import React, { Component } from 'react';
 import Items from './Items';
+import styles from './styles.less';
 
 interface PaginatedViewProps {
   currentPage: number;
@@ -34,12 +35,16 @@ export default class AsyncView extends Component<PaginatedViewProps> {
         <div>LastPage: {lastPage.toString()}</div>
         {currentPage !== 0 && (
           <div>
-            <button onClick={this.handlePreviousPage}>Previous Page</button>
+            <button id={styles.previous} onClick={this.handlePreviousPage}>
+              Previous Page
+            </button>
           </div>
         )}
         {currentPage !== lastPage && (
           <div>
-            <button onClick={this.handleNextPage}>Next Page</button>
+            <button id={styles.next} onClick={this.handleNextPage}>
+              Next Page
+            </button>
           </div>
         )}
       </div>
