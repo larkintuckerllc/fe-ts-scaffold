@@ -18,10 +18,10 @@ interface DispatchProps {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  currentPage: fromItems.getCurrentPage(state),
+  currentPage: fromItems.getItemsCurrentPage(state),
   error: fromItems.getItemsError(state),
   items: fromItems.getItems(state),
-  lastPage: fromItems.getLastPage(state),
+  lastPage: fromItems.getItemsLastPage(state),
   requested: fromItems.getItemsRequested(state),
 });
 

@@ -1,4 +1,3 @@
-// import { init, initialState } from 'STORE/reducers';
 import { unknown } from 'STORE/AppAction';
 import { appStateInitial } from 'STORE/AppState';
 import counter, { decrement, getCounter, increment } from './counter';

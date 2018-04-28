@@ -5,12 +5,13 @@ import { appStateInitial } from 'STORE/AppState';
 import Item from './Item';
 import items, {
   fetchItems,
-  getCurrentPage,
   getItem,
   getItems,
+  getItemsCurrentPage,
   getItemsError,
+  getItemsLastPage,
+  getItemsPaged,
   getItemsRequested,
-  getLastPage,
 } from './items';
 import { itemsInitialState } from './ItemsState';
 
@@ -72,6 +73,30 @@ describe('items duck', () => {
     });
   });
 
+  it('fetchItems success should dispatch request and response - success actions - cached', () => {
+    const dispatch = jest.fn();
+    const getState = () => appStateSample;
+    return fetchItems(0)(dispatch, getState).then(() => {
+      const callsLength = 1;
+      expect(dispatch.mock.calls.length).toBe(callsLength);
+      expect(dispatch.mock.calls[0][0]).toEqual(currentPage);
+    });
+  });
+
+  it('fetchTodos success should dispatch request and response - error actions', () => {
+    const dispatch = jest.fn();
+    const apisItems = require('APIS/items');
+    apisItems.setError(true);
+    const callsLength = 3;
+    const getState = () => appStateInitial;
+    return fetchItems(0)(dispatch, getState).then(() => {
+      expect(dispatch.mock.calls.length).toBe(callsLength);
+      expect(dispatch.mock.calls[0][0]).toEqual(currentPage);
+      expect(dispatch.mock.calls[1][0]).toEqual(request);
+      expect(dispatch.mock.calls[2][0]).toEqual(responseError);
+    });
+  });
+
   // REDUCERS
   describe('reducer', () => {
     it('should ignore unknown actions', () => {
@@ -95,6 +120,12 @@ describe('items duck', () => {
       expect(items(state, responseError)).toEqualImmutable(nextState);
     });
 
+    it('should handle SET_CURRENT_PAGE', () => {
+      const state = itemsInitialState.set('currentPage', 1);
+      const nextState = itemsInitialState.set('currentPage', 0);
+      expect(items(state, currentPage)).toEqualImmutable(nextState);
+    });
+
     // SELECTORS
     it('getItemsRequested should return', () => {
       const result = false;
@@ -116,14 +147,24 @@ describe('items duck', () => {
       expect(getItems(appStateSample)).toEqualImmutable(result);
     });
 
-    it('getCurrentPage should return', () => {
+    it('getItemsCurrentPage should return', () => {
       const result = 0;
-      expect(getCurrentPage(appStateSample)).toEqualImmutable(result);
+      expect(getItemsCurrentPage(appStateSample)).toEqualImmutable(result);
     });
 
-    it('getLastPage should return', () => {
+    it('getItemsLastPage should return', () => {
       const result = 0;
-      expect(getLastPage(appStateSample)).toEqualImmutable(result);
+      expect(getItemsLastPage(appStateSample)).toEqualImmutable(result);
+    });
+
+    it('getItemsPages should return with no page', () => {
+      const result = List([]);
+      expect(getItemsPaged(appStateInitial)).toEqualImmutable(result);
+    });
+
+    it('getItemsPages should return with page', () => {
+      const result = List([itemSample]);
+      expect(getItemsPaged(appStateSample)).toEqualImmutable(result);
     });
   });
 });

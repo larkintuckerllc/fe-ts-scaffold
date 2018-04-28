@@ -8,7 +8,16 @@ interface FetchItemsParams {
   limit?: number;
   offset?: number;
 }
+let error = false;
+
+export const setError = (value: boolean): void => {
+  error = value;
+};
+
 export const fetchItems = (params?: FetchItemsParams) => {
+  if (error) {
+    return Promise.reject('500');
+  }
   let items;
   let response;
   if (params === undefined) {

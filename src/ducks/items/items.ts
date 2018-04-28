@@ -204,9 +204,9 @@ export const getItems = createSelector(
   (pById, pIds) => pIds.map(o => pById.get(o)) as List<Item>
 );
 
-export const getCurrentPage = (state: AppState) => state.get('items').get('currentPage');
+export const getItemsCurrentPage = (state: AppState) => state.get('items').get('currentPage');
 
-export const getLastPage = (state: AppState) => state.get('items').get('lastPage');
+export const getItemsLastPage = (state: AppState) => state.get('items').get('lastPage');
 
 const getIsPageFetched = (state: AppState, page: number) => {
   return (
