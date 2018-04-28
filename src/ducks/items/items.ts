@@ -149,6 +149,9 @@ const currentPage = (state: number, action: AppAction) => {
 const lastPage = (state: number, action: AppAction) => {
   switch (action.type) {
     case FETCH_ITEMS_RESPONSE:
+      if (action.error) {
+        return state;
+      }
       const payload = action.payload as FetchItemsResponseActionPayload;
       return payload.pageCount - 1;
     default:
