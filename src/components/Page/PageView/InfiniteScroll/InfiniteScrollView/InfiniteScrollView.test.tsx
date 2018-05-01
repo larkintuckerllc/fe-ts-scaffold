@@ -26,45 +26,20 @@ describe('InfiniteScrollView component', () => {
   window.scroll = jest.fn();
 
   it('shallow renders without crashing', () => {
-    const { currentPage, error, fetchItems, lastPage, requested, items } = getDefaultProps();
-    shallow(
-      <InfiniteScrollView
-        currentPage={currentPage}
-        error={error}
-        fetchItems={fetchItems}
-        items={items}
-        lastPage={lastPage}
-        requested={requested}
-      />
-    );
+    const defaultProps = getDefaultProps();
+    shallow(<InfiniteScrollView {...defaultProps} />);
   });
 
   it('renders differently with not requested and error', () => {
-    const { currentPage, fetchItems, lastPage, items, requested } = getDefaultProps();
-    const wrapper = shallow(
-      <InfiniteScrollView
-        currentPage={currentPage}
-        error={true}
-        fetchItems={fetchItems}
-        items={items}
-        lastPage={lastPage}
-        requested={requested}
-      />
-    );
+    const { error, ...defaultProps } = getDefaultProps();
+    const wrapper = shallow(<InfiniteScrollView {...defaultProps} error={true} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('calls fetchItems on mount', () => {
-    const { currentPage, error, fetchItems, items, lastPage, requested } = getDefaultProps();
+    const { currentPage, fetchItems, ...defaultProps } = getDefaultProps();
     shallow(
-      <InfiniteScrollView
-        currentPage={currentPage}
-        error={error}
-        fetchItems={fetchItems}
-        items={items}
-        lastPage={lastPage}
-        requested={requested}
-      />
+      <InfiniteScrollView {...defaultProps} currentPage={currentPage} fetchItems={fetchItems} />
     );
     expect(fetchItems.mock.calls.length).toBe(1);
     expect(fetchItems.mock.calls[0][0]).toBe(currentPage);

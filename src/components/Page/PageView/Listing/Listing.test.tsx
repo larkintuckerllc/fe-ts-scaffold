@@ -12,13 +12,13 @@ const getDefaultProps = () => ({
 
 describe('Listing component', () => {
   it('shallow renders without crashing', () => {
-    const { add, items } = getDefaultProps();
-    shallow(<Listing add={add} items={items} />);
+    const defaultProps = getDefaultProps();
+    shallow(<Listing {...defaultProps} />);
   });
 
-  it('shallow renders without crashing', () => {
-    const { add, items } = getDefaultProps();
-    const wrapper = shallow(<Listing add={add} items={items} />);
+  it('calls add on click', () => {
+    const { add, ...defaultProps } = getDefaultProps();
+    const wrapper = shallow(<Listing {...defaultProps} add={add} />);
     const callsLength = 1;
     const call0Result = 'Hello World';
     wrapper.find('#test_add').simulate('click');

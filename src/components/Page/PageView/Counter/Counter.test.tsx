@@ -14,15 +14,13 @@ const getDefaultProps = () => ({
 
 describe('Counter component', () => {
   it('shallow renders without crashing', () => {
-    const { counter, decrement, increment } = getDefaultProps();
-    shallow(<Counter counter={counter} decrement={decrement} increment={increment} />);
+    const defaultProps = getDefaultProps();
+    shallow(<Counter {...defaultProps} />);
   });
 
   it('calls decrement on test_decrement click', () => {
-    const { counter, decrement, increment } = getDefaultProps();
-    const wrapper = shallow(
-      <Counter counter={counter} decrement={decrement} increment={increment} />
-    );
+    const { decrement, ...defaultProps } = getDefaultProps();
+    const wrapper = shallow(<Counter {...defaultProps} decrement={decrement} />);
     const testDecrement = wrapper.find(`#${styles.decrement}`);
     testDecrement.simulate('click');
     const callsLength = 1;
@@ -30,10 +28,8 @@ describe('Counter component', () => {
   });
 
   it('calls increment on test_increment click', () => {
-    const { counter, decrement, increment } = getDefaultProps();
-    const wrapper = shallow(
-      <Counter counter={counter} decrement={decrement} increment={increment} />
-    );
+    const { increment, ...defaultProps } = getDefaultProps();
+    const wrapper = shallow(<Counter {...defaultProps} increment={increment} />);
     const testIncrement = wrapper.find(`#${styles.increment}`);
     testIncrement.simulate('click');
     const callsLength = 1;

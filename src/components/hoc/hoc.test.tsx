@@ -29,19 +29,19 @@ const getDefaultProps = () => ({
 
 describe('hoc HOC component', () => {
   it('shallow renders without crashing', () => {
-    const { text } = getDefaultProps();
-    shallow(<WrappedWithHoc text={text} />);
+    const defaultProps = getDefaultProps();
+    shallow(<WrappedWithHoc {...defaultProps} />);
   });
 
   it('handles click', () => {
-    const { text } = getDefaultProps();
-    const wrapper = shallow(<WrappedWithHoc text={text} />);
+    const defaultProps = getDefaultProps();
+    const wrapper = shallow(<WrappedWithHoc {...defaultProps} />);
     wrapper.find('#test_root').simulate('click');
   });
 
   it('handles click with debug', () => {
-    const { text } = getDefaultProps();
-    const wrapper = shallow(<WrappedWithHocDebug text={text} />);
+    const defaultProps = getDefaultProps();
+    const wrapper = shallow(<WrappedWithHocDebug {...defaultProps} />);
     wrapper.find('#test_root').simulate('click');
   });
 });

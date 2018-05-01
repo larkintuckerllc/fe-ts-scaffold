@@ -6,16 +6,12 @@ import StatefulView from './StatefulView';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 
-const getDefaultProps = () => ({});
-
 describe('Stateful component', () => {
   it('shallow renders without crashing', () => {
-    const {} = getDefaultProps();
     shallow(<Stateful />);
   });
 
   it('with StateView initalized counter to 0', () => {
-    const {} = getDefaultProps();
     const wrapper = shallow(<Stateful />);
     const result = 0;
     const testStatefulView = wrapper.find(StatefulView);
@@ -23,7 +19,6 @@ describe('Stateful component', () => {
   });
 
   it('with StateView increments counter when increment called', () => {
-    const {} = getDefaultProps();
     const wrapper = shallow(<Stateful />);
     const result = 1;
     let testStatefulView = wrapper.find(StatefulView);
@@ -34,7 +29,6 @@ describe('Stateful component', () => {
   });
 
   it('with StateView increments counter when decrement called', () => {
-    const {} = getDefaultProps();
     const wrapper = shallow(<Stateful />);
     const result = -1;
     let testStatefulView = wrapper.find(StatefulView);

@@ -7,11 +7,8 @@ import InfiniteScroll from './InfiniteScroll';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 
-const getDefaultProps = () => ({});
-
 describe('Paginated component', () => {
   it('shallow renders without crashing', () => {
-    const {} = getDefaultProps();
     const store = createMockStore(appStateRecordDefault);
     const context = {
       store,

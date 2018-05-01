@@ -25,121 +25,57 @@ const getDefaultProps = () => ({
 
 describe('PaginatedView component', () => {
   it('shallow renders without crashing', () => {
-    const { currentPage, error, fetchItems, lastPage, requested, items } = getDefaultProps();
-    shallow(
-      <PaginatedView
-        currentPage={currentPage}
-        error={error}
-        fetchItems={fetchItems}
-        items={items}
-        lastPage={lastPage}
-        requested={requested}
-      />
-    );
+    const defaultProps = getDefaultProps();
+    shallow(<PaginatedView {...defaultProps} />);
   });
   it('renders differently with requested', () => {
-    const { currentPage, error, fetchItems, lastPage, items } = getDefaultProps();
-    const wrapper = shallow(
-      <PaginatedView
-        currentPage={currentPage}
-        error={error}
-        fetchItems={fetchItems}
-        items={items}
-        lastPage={lastPage}
-        requested={true}
-      />
-    );
+    const { requested, ...defaultProps } = getDefaultProps();
+    const wrapper = shallow(<PaginatedView {...defaultProps} requested={true} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders differently with not requested and error', () => {
-    const { currentPage, fetchItems, lastPage, items, requested } = getDefaultProps();
-    const wrapper = shallow(
-      <PaginatedView
-        currentPage={currentPage}
-        error={true}
-        fetchItems={fetchItems}
-        items={items}
-        lastPage={lastPage}
-        requested={requested}
-      />
-    );
+    const { error, ...defaultProps } = getDefaultProps();
+    const wrapper = shallow(<PaginatedView {...defaultProps} error={true} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders differently with not requested not error and 0 todos', () => {
-    const { currentPage, error, fetchItems, lastPage, requested } = getDefaultProps();
-    const items = List<ItemRecord>([]);
-    const wrapper = shallow(
-      <PaginatedView
-        currentPage={currentPage}
-        error={error}
-        fetchItems={fetchItems}
-        items={items}
-        lastPage={lastPage}
-        requested={requested}
-      />
-    );
+    const { items, ...defaultProps } = getDefaultProps();
+    const emptyItems = List<ItemRecord>([]);
+    const wrapper = shallow(<PaginatedView {...defaultProps} items={emptyItems} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders differently with currentPage not 0', () => {
-    const { error, fetchItems, items, lastPage, requested } = getDefaultProps();
-    const wrapper = shallow(
-      <PaginatedView
-        currentPage={1}
-        error={error}
-        fetchItems={fetchItems}
-        items={items}
-        lastPage={lastPage}
-        requested={requested}
-      />
-    );
+    const { currentPage, ...defaultProps } = getDefaultProps();
+    const testCurrentPage = 1;
+    const wrapper = shallow(<PaginatedView {...defaultProps} currentPage={testCurrentPage} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders differently with currentPage not 0 and lastPage', () => {
-    const { error, fetchItems, items, requested } = getDefaultProps();
+    const { currentPage, lastPage, ...defaultProps } = getDefaultProps();
+    const testCurrentPage = 1;
+    const testLastPage = 1;
     const wrapper = shallow(
-      <PaginatedView
-        currentPage={1}
-        error={error}
-        fetchItems={fetchItems}
-        items={items}
-        lastPage={1}
-        requested={requested}
-      />
+      <PaginatedView {...defaultProps} currentPage={testCurrentPage} lastPage={testLastPage} />
     );
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('calls fetchTodos on mount', () => {
-    const { currentPage, error, fetchItems, items, lastPage, requested } = getDefaultProps();
-    shallow(
-      <PaginatedView
-        currentPage={currentPage}
-        error={error}
-        fetchItems={fetchItems}
-        items={items}
-        lastPage={lastPage}
-        requested={requested}
-      />
-    );
+  it('calls fetchItems on mount', () => {
+    const { currentPage, fetchItems, ...defaultProps } = getDefaultProps();
+    shallow(<PaginatedView {...defaultProps} currentPage={currentPage} fetchItems={fetchItems} />);
     expect(fetchItems.mock.calls.length).toBe(1);
     expect(fetchItems.mock.calls[0][0]).toBe(currentPage);
   });
 
   it('calls fetchItems on next click', () => {
-    const { currentPage, error, fetchItems, items, requested } = getDefaultProps();
+    const { fetchItems, lastPage, ...defaultProps } = getDefaultProps();
+    const testLastPage = 1;
     const wrapper = shallow(
-      <PaginatedView
-        currentPage={currentPage}
-        error={error}
-        fetchItems={fetchItems}
-        items={items}
-        lastPage={1}
-        requested={requested}
-      />
+      <PaginatedView {...defaultProps} fetchItems={fetchItems} lastPage={testLastPage} />
     );
     const testNext = wrapper.find(`#${styles.next}`);
     testNext.simulate('click');
@@ -150,15 +86,15 @@ describe('PaginatedView component', () => {
   });
 
   it('calls fetchItems on previous click', () => {
-    const { error, fetchItems, items, requested } = getDefaultProps();
+    const { currentPage, fetchItems, lastPage, ...defaultProps } = getDefaultProps();
+    const testCurrentPage = 1;
+    const testLastPage = 1;
     const wrapper = shallow(
       <PaginatedView
-        currentPage={1}
-        error={error}
+        {...defaultProps}
+        currentPage={testCurrentPage}
         fetchItems={fetchItems}
-        items={items}
-        lastPage={1}
-        requested={requested}
+        lastPage={testLastPage}
       />
     );
     const testPrevious = wrapper.find(`#${styles.previous}`);
