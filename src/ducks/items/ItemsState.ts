@@ -1,18 +1,8 @@
 import { List, Map, Record } from 'immutable';
 import Item from './Item';
 
-const itemsStateDefault = {
-  byId: Map<number, Item>(),
-  currentPage: 0,
-  errored: false,
-  ids: List<number>([]),
-  lastPage: 0,
-  pages: Map<number, List<number>>(),
-  requested: false,
-};
-
-interface ItemsStateJS {
-  byId: Map<number, Item>;
+export default interface ItemsState {
+  byId: Map<number, Record<Item>>;
   currentPage: number;
   errored: boolean;
   ids: List<number>;
@@ -21,13 +11,14 @@ interface ItemsStateJS {
   requested: boolean;
 }
 
-export default class ItemsState extends Record(itemsStateDefault) {
-  constructor(params: ItemsStateJS) {
-    super(params);
-  }
-  public get<T extends keyof ItemsStateJS>(value: T): ItemsStateJS[T] {
-    return super.get(value, null);
-  }
-}
+const itemsStateDefault: ItemsState = {
+  byId: Map<number, Record<Item>>(),
+  currentPage: 0,
+  errored: false,
+  ids: List<number>([]),
+  lastPage: 0,
+  pages: Map<number, List<number>>(),
+  requested: false,
+};
 
-export const itemsInitialState = new ItemsState(itemsStateDefault);
+export const itemsInitialState = Record<ItemsState>(itemsStateDefault)(itemsStateDefault);

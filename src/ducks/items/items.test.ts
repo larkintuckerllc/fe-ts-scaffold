@@ -1,8 +1,8 @@
-import { List, Map } from 'immutable';
+import { List, Map, Record } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
 import { unknown } from 'STORE/AppAction';
 import { appStateInitial } from 'STORE/AppState';
-import Item from './Item';
+import Item, { ItemFactory } from './Item';
 import items, {
   fetchItems,
   getItem,
@@ -22,7 +22,7 @@ describe('items duck', () => {
     id: 0,
     name: 'name',
   };
-  const itemSample = new Item(itemDefault);
+  const itemSample = ItemFactory(itemDefault);
   const itemsSample = List([itemSample]);
   const currentPage = {
     payload: 0,
@@ -44,9 +44,9 @@ describe('items duck', () => {
     payload: '500',
     type: 'FETCH_ITEMS_RESPONSE',
   };
-  let byIdSample = Map<number, Item>();
-  byIdSample = byIdSample.set(itemSample.get('id'), itemSample);
-  const idsSample = List([itemSample.get('id')]);
+  let byIdSample = Map<number, Record<Item>>();
+  byIdSample = byIdSample.set(itemSample.get('id', null), itemSample);
+  const idsSample = List([itemSample.get('id', null)]);
   let itemsStateSample = itemsInitialState.set('byId', byIdSample);
   const page = List<number>([0]);
   let pages = Map<number, List<number>>();
@@ -138,7 +138,7 @@ describe('items duck', () => {
     });
 
     it('getItem should return', () => {
-      const id = itemSample.get('id');
+      const id = itemSample.get('id', null);
       expect(getItem(appStateSample, id)).toEqualImmutable(itemSample);
     });
 

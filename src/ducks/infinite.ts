@@ -1,3 +1,4 @@
+import { Record } from 'immutable';
 import AppAction from 'STORE/AppAction';
 import AppState from 'STORE/AppState';
 
@@ -28,6 +29,6 @@ export default (state: boolean, action: AppAction) => {
 };
 
 // SELECTORS
-export const getInfinite = (state: AppState) => {
-  return state.get('infinite');
+export const getInfinite = (state: Record<AppState>) => {
+  return state.get('infinite', null);
 };

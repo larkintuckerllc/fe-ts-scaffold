@@ -1,8 +1,7 @@
-import { itemsInitialState } from './ItemsState';
+import './ItemsState';
 
 describe('ItemsState', () => {
-  it('get errored', () => {
-    const errored = itemsInitialState.get('errored');
-    expect(errored).toBe(false);
+  it('imports', () => {
+    // SMOKE
   });
 });

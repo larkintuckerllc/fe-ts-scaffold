@@ -1,5 +1,5 @@
-import Item from 'DUCKS/items/Item';
-import Enzyme, { mount, shallow } from 'enzyme';
+import { ItemFactory } from 'DUCKS/items/Item';
+import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import { List } from 'immutable';
 import React from 'react';
@@ -11,7 +11,7 @@ const itemDefault = {
   id: 0,
   name: 'name',
 };
-const sampleItem = new Item(itemDefault);
+const sampleItem = ItemFactory(itemDefault);
 const sampleItems = List([sampleItem]);
 const getDefaultProps = () => ({
   currentPage: 0,

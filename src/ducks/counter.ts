@@ -1,3 +1,4 @@
+import { Record } from 'immutable';
 import AppAction from 'STORE/AppAction';
 import AppState from 'STORE/AppState';
 
@@ -40,6 +41,6 @@ export default (state: number, action: AppAction) => {
 };
 
 // SELECTORS
-export const getCounter = (state: AppState) => {
-  return state.get('counter');
+export const getCounter = (state: Record<AppState>) => {
+  return state.get('counter', null);
 };

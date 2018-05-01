@@ -1,7 +1,7 @@
 import * as fromAdder from 'DUCKS/adder';
 import * as fromCounter from 'DUCKS/counter';
 import * as fromInfinite from 'DUCKS/infinite';
-import { List } from 'immutable';
+import { List, Record } from 'immutable';
 import { connect } from 'react-redux';
 import AppState from 'STORE/AppState';
 import PageView from './PageView';
@@ -19,7 +19,7 @@ interface DispatchProps {
   toggleInfinite(): void;
 }
 
-const mapStateToProps = (state: AppState) => ({
+const mapStateToProps = (state: Record<AppState>) => ({
   adder: fromAdder.getAdder(state),
   counter: fromCounter.getCounter(state),
   infinite: fromInfinite.getInfinite(state),

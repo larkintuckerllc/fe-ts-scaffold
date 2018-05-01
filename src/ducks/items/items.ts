@@ -1,10 +1,10 @@
 import * as fromItems from 'APIS/items';
-import { List, Map } from 'immutable';
+import { List, Map, Record } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import { createSelector } from 'reselect';
 import AppAction from 'STORE/AppAction';
 import AppState from 'STORE/AppState';
-import Item, { ItemJS } from './Item';
+import Item, { ItemFactory } from './Item';
 
 const PAGE_SIZE = 2;
 
@@ -16,7 +16,7 @@ const FETCH_ITEMS_RESPONSE = 'FETCH_ITEMS_RESPONSE';
 const SET_ITEMS_CURRENT_PAGE = 'SET_ITEMS_CURRENT_PAGE';
 
 interface FetchItemsResponseActionPayload {
-  items: List<Item>;
+  items: List<Record<Item>>;
   page: number;
   pageCount: number;
 }
@@ -62,7 +62,7 @@ const fetchItemsResponse = (
 
 export const fetchItems = (page: number) => async (
   dispatch: (action: AppAction) => void,
-  getState: () => AppState
+  getState: () => Record<AppState>
 ) => {
   const state = getState();
   const offset = page * PAGE_SIZE;
@@ -76,9 +76,9 @@ export const fetchItems = (page: number) => async (
       limit: PAGE_SIZE,
       offset,
     });
-    const reducer = (accumulator: List<Item>, jsonItem: ItemJS) =>
-      accumulator.push(new Item(jsonItem));
-    const items = json.results.reduce(reducer, List<Item>([])) as List<Item>;
+    const reducer = (accumulator: List<Record<Item>>, jsonItem: Item) =>
+      accumulator.push(ItemFactory(jsonItem));
+    const items = json.results.reduce(reducer, List<Record<Item>>([])) as List<Record<Item>>;
     const pageCount = Math.ceil(json.count / PAGE_SIZE);
     dispatch(fetchItemsResponse({ items, page, pageCount }));
   } catch {
@@ -98,14 +98,14 @@ const requested = (state: boolean, action: AppAction) => {
   }
 };
 
-const byId = (state: Map<number, Item>, action: AppAction) => {
+const byId = (state: Map<number, Record<Item>>, action: AppAction) => {
   switch (action.type) {
     case FETCH_ITEMS_RESPONSE:
       if (action.error) {
         return state;
       }
-      const reducer = (accumulator: Map<number, Item>, item: Item) =>
-        accumulator.set(item.get('id'), item);
+      const reducer = (accumulator: Map<number, Record<Item>>, item: Record<Item>) =>
+        accumulator.set(item.get('id', null), item);
       const payload = action.payload as FetchItemsResponseActionPayload;
       return payload.items.reduce(reducer, state);
     default:
@@ -120,7 +120,7 @@ const ids = (state: List<number>, action: AppAction) => {
         return state;
       }
       const payload = action.payload as FetchItemsResponseActionPayload;
-      return state.merge(List(payload.items.map((o: Item) => o.get('id'))));
+      return state.merge(List(payload.items.map((o: Record<Item>) => o.get('id', null))));
     default:
       return state;
   }
@@ -166,7 +166,7 @@ const pages = (state: Map<number, List<number>>, action: AppAction) => {
         return state;
       }
       const payload = action.payload as FetchItemsResponseActionPayload;
-      const pageIds = List<number>(payload.items.map((o: Item) => o.get('id')));
+      const pageIds = List<number>(payload.items.map((o: Record<Item>) => o.get('id', null)));
       return state.set(payload.page, pageIds);
     default:
       return state;
@@ -184,43 +184,47 @@ export default combineReducers({
 });
 
 // SELECTORS
-export const getItemsRequested = (state: AppState) => state.get('items').get('requested');
+export const getItemsRequested = (state: Record<AppState>) =>
+  state.get('items', null).get('requested', null);
 
-export const getItemsError = (state: AppState) => state.get('items').get('errored');
+export const getItemsError = (state: Record<AppState>) =>
+  state.get('items', null).get('errored', null);
 
-export const getItem = (state: AppState, id: number) => {
+export const getItem = (state: Record<AppState>, id: number) => {
   return state
-    .get('items')
-    .get('byId')
+    .get('items', null)
+    .get('byId', null)
     .get(id);
 };
 
-const getItemsById = (state: AppState) => state.get('items').get('byId');
+const getItemsById = (state: Record<AppState>) => state.get('items', null).get('byId', null);
 
-const getItemsIds = (state: AppState) => state.get('items').get('ids');
+const getItemsIds = (state: Record<AppState>) => state.get('items', null).get('ids', null);
 
 export const getItems = createSelector(
   [getItemsById, getItemsIds],
-  (pById, pIds) => pIds.map(o => pById.get(o)) as List<Item>
+  (pById, pIds) => pIds.map(o => pById.get(o)) as List<Record<Item>>
 );
 
-export const getItemsCurrentPage = (state: AppState) => state.get('items').get('currentPage');
+export const getItemsCurrentPage = (state: Record<AppState>) =>
+  state.get('items', null).get('currentPage', null);
 
-export const getItemsLastPage = (state: AppState) => state.get('items').get('lastPage');
+export const getItemsLastPage = (state: Record<AppState>) =>
+  state.get('items', null).get('lastPage', null);
 
-const getIsPageFetched = (state: AppState, page: number) => {
+const getIsPageFetched = (state: Record<AppState>, page: number) => {
   return (
     state
-      .get('items')
-      .get('pages')
+      .get('items', null)
+      .get('pages', null)
       .get(page) !== undefined
   );
 };
-const getItemsIdsPaged = (state: AppState) => {
-  const page = state.get('items').get('currentPage');
+const getItemsIdsPaged = (state: Record<AppState>) => {
+  const page = state.get('items', null).get('currentPage', null);
   const pageIds = state
-    .get('items')
-    .get('pages')
+    .get('items', null)
+    .get('pages', null)
     .get(page);
   if (pageIds === undefined) {
     return List<number>([]);
@@ -230,5 +234,5 @@ const getItemsIdsPaged = (state: AppState) => {
 
 export const getItemsPaged = createSelector(
   [getItemsById, getItemsIdsPaged],
-  (pById, pIds) => pIds.map(o => pById.get(o)) as List<Item>
+  (pById, pIds) => pIds.map(o => pById.get(o)) as List<Record<Item>>
 );

@@ -1,5 +1,5 @@
 import Item from 'DUCKS/items/Item';
-import { List } from 'immutable';
+import { List, Record } from 'immutable';
 import React, { Component } from 'react';
 import Items from './Items';
 import styles from './styles.less';
@@ -9,7 +9,7 @@ interface PaginatedViewProps {
   error: boolean;
   requested: boolean;
   lastPage: number;
-  items: List<Item>;
+  items: List<Record<Item>>;
   fetchItems(page: number): void;
 }
 

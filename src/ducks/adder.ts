@@ -1,4 +1,4 @@
-import { List } from 'immutable';
+import { List, Record } from 'immutable';
 import AppAction from 'STORE/AppAction';
 import AppState from 'STORE/AppState';
 
@@ -31,6 +31,6 @@ export default (state: List<string>, action: AppAction) => {
 };
 
 // SELECTORS
-export const getAdder = (state: AppState) => {
-  return state.get('adder');
+export const getAdder = (state: Record<AppState>) => {
+  return state.get('adder', null);
 };

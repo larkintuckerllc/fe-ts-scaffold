@@ -1,7 +1,7 @@
-import Item from 'DUCKS/items/Item';
+import Item, { ItemFactory } from 'DUCKS/items/Item';
 import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
-import { List } from 'immutable';
+import { List, Record } from 'immutable';
 import React from 'react';
 import PaginatedView from './PaginatedView';
 import styles from './styles.less';
@@ -12,7 +12,7 @@ const itemDefault = {
   id: 0,
   name: 'name',
 };
-const sampleItem = new Item(itemDefault);
+const sampleItem = ItemFactory(itemDefault);
 const sampleItems = List([sampleItem]);
 const getDefaultProps = () => ({
   currentPage: 0,
@@ -69,7 +69,7 @@ describe('PaginatedView component', () => {
 
   it('renders differently with not requested not error and 0 todos', () => {
     const { currentPage, error, fetchItems, lastPage, requested } = getDefaultProps();
-    const items = List<Item>([]);
+    const items = List<Record<Item>>([]);
     const wrapper = shallow(
       <PaginatedView
         currentPage={currentPage}
