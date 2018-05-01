@@ -11,3 +11,4 @@ const itemDefault: Item = {
 };
 
 export const ItemFactory = Record<Item>(itemDefault);
+export type ItemRecord = Record<Item>;

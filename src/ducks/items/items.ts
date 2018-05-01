@@ -4,7 +4,7 @@ import { combineReducers } from 'redux-immutable';
 import { createSelector } from 'reselect';
 import AppAction from 'STORE/AppAction';
 import AppState from 'STORE/AppState';
-import Item, { ItemFactory } from './Item';
+import Item, { ItemFactory, ItemRecord } from './Item';
 
 const PAGE_SIZE = 2;
 
@@ -16,7 +16,7 @@ const FETCH_ITEMS_RESPONSE = 'FETCH_ITEMS_RESPONSE';
 const SET_ITEMS_CURRENT_PAGE = 'SET_ITEMS_CURRENT_PAGE';
 
 interface FetchItemsResponseActionPayload {
-  items: List<Record<Item>>;
+  items: List<ItemRecord>;
   page: number;
   pageCount: number;
 }
@@ -76,9 +76,9 @@ export const fetchItems = (page: number) => async (
       limit: PAGE_SIZE,
       offset,
     });
-    const reducer = (accumulator: List<Record<Item>>, jsonItem: Item) =>
+    const reducer = (accumulator: List<ItemRecord>, jsonItem: Item) =>
       accumulator.push(ItemFactory(jsonItem));
-    const items = json.results.reduce(reducer, List<Record<Item>>([])) as List<Record<Item>>;
+    const items = json.results.reduce(reducer, List<ItemRecord>([])) as List<ItemRecord>;
     const pageCount = Math.ceil(json.count / PAGE_SIZE);
     dispatch(fetchItemsResponse({ items, page, pageCount }));
   } catch {
@@ -98,13 +98,13 @@ const requested = (state: boolean, action: AppAction) => {
   }
 };
 
-const byId = (state: Map<number, Record<Item>>, action: AppAction) => {
+const byId = (state: Map<number, ItemRecord>, action: AppAction) => {
   switch (action.type) {
     case FETCH_ITEMS_RESPONSE:
       if (action.error) {
         return state;
       }
-      const reducer = (accumulator: Map<number, Record<Item>>, item: Record<Item>) =>
+      const reducer = (accumulator: Map<number, ItemRecord>, item: ItemRecord) =>
         accumulator.set(item.get('id', null), item);
       const payload = action.payload as FetchItemsResponseActionPayload;
       return payload.items.reduce(reducer, state);
@@ -120,7 +120,7 @@ const ids = (state: List<number>, action: AppAction) => {
         return state;
       }
       const payload = action.payload as FetchItemsResponseActionPayload;
-      return state.merge(List(payload.items.map((o: Record<Item>) => o.get('id', null))));
+      return state.merge(List(payload.items.map((o: ItemRecord) => o.get('id', null))));
     default:
       return state;
   }
@@ -166,7 +166,7 @@ const pages = (state: Map<number, List<number>>, action: AppAction) => {
         return state;
       }
       const payload = action.payload as FetchItemsResponseActionPayload;
-      const pageIds = List<number>(payload.items.map((o: Record<Item>) => o.get('id', null)));
+      const pageIds = List<number>(payload.items.map((o: ItemRecord) => o.get('id', null)));
       return state.set(payload.page, pageIds);
     default:
       return state;
@@ -203,7 +203,7 @@ const getItemsIds = (state: Record<AppState>) => state.get('items', null).get('i
 
 export const getItems = createSelector(
   [getItemsById, getItemsIds],
-  (pById, pIds) => pIds.map(o => pById.get(o)) as List<Record<Item>>
+  (pById, pIds) => pIds.map(o => pById.get(o)) as List<ItemRecord>
 );
 
 export const getItemsCurrentPage = (state: Record<AppState>) =>
@@ -234,5 +234,5 @@ const getItemsIdsPaged = (state: Record<AppState>) => {
 
 export const getItemsPaged = createSelector(
   [getItemsById, getItemsIdsPaged],
-  (pById, pIds) => pIds.map(o => pById.get(o)) as List<Record<Item>>
+  (pById, pIds) => pIds.map(o => pById.get(o)) as List<ItemRecord>
 );

@@ -1,8 +1,8 @@
 import { List, Map, Record } from 'immutable';
-import Item from './Item';
+import { ItemRecord } from './Item';
 
 export default interface ItemsState {
-  byId: Map<number, Record<Item>>;
+  byId: Map<number, ItemRecord>;
   currentPage: number;
   errored: boolean;
   ids: List<number>;
@@ -12,7 +12,7 @@ export default interface ItemsState {
 }
 
 const itemsStateDefault: ItemsState = {
-  byId: Map<number, Record<Item>>(),
+  byId: Map<number, ItemRecord>(),
   currentPage: 0,
   errored: false,
   ids: List<number>([]),

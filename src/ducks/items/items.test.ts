@@ -1,8 +1,8 @@
-import { List, Map, Record } from 'immutable';
+import { List, Map } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
 import { unknown } from 'STORE/AppAction';
 import { appStateInitial } from 'STORE/AppState';
-import Item, { ItemFactory } from './Item';
+import { ItemFactory, ItemRecord } from './Item';
 import items, {
   fetchItems,
   getItem,
@@ -44,7 +44,7 @@ describe('items duck', () => {
     payload: '500',
     type: 'FETCH_ITEMS_RESPONSE',
   };
-  let byIdSample = Map<number, Record<Item>>();
+  let byIdSample = Map<number, ItemRecord>();
   byIdSample = byIdSample.set(itemSample.get('id', null), itemSample);
   const idsSample = List([itemSample.get('id', null)]);
   let itemsStateSample = itemsInitialState.set('byId', byIdSample);

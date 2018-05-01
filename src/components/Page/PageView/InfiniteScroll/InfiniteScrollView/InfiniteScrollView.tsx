@@ -1,5 +1,5 @@
-import Item from 'DUCKS/items/Item';
-import { List, Record } from 'immutable';
+import { ItemRecord } from 'DUCKS/items/Item';
+import { List } from 'immutable';
 import React, { Component } from 'react';
 import Items from './Items';
 
@@ -10,7 +10,7 @@ interface InfiniteViewProps {
   error: boolean;
   requested: boolean;
   lastPage: number;
-  items: List<Record<Item>>;
+  items: List<ItemRecord>;
   fetchItems(page: number): Promise<void>;
 }
 

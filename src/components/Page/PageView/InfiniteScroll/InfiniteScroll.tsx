@@ -1,5 +1,5 @@
 import * as fromItems from 'DUCKS/items';
-import Item from 'DUCKS/items/Item';
+import { ItemRecord } from 'DUCKS/items/Item';
 import { List, Record } from 'immutable';
 import { connect } from 'react-redux';
 import AppState from 'STORE/AppState';
@@ -10,7 +10,7 @@ interface StateProps {
   error: boolean;
   lastPage: number;
   requested: boolean;
-  items: List<Record<Item>>;
+  items: List<ItemRecord>;
 }
 
 interface DispatchProps {
