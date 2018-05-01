@@ -15,3 +15,4 @@ const todoDefault: Todo = {
 };
 
 export const TodoFactory = Record(todoDefault);
+export type TodoRecord = Record<Todo>;

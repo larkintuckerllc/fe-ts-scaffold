@@ -4,7 +4,7 @@ import { combineReducers } from 'redux-immutable';
 import { createSelector } from 'reselect';
 import AppAction from 'STORE/AppAction';
 import AppState from 'STORE/AppState';
-import Todo, { TodoFactory } from './Todo';
+import Todo, { TodoFactory, TodoRecord } from './Todo';
 
 // ACTIONS
 const FETCH_TODOS_REQUEST = 'FETCH_TODOS_REQUEST';
@@ -17,7 +17,7 @@ export interface FetchTodosRequestAction {
 
 export interface FetchTodosResponseAction {
   type: typeof FETCH_TODOS_RESPONSE;
-  payload: List<Record<Todo>> | string;
+  payload: List<TodoRecord> | string;
   error?: boolean;
 }
 
@@ -26,7 +26,7 @@ const fetchTodosRequest = (): FetchTodosRequestAction => ({
 });
 
 const fetchTodosResponse = (
-  payload: List<Record<Todo>> | string,
+  payload: List<TodoRecord> | string,
   error?: boolean
 ): FetchTodosResponseAction =>
   error
@@ -44,9 +44,9 @@ export const fetchTodos = () => async (dispatch: (action: AppAction) => void) =>
   dispatch(fetchTodosRequest());
   try {
     const json = await fromTodos.fetchTodos();
-    const reducer = (accumulator: List<Record<Todo>>, jsonTodo: Todo) =>
+    const reducer = (accumulator: List<TodoRecord>, jsonTodo: Todo) =>
       accumulator.push(TodoFactory(jsonTodo));
-    const todos = json.reduce(reducer, List<Record<Todo>>([])) as List<Record<Todo>>;
+    const todos = json.reduce(reducer, List<TodoRecord>([])) as List<TodoRecord>;
     dispatch(fetchTodosResponse(todos));
   } catch {
     dispatch(fetchTodosResponse('500', true));
@@ -65,15 +65,15 @@ const requested = (state: boolean, action: AppAction) => {
   }
 };
 
-const byId = (state: Map<number, Record<Todo>>, action: AppAction) => {
+const byId = (state: Map<number, TodoRecord>, action: AppAction) => {
   switch (action.type) {
     case FETCH_TODOS_RESPONSE:
       if (action.error) {
         return state;
       }
-      const reducer = (accumulator: Map<number, Record<Todo>>, todo: Record<Todo>) =>
+      const reducer = (accumulator: Map<number, TodoRecord>, todo: TodoRecord) =>
         accumulator.set(todo.get('id', null), todo);
-      const payload = action.payload as List<Record<Todo>>;
+      const payload = action.payload as List<TodoRecord>;
       return payload.reduce(reducer, state);
     default:
       return state;
@@ -86,8 +86,8 @@ const ids = (state: List<number>, action: AppAction) => {
       if (action.error) {
         return state;
       }
-      const payload = action.payload as List<Record<Todo>>;
-      return List(payload.map((o: Record<Todo>) => o.get('id', null)));
+      const payload = action.payload as List<TodoRecord>;
+      return List(payload.map((o: TodoRecord) => o.get('id', null)));
     default:
       return state;
   }
@@ -131,5 +131,5 @@ const getTodosIds = (state: Record<AppState>) => state.get('todos', null).get('i
 
 export const getTodos = createSelector(
   [getTodosById, getTodosIds],
-  (pById, pIds) => pIds.map(o => pById.get(o)) as List<Record<Todo>>
+  (pById, pIds) => pIds.map(o => pById.get(o)) as List<TodoRecord>
 );

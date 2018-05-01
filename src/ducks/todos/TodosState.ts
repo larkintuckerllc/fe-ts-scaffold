@@ -1,15 +1,15 @@
 import { List, Map, Record } from 'immutable';
-import Todo from './Todo';
+import { TodoRecord } from './Todo';
 
 export default interface TodosState {
-  byId: Map<number, Record<Todo>>;
+  byId: Map<number, TodoRecord>;
   errored: boolean;
   ids: List<number>;
   requested: boolean;
 }
 
 const todosStateDefault: TodosState = {
-  byId: Map<number, Record<Todo>>(),
+  byId: Map<number, TodoRecord>(),
   errored: false,
   ids: List<number>([]),
   requested: false,

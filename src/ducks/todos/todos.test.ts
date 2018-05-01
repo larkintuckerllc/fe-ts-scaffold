@@ -1,8 +1,8 @@
-import { List, Map, Record } from 'immutable';
+import { List, Map } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
 import { unknown } from 'STORE/AppAction';
 import { appStateInitial } from 'STORE/AppState';
-import Todo, { TodoFactory } from './Todo';
+import { TodoFactory, TodoRecord } from './Todo';
 import todos, { fetchTodos, getTodo, getTodos, getTodosError, getTodosRequested } from './todos';
 import { todosInitialState } from './TodosState';
 
@@ -29,7 +29,7 @@ describe('todos duck', () => {
     payload: '500',
     type: 'FETCH_TODOS_RESPONSE',
   };
-  let byIdSample = Map<number, Record<Todo>>();
+  let byIdSample = Map<number, TodoRecord>();
   byIdSample = byIdSample.set(todoSample.get('id', null), todoSample);
   const idsSample = List([todoSample.get('id', null)]);
   let todosStateSample = todosInitialState.set('byId', byIdSample);

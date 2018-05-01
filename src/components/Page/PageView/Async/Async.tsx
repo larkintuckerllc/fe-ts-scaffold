@@ -1,5 +1,5 @@
 import * as fromTodos from 'DUCKS/todos';
-import Todo from 'DUCKS/todos/Todo';
+import { TodoRecord } from 'DUCKS/todos/Todo';
 import { List, Record } from 'immutable';
 import { connect } from 'react-redux';
 import AppState from 'STORE/AppState';
@@ -8,7 +8,7 @@ import AsyncView from './AsyncView';
 interface StateProps {
   error: boolean;
   requested: boolean;
-  todos: List<Record<Todo>>;
+  todos: List<TodoRecord>;
 }
 
 interface DispatchProps {

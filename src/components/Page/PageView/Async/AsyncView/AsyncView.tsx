@@ -1,12 +1,12 @@
-import Todo from 'DUCKS/todos/Todo';
-import { List, Record } from 'immutable';
+import { TodoRecord } from 'DUCKS/todos/Todo';
+import { List } from 'immutable';
 import React, { Component } from 'react';
 import Todos from './Todos';
 
 interface AsyncViewProps {
   error: boolean;
   requested: boolean;
-  todos: List<Record<Todo>>;
+  todos: List<TodoRecord>;
   fetchTodos(): void;
 }
 

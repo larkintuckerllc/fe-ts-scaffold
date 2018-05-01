@@ -1,7 +1,7 @@
-import Todo, { TodoFactory } from 'DUCKS/todos/Todo';
+import { TodoFactory, TodoRecord } from 'DUCKS/todos/Todo';
 import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
-import { List, Record } from 'immutable';
+import { List } from 'immutable';
 import React from 'react';
 import AsyncView from './AsyncView';
 
@@ -47,7 +47,7 @@ describe('Async component', () => {
 
   it('renders differently with not requested not error and 0 todos', () => {
     const { error, fetchTodos, requested } = getDefaultProps();
-    const todos = List<Record<Todo>>([]);
+    const todos = List<TodoRecord>([]);
     const wrapper = shallow(
       <AsyncView error={error} fetchTodos={fetchTodos} requested={requested} todos={todos} />
     );
