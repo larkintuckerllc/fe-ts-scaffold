@@ -1,5 +1,5 @@
-import { adderInitialState, AdderState } from 'DUCKS/adder';
-import { counterInitialState, CounterState } from 'DUCKS/counter';
+import { AdderState, adderStateDefault } from 'DUCKS/adder';
+import { CounterState, counterStateDefault } from 'DUCKS/counter';
 import { InfiniteState, infiniteStateDefault } from 'DUCKS/infinite';
 import { ItemsStateRecord, itemsStateRecordDefault } from 'DUCKS/items/ItemsState';
 import { TodosStateRecord, todosStateRecordDefault } from 'DUCKS/todos/TodosState';
@@ -14,8 +14,8 @@ export default interface AppState {
 }
 
 const appStateDefault: AppState = {
-  adder: adderInitialState,
-  counter: counterInitialState,
+  adder: adderStateDefault,
+  counter: counterStateDefault,
   infinite: infiniteStateDefault,
   items: itemsStateRecordDefault,
   todos: todosStateRecordDefault,

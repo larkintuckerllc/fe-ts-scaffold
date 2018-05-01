@@ -18,7 +18,7 @@ export const add = (value: string): AddAction => ({
 // STATE
 export type AdderState = List<string>;
 
-export const adderInitialState = List<string>([]);
+export const adderStateDefault = List<string>([]);
 
 // REDUCER
 export default (state: List<string>, action: AppAction) => {

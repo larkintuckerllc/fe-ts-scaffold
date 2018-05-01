@@ -25,7 +25,7 @@ export const decrement = (): DecrementAction => ({
 // STATE
 export type CounterState = number;
 
-export const counterInitialState = 0;
+export const counterStateDefault = 0;
 
 // REDUCER
 export default (state: number, action: AppAction) => {
