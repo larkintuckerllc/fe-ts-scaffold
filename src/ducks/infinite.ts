@@ -15,7 +15,7 @@ export const toggleInfinite = (): ToggleInfiniteAction => ({
 // STATE
 export type InfiniteState = boolean;
 
-export const infiniteInitialState = false;
+export const infiniteStateDefault = false;
 
 // REDUCER
 export default (state: boolean, action: AppAction) => {

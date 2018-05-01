@@ -15,5 +15,6 @@ const todosStateDefault: TodosState = {
   requested: false,
 };
 
-export const todosInitialState = Record<TodosState>(todosStateDefault)(todosStateDefault);
+const TodosStateFactory = Record<TodosState>(todosStateDefault);
+export const todosStateRecordDefault = TodosStateFactory(todosStateDefault);
 export type TodosStateRecord = Record<TodosState>;

@@ -68,5 +68,4 @@ describe('items api', () => {
     const response = await fetchItems({ offset: OFFSET, limit: LIMIT });
     expect(response).toEqual(expectResponse);
   });
-
 });

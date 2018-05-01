@@ -21,5 +21,6 @@ const itemsStateDefault: ItemsState = {
   requested: false,
 };
 
-export const itemsInitialState = Record<ItemsState>(itemsStateDefault)(itemsStateDefault);
+const ItemsStateFactory = Record<ItemsState>(itemsStateDefault);
+export const itemsStateRecordDefault = ItemsStateFactory(itemsStateDefault);
 export type ItemsStateRecord = Record<ItemsState>;

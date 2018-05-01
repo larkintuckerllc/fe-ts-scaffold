@@ -1,5 +1,5 @@
 import { unknown } from 'STORE/AppAction';
-import { appStateInitial } from 'STORE/AppState';
+import { appStateRecordDefault } from 'STORE/AppState';
 import infinite, { getInfinite, toggleInfinite } from './infinite';
 
 describe('counter duck', () => {
@@ -25,6 +25,6 @@ describe('counter duck', () => {
 
   it('getInfinite should return', () => {
     const result = false;
-    expect(getInfinite(appStateInitial)).toEqual(result);
+    expect(getInfinite(appStateRecordDefault)).toEqual(result);
   });
 });

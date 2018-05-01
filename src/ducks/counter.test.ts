@@ -1,5 +1,5 @@
 import { unknown } from 'STORE/AppAction';
-import { appStateInitial } from 'STORE/AppState';
+import { appStateRecordDefault } from 'STORE/AppState';
 import counter, { decrement, getCounter, increment } from './counter';
 
 describe('counter duck', () => {
@@ -39,6 +39,6 @@ describe('counter duck', () => {
 
   it('getCounter should return', () => {
     const result = 0;
-    expect(getCounter(appStateInitial)).toEqual(result);
+    expect(getCounter(appStateRecordDefault)).toEqual(result);
   });
 });
