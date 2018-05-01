@@ -22,3 +22,4 @@ const itemsStateDefault: ItemsState = {
 };
 
 export const itemsInitialState = Record<ItemsState>(itemsStateDefault)(itemsStateDefault);
+export type ItemsStateRecord = Record<ItemsState>;
