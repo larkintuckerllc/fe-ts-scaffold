@@ -1,6 +1,6 @@
-import { List, Record } from 'immutable';
+import { List } from 'immutable';
 import AppAction from 'STORE/AppAction';
-import AppState from 'STORE/AppState';
+import { AppStateRecord } from 'STORE/AppState';
 
 // ACTIONS
 const ADD = 'ADD';
@@ -31,6 +31,6 @@ export default (state: List<string>, action: AppAction) => {
 };
 
 // SELECTORS
-export const getAdder = (state: Record<AppState>) => {
+export const getAdder = (state: AppStateRecord) => {
   return state.get('adder', null);
 };

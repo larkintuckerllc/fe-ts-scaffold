@@ -1,8 +1,8 @@
 import * as fromTodos from 'DUCKS/todos';
 import { TodoRecord } from 'DUCKS/todos/Todo';
-import { List, Record } from 'immutable';
+import { List } from 'immutable';
 import { connect } from 'react-redux';
-import AppState from 'STORE/AppState';
+import { AppStateRecord } from 'STORE/AppState';
 import AsyncView from './AsyncView';
 
 interface StateProps {
@@ -15,7 +15,7 @@ interface DispatchProps {
   fetchTodos(): void;
 }
 
-const mapStateToProps = (state: Record<AppState>) => ({
+const mapStateToProps = (state: AppStateRecord) => ({
   error: fromTodos.getTodosError(state),
   requested: fromTodos.getTodosRequested(state),
   todos: fromTodos.getTodos(state),

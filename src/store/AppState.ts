@@ -21,4 +21,5 @@ const appStateDefault: AppState = {
   todos: todosInitialState,
 };
 
-export const appStateInitial = Record(appStateDefault)(appStateDefault);
+export const appStateInitial = Record<AppState>(appStateDefault)(appStateDefault);
+export type AppStateRecord = Record<AppState>;

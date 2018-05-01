@@ -1,7 +1,6 @@
 import * as fromCounter from 'DUCKS/counter';
-import { Record } from 'immutable';
 import { connect } from 'react-redux';
-import AppState from 'STORE/AppState';
+import { AppStateRecord } from 'STORE/AppState';
 import AnotherCounterView from './AnotherCounterView';
 
 interface StateProps {
@@ -13,7 +12,7 @@ interface DispatchProps {
   increment(): void;
 }
 
-const mapStateToProps = (state: Record<AppState>) => ({
+const mapStateToProps = (state: AppStateRecord) => ({
   counter: fromCounter.getCounter(state),
 });
 

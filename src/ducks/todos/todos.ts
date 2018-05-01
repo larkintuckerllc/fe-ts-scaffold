@@ -1,9 +1,9 @@
 import * as fromTodos from 'APIS/todos';
-import { List, Map, Record } from 'immutable';
+import { List, Map } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import { createSelector } from 'reselect';
 import AppAction from 'STORE/AppAction';
-import AppState from 'STORE/AppState';
+import { AppStateRecord } from 'STORE/AppState';
 import Todo, { TodoFactory, TodoRecord } from './Todo';
 
 // ACTIONS
@@ -112,22 +112,22 @@ export default combineReducers({
 });
 
 // SELECTORS
-export const getTodosRequested = (state: Record<AppState>) =>
+export const getTodosRequested = (state: AppStateRecord) =>
   state.get('todos', null).get('requested', null);
 
-export const getTodosError = (state: Record<AppState>) =>
+export const getTodosError = (state: AppStateRecord) =>
   state.get('todos', null).get('errored', null);
 
-export const getTodo = (state: Record<AppState>, id: number) => {
+export const getTodo = (state: AppStateRecord, id: number) => {
   return state
     .get('todos', null)
     .get('byId', null)
     .get(id);
 };
 
-const getTodosById = (state: Record<AppState>) => state.get('todos', null).get('byId', null);
+const getTodosById = (state: AppStateRecord) => state.get('todos', null).get('byId', null);
 
-const getTodosIds = (state: Record<AppState>) => state.get('todos', null).get('ids', null);
+const getTodosIds = (state: AppStateRecord) => state.get('todos', null).get('ids', null);
 
 export const getTodos = createSelector(
   [getTodosById, getTodosIds],

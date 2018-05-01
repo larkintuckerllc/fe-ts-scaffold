@@ -1,6 +1,5 @@
-import { Record } from 'immutable';
 import AppAction from 'STORE/AppAction';
-import AppState from 'STORE/AppState';
+import { AppStateRecord } from 'STORE/AppState';
 
 // ACTIONS
 const INCREMENT = 'INCREMENT';
@@ -41,6 +40,6 @@ export default (state: number, action: AppAction) => {
 };
 
 // SELECTORS
-export const getCounter = (state: Record<AppState>) => {
+export const getCounter = (state: AppStateRecord) => {
   return state.get('counter', null);
 };

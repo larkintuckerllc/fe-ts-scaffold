@@ -1,8 +1,8 @@
 import * as fromItems from 'DUCKS/items';
 import { ItemRecord } from 'DUCKS/items/Item';
-import { List, Record } from 'immutable';
+import { List } from 'immutable';
 import { connect } from 'react-redux';
-import AppState from 'STORE/AppState';
+import { AppStateRecord } from 'STORE/AppState';
 import InfiniteScrollView from './InfiniteScrollView';
 
 interface StateProps {
@@ -17,7 +17,7 @@ interface DispatchProps {
   fetchItems(page: number): void;
 }
 
-const mapStateToProps = (state: Record<AppState>) => ({
+const mapStateToProps = (state: AppStateRecord) => ({
   currentPage: fromItems.getItemsCurrentPage(state),
   error: fromItems.getItemsError(state),
   items: fromItems.getItems(state),

@@ -1,9 +1,9 @@
 import * as fromItems from 'APIS/items';
-import { List, Map, Record } from 'immutable';
+import { List, Map } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import { createSelector } from 'reselect';
 import AppAction from 'STORE/AppAction';
-import AppState from 'STORE/AppState';
+import { AppStateRecord } from 'STORE/AppState';
 import Item, { ItemFactory, ItemRecord } from './Item';
 
 const PAGE_SIZE = 2;
@@ -62,7 +62,7 @@ const fetchItemsResponse = (
 
 export const fetchItems = (page: number) => async (
   dispatch: (action: AppAction) => void,
-  getState: () => Record<AppState>
+  getState: () => AppStateRecord
 ) => {
   const state = getState();
   const offset = page * PAGE_SIZE;
@@ -184,35 +184,35 @@ export default combineReducers({
 });
 
 // SELECTORS
-export const getItemsRequested = (state: Record<AppState>) =>
+export const getItemsRequested = (state: AppStateRecord) =>
   state.get('items', null).get('requested', null);
 
-export const getItemsError = (state: Record<AppState>) =>
+export const getItemsError = (state: AppStateRecord) =>
   state.get('items', null).get('errored', null);
 
-export const getItem = (state: Record<AppState>, id: number) => {
+export const getItem = (state: AppStateRecord, id: number) => {
   return state
     .get('items', null)
     .get('byId', null)
     .get(id);
 };
 
-const getItemsById = (state: Record<AppState>) => state.get('items', null).get('byId', null);
+const getItemsById = (state: AppStateRecord) => state.get('items', null).get('byId', null);
 
-const getItemsIds = (state: Record<AppState>) => state.get('items', null).get('ids', null);
+const getItemsIds = (state: AppStateRecord) => state.get('items', null).get('ids', null);
 
 export const getItems = createSelector(
   [getItemsById, getItemsIds],
   (pById, pIds) => pIds.map(o => pById.get(o)) as List<ItemRecord>
 );
 
-export const getItemsCurrentPage = (state: Record<AppState>) =>
+export const getItemsCurrentPage = (state: AppStateRecord) =>
   state.get('items', null).get('currentPage', null);
 
-export const getItemsLastPage = (state: Record<AppState>) =>
+export const getItemsLastPage = (state: AppStateRecord) =>
   state.get('items', null).get('lastPage', null);
 
-const getIsPageFetched = (state: Record<AppState>, page: number) => {
+const getIsPageFetched = (state: AppStateRecord, page: number) => {
   return (
     state
       .get('items', null)
@@ -220,7 +220,7 @@ const getIsPageFetched = (state: Record<AppState>, page: number) => {
       .get(page) !== undefined
   );
 };
-const getItemsIdsPaged = (state: Record<AppState>) => {
+const getItemsIdsPaged = (state: AppStateRecord) => {
   const page = state.get('items', null).get('currentPage', null);
   const pageIds = state
     .get('items', null)
