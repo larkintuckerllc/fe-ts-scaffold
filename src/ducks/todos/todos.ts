@@ -1,4 +1,4 @@
-import * as fromTodos from 'APIS/todos';
+import todosAPI from 'APIS/todos';
 import { List, Map } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import { createSelector } from 'reselect';
@@ -43,7 +43,7 @@ const fetchTodosResponse = (
 export const fetchTodos = () => async (dispatch: (action: AppAction) => void) => {
   dispatch(fetchTodosRequest());
   try {
-    const json = await fromTodos.fetchTodos();
+    const json = await todosAPI.fetch();
     const reducer = (accumulator: List<TodoRecord>, jsonTodo: Todo) =>
       accumulator.push(TodoFactory(jsonTodo));
     const todos = json.reduce(reducer, List<TodoRecord>([])) as List<TodoRecord>;

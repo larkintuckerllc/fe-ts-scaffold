@@ -24,41 +24,32 @@ const getDefaultProps = () => ({
 
 describe('Async component', () => {
   it('shallow renders without crashing', () => {
-    const { error, fetchTodos, requested, todos } = getDefaultProps();
-    shallow(
-      <AsyncView error={error} fetchTodos={fetchTodos} requested={requested} todos={todos} />
-    );
+    const defaultProps = getDefaultProps();
+    shallow(<AsyncView {...defaultProps} />);
   });
   it('renders differently with requested', () => {
-    const { error, fetchTodos, todos } = getDefaultProps();
-    const wrapper = shallow(
-      <AsyncView error={error} fetchTodos={fetchTodos} requested={true} todos={todos} />
-    );
+    const { requested, ...defaultProps } = getDefaultProps();
+    const wrapper = shallow(<AsyncView {...defaultProps} requested={true} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders differently with not requested and error', () => {
-    const { fetchTodos, requested, todos } = getDefaultProps();
-    const wrapper = shallow(
-      <AsyncView error={true} fetchTodos={fetchTodos} requested={requested} todos={todos} />
-    );
+    const { error, ...defaultProps } = getDefaultProps();
+    const wrapper = shallow(<AsyncView {...defaultProps} error={true} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders differently with not requested not error and 0 todos', () => {
-    const { error, fetchTodos, requested } = getDefaultProps();
-    const todos = List<TodoRecord>([]);
-    const wrapper = shallow(
-      <AsyncView error={error} fetchTodos={fetchTodos} requested={requested} todos={todos} />
-    );
+    const { todos, ...defaultProps } = getDefaultProps();
+    const emptyTodos = List<TodoRecord>([]);
+    const wrapper = shallow(<AsyncView {...defaultProps} todos={emptyTodos} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('calls fetchTodos on mount', () => {
-    const { error, fetchTodos, requested, todos } = getDefaultProps();
-    shallow(
-      <AsyncView error={error} fetchTodos={fetchTodos} requested={requested} todos={todos} />
-    );
-    expect(fetchTodos.mock.calls.length).toBe(1);
+    const { fetchTodos, ...defaultProps } = getDefaultProps();
+    const callsLength = 1;
+    shallow(<AsyncView {...defaultProps} fetchTodos={fetchTodos} />);
+    expect(fetchTodos.mock.calls.length).toBe(callsLength);
   });
 });

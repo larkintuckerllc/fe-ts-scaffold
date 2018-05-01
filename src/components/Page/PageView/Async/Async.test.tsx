@@ -7,11 +7,8 @@ import Async from './Async';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 
-const getDefaultProps = () => ({});
-
 describe('Async component', () => {
   it('shallow renders without crashing', () => {
-    const {} = getDefaultProps();
     const store = createMockStore(appStateRecordDefault);
     const context = {
       store,

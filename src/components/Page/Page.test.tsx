@@ -7,11 +7,8 @@ import Page from './Page';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 
-const getDefaultProps = () => ({});
-
 describe('Page component', () => {
   it('shallow renders without crashing', () => {
-    const {} = getDefaultProps();
     const store = createMockStore(appStateRecordDefault);
     const context = {
       store,

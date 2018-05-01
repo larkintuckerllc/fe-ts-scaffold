@@ -1,4 +1,4 @@
-import { fetchItems } from './items';
+import itemsAPI from './items';
 
 const ITEMS = [
   {
@@ -30,7 +30,7 @@ describe('items api', () => {
       results: ITEMS,
     };
     expect.assertions(1);
-    const response = await fetchItems();
+    const response = await itemsAPI.fetch();
     expect(response).toEqual(expectResponse);
   });
 
@@ -40,7 +40,7 @@ describe('items api', () => {
       results: ITEMS,
     };
     expect.assertions(1);
-    const response = await fetchItems({});
+    const response = await itemsAPI.fetch({});
     expect(response).toEqual(expectResponse);
   });
 
@@ -52,7 +52,7 @@ describe('items api', () => {
       results: items,
     };
     expect.assertions(1);
-    const response = await fetchItems({ offset: OFFSET });
+    const response = await itemsAPI.fetch({ offset: OFFSET });
     expect(response).toEqual(expectResponse);
   });
 
@@ -65,7 +65,7 @@ describe('items api', () => {
       results: items,
     };
     expect.assertions(1);
-    const response = await fetchItems({ offset: OFFSET, limit: LIMIT });
+    const response = await itemsAPI.fetch({ offset: OFFSET, limit: LIMIT });
     expect(response).toEqual(expectResponse);
   });
 });

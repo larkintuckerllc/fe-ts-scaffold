@@ -31,9 +31,8 @@ const SCHEMA = {
   title: 'Todo set',
   type: 'array',
 };
-const ajv = new Ajv();
-const validate = ajv.compile(SCHEMA);
-export const fetchTodos = async () => {
+const validate = new Ajv().compile(SCHEMA);
+const fetchTodos = async () => {
   const response = await fetch(ENDPOINT);
   const json = await response.json();
   const valid = validate(json);
@@ -42,3 +41,4 @@ export const fetchTodos = async () => {
   }
   return json;
 };
+export default { fetch: fetchTodos };

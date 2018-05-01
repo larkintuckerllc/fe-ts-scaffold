@@ -11,4 +11,5 @@ export const setError = (value: boolean): void => {
   error = value;
 };
 
-export const fetchTodos = () => (error ? Promise.reject('500') : Promise.resolve([todoDefault]));
+const fetchTodos = () => (error ? Promise.reject('500') : Promise.resolve([todoDefault]));
+export default { fetch: fetchTodos };

@@ -1,4 +1,4 @@
-import { fetchTodos } from './todos';
+import todosAPI from './todos';
 
 describe('todos api', () => {
   it('fetchTodos success with fetch success', async () => {
@@ -17,7 +17,7 @@ describe('todos api', () => {
       })
     );
     expect.assertions(1);
-    const response = await fetchTodos();
+    const response = await todosAPI.fetch();
     expect(response).toBe(todos);
   });
 
@@ -25,7 +25,7 @@ describe('todos api', () => {
     window.fetch = jest.fn().mockImplementation(() => Promise.reject(true));
     expect.assertions(1);
     try {
-      await fetchTodos();
+      await todosAPI.fetch();
     } catch (e) {
       expect(true).toEqual(true); // JUST EXPECT CATCH TO BE CALLED
     }
@@ -40,7 +40,7 @@ describe('todos api', () => {
     );
     expect.assertions(1);
     try {
-      await fetchTodos();
+      await todosAPI.fetch();
     } catch (e) {
       expect(true).toEqual(true);
     }
@@ -60,7 +60,7 @@ describe('todos api', () => {
     );
     expect.assertions(1);
     try {
-      await fetchTodos();
+      await todosAPI.fetch();
     } catch (e) {
       expect(true).toEqual(true);
     }

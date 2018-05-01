@@ -14,7 +14,7 @@ export const setError = (value: boolean): void => {
   error = value;
 };
 
-export const fetchItems = (params?: FetchItemsParams) => {
+const fetchItems = (params?: FetchItemsParams) => {
   if (error) {
     return Promise.reject('500');
   }
@@ -44,3 +44,4 @@ export const fetchItems = (params?: FetchItemsParams) => {
   };
   return Promise.resolve(response);
 };
+export default { fetch: fetchItems };

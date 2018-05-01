@@ -1,4 +1,4 @@
-import * as fromItems from 'APIS/items';
+import itemsAPI from 'APIS/items';
 import { List, Map } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import { createSelector } from 'reselect';
@@ -72,7 +72,7 @@ export const fetchItems = (page: number) => async (
   }
   dispatch(fetchItemsRequest());
   try {
-    const json = await fromItems.fetchItems({
+    const json = await itemsAPI.fetch({
       limit: PAGE_SIZE,
       offset,
     });

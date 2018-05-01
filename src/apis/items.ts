@@ -24,7 +24,7 @@ interface FetchItemsParams {
   limit?: number;
   offset?: number;
 }
-export const fetchItems = (params?: FetchItemsParams) => {
+const fetchItems = (params?: FetchItemsParams) => {
   let items;
   let response;
   if (params === undefined) {
@@ -51,3 +51,4 @@ export const fetchItems = (params?: FetchItemsParams) => {
   };
   return Promise.resolve(response);
 };
+export default { fetch: fetchItems };
