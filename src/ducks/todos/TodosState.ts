@@ -16,3 +16,4 @@ const todosStateDefault: TodosState = {
 };
 
 export const todosInitialState = Record<TodosState>(todosStateDefault)(todosStateDefault);
+export type TodosStateRecord = Record<TodosState>;

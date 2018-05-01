@@ -2,7 +2,7 @@ import { adderInitialState, AdderState } from 'DUCKS/adder';
 import { counterInitialState, CounterState } from 'DUCKS/counter';
 import { infiniteInitialState, InfiniteState } from 'DUCKS/infinite';
 import ItemsState, { itemsInitialState } from 'DUCKS/items/ItemsState';
-import TodosState, { todosInitialState } from 'DUCKS/todos/TodosState';
+import { todosInitialState, TodosStateRecord } from 'DUCKS/todos/TodosState';
 import { Record } from 'immutable';
 
 export default interface AppState {
@@ -10,7 +10,7 @@ export default interface AppState {
   counter: CounterState;
   infinite: InfiniteState;
   items: Record<ItemsState>;
-  todos: Record<TodosState>;
+  todos: TodosStateRecord;
 }
 
 const appStateDefault: AppState = {
