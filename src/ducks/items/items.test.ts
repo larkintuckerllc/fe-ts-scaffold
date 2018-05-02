@@ -43,8 +43,7 @@ describe('items duck', () => {
     payload: '500',
     type: 'FETCH_ITEMS_RESPONSE',
   };
-  let byIdSample = Map<number, ItemRecord>();
-  byIdSample = byIdSample.set(itemSample.get('id', null), itemSample);
+  const byIdSample = Map.of(itemSample.get('id', null), itemSample) as Map<number, ItemRecord>;
   const idsSample = List([itemSample.get('id', null)]);
   let itemsStateSample = itemsStateRecordDefault.set('byId', byIdSample);
   const page = List<number>([0]);

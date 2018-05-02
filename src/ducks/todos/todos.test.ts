@@ -28,8 +28,7 @@ describe('todos duck', () => {
     payload: '500',
     type: 'FETCH_TODOS_RESPONSE',
   };
-  let byIdSample = Map<number, TodoRecord>();
-  byIdSample = byIdSample.set(todoSample.get('id', null), todoSample);
+  const byIdSample = Map.of(todoSample.get('id', null), todoSample) as Map<number, TodoRecord>;
   const idsSample = List([todoSample.get('id', null)]);
   let todosStateSample = todosStateRecordDefault.set('byId', byIdSample);
   todosStateSample = todosStateSample.set('ids', idsSample);
