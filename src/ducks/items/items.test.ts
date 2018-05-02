@@ -45,13 +45,14 @@ describe('items duck', () => {
   };
   const byIdSample: Map<number, ItemRecord> = Map.of(itemSample.get('id', null), itemSample);
   const idsSample = List([itemSample.get('id', null)]);
-  let itemsStateSample = itemsStateRecordDefault.set('byId', byIdSample);
   const page = List<number>([0]);
   let pages = Map<number, List<number>>();
   pages = pages.set(0, page);
-  itemsStateSample = itemsStateSample.set('ids', idsSample);
-  itemsStateSample = itemsStateSample.set('lastPage', 0);
-  itemsStateSample = itemsStateSample.set('pages', pages);
+  const itemsStateSample = itemsStateRecordDefault
+    .set('byId', byIdSample)
+    .set('ids', idsSample)
+    .set('lastPage', 0)
+    .set('pages', pages);
   const appStateSample = appStateRecordDefault.set('items', itemsStateSample);
 
   beforeEach(() => {

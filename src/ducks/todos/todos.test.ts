@@ -30,8 +30,7 @@ describe('todos duck', () => {
   };
   const byIdSample: Map<number, TodoRecord> = Map.of(todoSample.get('id', null), todoSample);
   const idsSample = List([todoSample.get('id', null)]);
-  let todosStateSample = todosStateRecordDefault.set('byId', byIdSample);
-  todosStateSample = todosStateSample.set('ids', idsSample);
+  const todosStateSample = todosStateRecordDefault.set('byId', byIdSample).set('ids', idsSample);
   const appStateSample = appStateRecordDefault.set('todos', todosStateSample);
 
   beforeEach(() => {
