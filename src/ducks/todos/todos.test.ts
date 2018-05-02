@@ -1,3 +1,4 @@
+import todosAPI from 'APIS/todos';
 import { List, Map } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
 import { unknown } from 'STORE/AppAction';
@@ -5,8 +6,6 @@ import { appStateRecordDefault } from 'STORE/AppState';
 import { TodoFactory, TodoRecord } from './Todo';
 import todos, { fetchTodos, getTodo, getTodos, getTodosError, getTodosRequested } from './todos';
 import { todosStateRecordDefault } from './TodosState';
-
-jest.mock('APIS/todos');
 
 describe('todos duck', () => {
   const todoDefault = {
@@ -38,13 +37,14 @@ describe('todos duck', () => {
 
   beforeEach(() => {
     jest.addMatchers(matchers);
+    jest.resetModules();
+    jest.resetAllMocks();
   });
 
   // ACTIONS
   it('fetchTodos success should dispatch request and response - success actions', () => {
+    todosAPI.fetch = jest.fn().mockResolvedValue([todoDefault]);
     const dispatch = jest.fn();
-    const apisTodos = require('APIS/todos');
-    apisTodos.setError(false);
     return fetchTodos()(dispatch).then(() => {
       const callsLength = 2;
       expect(dispatch.mock.calls.length).toBe(callsLength);
@@ -54,11 +54,11 @@ describe('todos duck', () => {
   });
 
   it('fetchTodos success should dispatch request and response - error actions', () => {
+    todosAPI.fetch = jest.fn().mockRejectedValue(new Error('500'));
     const dispatch = jest.fn();
-    const apisTodos = require('APIS/todos');
-    apisTodos.setError(true);
     return fetchTodos()(dispatch).then(() => {
-      expect(dispatch.mock.calls.length).toBe(2);
+      const callsLength = 2;
+      expect(dispatch.mock.calls.length).toBe(callsLength);
       expect(dispatch.mock.calls[0][0]).toEqual(request);
       expect(dispatch.mock.calls[1][0]).toEqual(responseError);
     });

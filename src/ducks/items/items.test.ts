@@ -1,3 +1,4 @@
+import itemsAPI from 'APIS/items';
 import { List, Map } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
 import { unknown } from 'STORE/AppAction';
@@ -14,8 +15,6 @@ import items, {
   getItemsRequested,
 } from './items';
 import { itemsStateRecordDefault } from './ItemsState';
-
-jest.mock('APIS/items');
 
 describe('items duck', () => {
   const itemDefault = {
@@ -58,10 +57,16 @@ describe('items duck', () => {
 
   beforeEach(() => {
     jest.addMatchers(matchers);
+    jest.resetModules();
+    jest.resetAllMocks();
   });
 
   // ACTIONS
   it('fetchItems success should dispatch request and response - success actions', () => {
+    itemsAPI.fetch = jest.fn().mockResolvedValue({
+      count: 1,
+      results: [itemDefault],
+    });
     const dispatch = jest.fn();
     const getState = () => appStateRecordDefault;
     return fetchItems(0)(dispatch, getState).then(() => {
@@ -74,6 +79,10 @@ describe('items duck', () => {
   });
 
   it('fetchItems success should dispatch request and response - success actions - cached', () => {
+    itemsAPI.fetch = jest.fn().mockResolvedValue({
+      count: 1,
+      results: [itemDefault],
+    });
     const dispatch = jest.fn();
     const getState = () => appStateSample;
     return fetchItems(0)(dispatch, getState).then(() => {
@@ -84,12 +93,11 @@ describe('items duck', () => {
   });
 
   it('fetchTodos success should dispatch request and response - error actions', () => {
+    itemsAPI.fetch = jest.fn().mockRejectedValue(new Error('500'));
     const dispatch = jest.fn();
-    const apisItems = require('APIS/items');
-    apisItems.setError(true);
-    const callsLength = 3;
     const getState = () => appStateRecordDefault;
     return fetchItems(0)(dispatch, getState).then(() => {
+      const callsLength = 3;
       expect(dispatch.mock.calls.length).toBe(callsLength);
       expect(dispatch.mock.calls[0][0]).toEqual(currentPage);
       expect(dispatch.mock.calls[1][0]).toEqual(request);
