@@ -1,9 +1,10 @@
 import itemsAPI from 'APIS/items';
+import itemsTestData from 'APIS/items/items.testdata';
 import { List, Map } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
 import { unknown } from 'STORE/AppAction';
 import { appStateRecordDefault } from 'STORE/AppState';
-import { ItemFactory, ItemRecord } from './Item';
+import Item, { ItemFactory, ItemRecord } from './Item';
 import items, {
   fetchItems,
   getItem,
@@ -17,12 +18,11 @@ import items, {
 import { itemsStateRecordDefault } from './ItemsState';
 
 describe('items duck', () => {
-  const itemDefault = {
-    id: 0,
-    name: 'name',
-  };
-  const itemSample = ItemFactory(itemDefault);
-  const itemsSample = List([itemSample]);
+  const itemSample = ItemFactory(itemsTestData[0]);
+  const itemsTestDataPaged = itemsTestData.slice(0, 2);
+  const reducer = (accumulator: List<ItemRecord>, jsonItem: Item) =>
+    accumulator.push(ItemFactory(jsonItem));
+  const itemsSample = itemsTestDataPaged.reduce(reducer, List<ItemRecord>([])) as List<ItemRecord>;
   const currentPage = {
     payload: 0,
     type: 'SET_ITEMS_CURRENT_PAGE',
@@ -34,7 +34,7 @@ describe('items duck', () => {
     payload: {
       items: itemsSample,
       page: 0,
-      pageCount: 1,
+      pageCount: 2,
     },
     type: 'FETCH_ITEMS_RESPONSE',
   };
@@ -43,18 +43,19 @@ describe('items duck', () => {
     payload: '500',
     type: 'FETCH_ITEMS_RESPONSE',
   };
-  const byIdSample: Map<number, ItemRecord> = Map.of(itemSample.get('id', null), itemSample);
-  const idsSample = List([itemSample.get('id', null)]);
-  const page = List<number>([0]);
+  const reducerById = (accumulator: Map<number, ItemRecord>, item: ItemRecord) =>
+    accumulator.set(item.get('id', null), item);
+  const byIdSample = itemsSample.reduce(reducerById, Map<number, ItemRecord>());
+  const idsSample = List([0, 1]);
+  const page = List<number>([0, 1]);
   let pages = Map<number, List<number>>();
   pages = pages.set(0, page);
   const itemsStateSample = itemsStateRecordDefault
     .set('byId', byIdSample)
     .set('ids', idsSample)
-    .set('lastPage', 0)
+    .set('lastPage', 1)
     .set('pages', pages);
   const appStateSample = appStateRecordDefault.set('items', itemsStateSample);
-
   beforeEach(() => {
     jest.addMatchers(matchers);
     jest.resetModules();
@@ -64,8 +65,8 @@ describe('items duck', () => {
   // ACTIONS
   it('fetchItems success should dispatch request and response - success actions', () => {
     itemsAPI.fetch = jest.fn().mockResolvedValue({
-      count: 1,
-      results: [itemDefault],
+      count: itemsTestData.length,
+      results: itemsTestDataPaged,
     });
     const dispatch = jest.fn();
     const getState = () => appStateRecordDefault;
@@ -77,11 +78,10 @@ describe('items duck', () => {
       expect(dispatch.mock.calls[2][0]).toEqual(responseSuccess);
     });
   });
-
   it('fetchItems success should dispatch request and response - success actions - cached', () => {
     itemsAPI.fetch = jest.fn().mockResolvedValue({
       count: 1,
-      results: [itemDefault],
+      results: itemsTestData,
     });
     const dispatch = jest.fn();
     const getState = () => appStateSample;
@@ -105,7 +105,6 @@ describe('items duck', () => {
     });
   });
 
-  // REDUCERS
   describe('reducer', () => {
     it('should ignore unknown actions', () => {
       const action = unknown();
@@ -133,8 +132,9 @@ describe('items duck', () => {
       const nextState = itemsStateRecordDefault.set('currentPage', 0);
       expect(items(state, currentPage)).toEqualImmutable(nextState);
     });
+  });
 
-    // SELECTORS
+  describe('selectors', () => {
     it('getItemsRequested should return', () => {
       const result = false;
       expect(getItemsRequested(appStateRecordDefault)).toEqual(result);
@@ -151,7 +151,7 @@ describe('items duck', () => {
     });
 
     it('getItems should return', () => {
-      const result = List([itemSample]);
+      const result = itemsSample;
       expect(getItems(appStateSample)).toEqualImmutable(result);
     });
 
@@ -161,7 +161,7 @@ describe('items duck', () => {
     });
 
     it('getItemsLastPage should return', () => {
-      const result = 0;
+      const result = 1;
       expect(getItemsLastPage(appStateSample)).toEqualImmutable(result);
     });
 
@@ -171,7 +171,7 @@ describe('items duck', () => {
     });
 
     it('getItemsPages should return with page', () => {
-      const result = List([itemSample]);
+      const result = itemsSample;
       expect(getItemsPaged(appStateSample)).toEqualImmutable(result);
     });
   });

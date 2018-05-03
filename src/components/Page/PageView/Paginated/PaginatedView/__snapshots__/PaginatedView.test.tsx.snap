@@ -10,7 +10,11 @@ exports[`PaginatedView component renders differently with currentPage not 0 1`] 
       Array [
         Object {
           "id": 0,
-          "name": "name",
+          "name": "A",
+        },
+        Object {
+          "id": 1,
+          "name": "B",
         },
       ]
     }
@@ -21,7 +25,7 @@ exports[`PaginatedView component renders differently with currentPage not 0 1`] 
   </div>
   <div>
     LastPage: 
-    0
+    1
   </div>
   <div>
     <button
@@ -29,14 +33,6 @@ exports[`PaginatedView component renders differently with currentPage not 0 1`] 
       onClick={[Function]}
     >
       Previous Page
-    </button>
-  </div>
-  <div>
-    <button
-      id="next"
-      onClick={[Function]}
-    >
-      Next Page
     </button>
   </div>
 </div>
@@ -52,7 +48,11 @@ exports[`PaginatedView component renders differently with currentPage not 0 and 
       Array [
         Object {
           "id": 0,
-          "name": "name",
+          "name": "A",
+        },
+        Object {
+          "id": 1,
+          "name": "B",
         },
       ]
     }

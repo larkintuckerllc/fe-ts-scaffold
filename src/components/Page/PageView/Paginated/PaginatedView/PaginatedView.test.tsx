@@ -1,4 +1,5 @@
-import { ItemFactory, ItemRecord } from 'DUCKS/items/Item';
+import itemsTestData from 'APIS/items/items.testdata';
+import Item, { ItemFactory, ItemRecord } from 'DUCKS/items/Item';
 import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import { List } from 'immutable';
@@ -8,18 +9,16 @@ import styles from './styles.less';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 
-const itemDefault = {
-  id: 0,
-  name: 'name',
-};
-const sampleItem = ItemFactory(itemDefault);
-const sampleItems = List([sampleItem]);
+const itemsTestDataPaged = itemsTestData.slice(0, 2);
+const reducer = (accumulator: List<ItemRecord>, jsonItem: Item) =>
+  accumulator.push(ItemFactory(jsonItem));
+const itemsSample = itemsTestDataPaged.reduce(reducer, List<ItemRecord>([])) as List<ItemRecord>;
 const getDefaultProps = () => ({
   currentPage: 0,
   error: false,
   fetchItems: jest.fn(),
-  items: sampleItems,
-  lastPage: 0,
+  items: itemsSample,
+  lastPage: 1,
   requested: false,
 });
 

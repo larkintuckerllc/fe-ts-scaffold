@@ -1,43 +1,21 @@
 import itemsAPI from './items';
+import itemsTestData from './items.testdata';
 
-const ITEMS = [
-  {
-    id: 0,
-    name: 'A',
-  },
-  {
-    id: 1,
-    name: 'B',
-  },
-  {
-    id: 2,
-    name: 'C',
-  },
-  {
-    id: 3,
-    name: 'D',
-  },
-  {
-    id: 4,
-    name: 'E',
-  },
-];
-const count = ITEMS.length;
+const count = itemsTestData.length;
 describe('items api', () => {
   it('fetchItems success with fetch success', async () => {
     const expectResponse = {
       count,
-      results: ITEMS,
+      results: itemsTestData,
     };
     expect.assertions(1);
     const response = await itemsAPI.fetch();
     expect(response).toEqual(expectResponse);
   });
-
   it('fetchItems success with fetch success with object', async () => {
     const expectResponse = {
       count,
-      results: ITEMS,
+      results: itemsTestData,
     };
     expect.assertions(1);
     const response = await itemsAPI.fetch({});
@@ -46,7 +24,7 @@ describe('items api', () => {
 
   it('fetchItems success with fetch success with offset', async () => {
     const OFFSET = 1;
-    const items = ITEMS.slice(OFFSET);
+    const items = itemsTestData.slice(OFFSET);
     const expectResponse = {
       count,
       results: items,
@@ -59,7 +37,7 @@ describe('items api', () => {
   it('fetchItems success with fetch success with offset and limit', async () => {
     const OFFSET = 1;
     const LIMIT = 2;
-    const items = ITEMS.slice(OFFSET, OFFSET + LIMIT);
+    const items = itemsTestData.slice(OFFSET, OFFSET + LIMIT);
     const expectResponse = {
       count,
       results: items,
