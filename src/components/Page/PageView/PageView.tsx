@@ -9,6 +9,7 @@ import InfiniteScroll from './InfiniteScroll';
 import Listing from './Listing';
 import Media from './Media';
 import Paginated from './Paginated';
+import PassThrough from './PassThrough';
 import Risky from './Risky';
 import Stateful from './Stateful';
 import Styling from './Styling';
@@ -46,6 +47,7 @@ const PageView = ({
       <Listing add={add} items={adder.toJS()} />
       <Media />
       <Paginated />
+      <PassThrough />
       <Risky />
       <Stateful />
       <Styling />
