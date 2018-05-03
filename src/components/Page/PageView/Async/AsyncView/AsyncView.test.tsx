@@ -1,4 +1,5 @@
-import { TodoFactory, TodoRecord } from 'DUCKS/todos/Todo';
+import todosTestData from 'APIS/todos/todos.testdata';
+import Todo, { TodoFactory, TodoRecord } from 'DUCKS/todos/Todo';
 import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import { List } from 'immutable';
@@ -7,14 +8,9 @@ import AsyncView from './AsyncView';
 
 Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 
-const todoDefault = {
-  completed: false,
-  id: 0,
-  title: 'title',
-  userID: 0,
-};
-const sampleTodo = TodoFactory(todoDefault);
-const sampleTodos = List([sampleTodo]);
+const reducer = (accumulator: List<TodoRecord>, jsonTodo: Todo) =>
+  accumulator.push(TodoFactory(jsonTodo));
+const sampleTodos = todosTestData.reduce(reducer, List<TodoRecord>([])) as List<TodoRecord>;
 const getDefaultProps = () => ({
   error: false,
   fetchTodos: jest.fn(),

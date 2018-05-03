@@ -1,3 +1,4 @@
+import todosTestData from 'APIS/todos/todos.testdata';
 import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import React from 'react';
@@ -7,12 +8,6 @@ Enzyme.configure({ adapter: new enzymeAdapterReact16() });
 
 describe('Todos component', () => {
   it('shallow renders without crashing', () => {
-    const todoDefault = {
-      completed: false,
-      id: 0,
-      title: 'title',
-      userID: 0,
-    };
-    shallow(<Todos todos={[todoDefault]} />);
+    shallow(<Todos todos={todosTestData} />);
   });
 });

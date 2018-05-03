@@ -1,16 +1,9 @@
 import todosAPI from './todos';
+import todosTestData from './todos.testdata';
 
 describe('todos api', () => {
   it('fetchTodos success with fetch success', async () => {
-    const todos = [
-      {
-        completed: false,
-        id: 0,
-        title: 'title',
-        userId: 0,
-      },
-    ];
-    const json = jest.fn().mockImplementation(() => Promise.resolve(todos));
+    const json = jest.fn().mockImplementation(() => Promise.resolve(todosTestData));
     window.fetch = jest.fn().mockImplementation(() =>
       Promise.resolve({
         json,
@@ -18,7 +11,7 @@ describe('todos api', () => {
     );
     expect.assertions(1);
     const response = await todosAPI.fetch();
-    expect(response).toBe(todos);
+    expect(response).toBe(todosTestData);
   });
 
   it('fetchTodos error with fetch error', async () => {
