@@ -1,4 +1,4 @@
-import itemsTestData from './items.testdata';
+import itemsTestData from './items.testdata.json';
 interface FetchItemsParams {
   limit?: number;
   offset?: number;

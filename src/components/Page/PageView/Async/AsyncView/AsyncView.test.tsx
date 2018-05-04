@@ -1,4 +1,4 @@
-import todosTestData from 'APIS/todos/todos.testdata';
+import todosTestData from 'APIS/todos/todos.testdata.json';
 import Todo, { TodoFactory, TodoRecord } from 'DUCKS/todos/Todo';
 import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';

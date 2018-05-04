@@ -1,5 +1,5 @@
 import itemsAPI from 'APIS/items';
-import itemsTestData from 'APIS/items/items.testdata';
+import itemsTestData from 'APIS/items/items.testdata.json';
 import { List, Map } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
 import { unknown } from 'STORE/AppAction';

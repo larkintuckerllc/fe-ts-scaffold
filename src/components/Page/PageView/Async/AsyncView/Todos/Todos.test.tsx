@@ -1,4 +1,4 @@
-import todosTestData from 'APIS/todos/todos.testdata';
+import todosTestData from 'APIS/todos/todos.testdata.json';
 import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';
 import React from 'react';

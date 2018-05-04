@@ -1,5 +1,5 @@
 import itemsAPI from './items';
-import itemsTestData from './items.testdata';
+import itemsTestData from './items.testdata.json';
 
 const count = itemsTestData.length;
 describe('items api', () => {

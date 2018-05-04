@@ -1,4 +1,4 @@
-import itemsTestData from 'APIS/items/items.testdata';
+import itemsTestData from 'APIS/items/items.testdata.json';
 import Item, { ItemFactory, ItemRecord } from 'DUCKS/items/Item';
 import Enzyme, { shallow } from 'enzyme';
 import enzymeAdapterReact16 from 'enzyme-adapter-react-16';

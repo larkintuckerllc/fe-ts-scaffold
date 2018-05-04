@@ -1,5 +1,5 @@
 import todosAPI from './todos';
-import todosTestData from './todos.testdata';
+import todosTestData from './todos.testdata.json';
 
 describe('todos api', () => {
   it('fetchTodos success with fetch success', async () => {

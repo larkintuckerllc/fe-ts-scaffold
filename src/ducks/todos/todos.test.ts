@@ -1,5 +1,5 @@
 import todosAPI from 'APIS/todos';
-import todosTestData from 'APIS/todos/todos.testdata';
+import todosTestData from 'APIS/todos/todos.testdata.json';
 import { List, Map } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
 import { unknown } from 'STORE/AppAction';
