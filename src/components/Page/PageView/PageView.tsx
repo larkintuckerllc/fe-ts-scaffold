@@ -40,12 +40,12 @@ const PageView = ({
   }
   return (
     <Frame>
-      <Letters />
       <Ant />
       <AnotherCounter />
       <Async />
       <Counter counter={counter} decrement={decrement} increment={increment} />
       <button onClick={toggleInfinite}>Show Infinite</button>
+      <Letters />
       <Listing add={add} items={adder.toJS()} />
       <Media />
       <Paginated />
