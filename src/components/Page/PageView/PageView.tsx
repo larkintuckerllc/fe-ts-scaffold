@@ -6,6 +6,7 @@ import Async from './Async';
 import Counter from './Counter';
 import Frame from './Frame';
 import InfiniteScroll from './InfiniteScroll';
+import Letters from './Letters';
 import Listing from './Listing';
 import Media from './Media';
 import Paginated from './Paginated';
@@ -39,6 +40,7 @@ const PageView = ({
   }
   return (
     <Frame>
+      <Letters />
       <Ant />
       <AnotherCounter />
       <Async />

@@ -6,6 +6,7 @@ import {
   FetchItemsResponseAction,
   SetItemsCurrentPageAction,
 } from 'DUCKS/items';
+import { LetterColoredToggleAction } from 'DUCKS/letterColored';
 import { FetchTodosRequestAction, FetchTodosResponseAction } from 'DUCKS/todos';
 
 const UNKNOWN = 'UNKNOWN';
@@ -26,6 +27,7 @@ type AppAction =
   | FetchTodosRequestAction
   | FetchTodosResponseAction
   | IncrementAction
+  | LetterColoredToggleAction
   | SetItemsCurrentPageAction
   | ToggleInfiniteAction
   | UnknownAction;
