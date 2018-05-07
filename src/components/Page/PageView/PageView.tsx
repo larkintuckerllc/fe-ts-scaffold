@@ -8,6 +8,7 @@ import Frame from './Frame';
 import InfiniteScroll from './InfiniteScroll';
 import Letters from './Letters';
 import Listing from './Listing';
+import Lists from './Lists';
 import Media from './Media';
 import Paginated from './Paginated';
 import PassThrough from './PassThrough';
@@ -47,6 +48,7 @@ const PageView = ({
       <button onClick={toggleInfinite}>Show Infinite</button>
       <Letters />
       <Listing add={add} items={adder.toJS()} />
+      <Lists />
       <Media />
       <Paginated />
       <PassThrough />
