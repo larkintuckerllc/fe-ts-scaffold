@@ -3,12 +3,12 @@ import React from 'react';
 import AnotherCounter from './AnotherCounter';
 import Ant from './Ant';
 import Async from './Async';
+import Choices from './Choices';
 import Counter from './Counter';
 import Frame from './Frame';
 import InfiniteScroll from './InfiniteScroll';
 import Letters from './Letters';
 import Listing from './Listing';
-import Lists from './Lists';
 import Media from './Media';
 import Paginated from './Paginated';
 import PassThrough from './PassThrough';
@@ -44,11 +44,11 @@ const PageView = ({
       <Ant />
       <AnotherCounter />
       <Async />
+      <Choices />
       <Counter counter={counter} decrement={decrement} increment={increment} />
       <button onClick={toggleInfinite}>Show Infinite</button>
       <Letters />
       <Listing add={add} items={adder.toJS()} />
-      <Lists />
       <Media />
       <Paginated />
       <PassThrough />

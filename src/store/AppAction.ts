@@ -1,4 +1,5 @@
 import { AddAction } from 'DUCKS/adder';
+import { FetchChoicesRequestAction, FetchChoicesResponseAction } from 'DUCKS/choices';
 import { DecrementAction, IncrementAction } from 'DUCKS/counter';
 import { ToggleInfiniteAction } from 'DUCKS/infinite';
 import {
@@ -7,7 +8,6 @@ import {
   SetItemsCurrentPageAction,
 } from 'DUCKS/items';
 import { LetterColoredToggleAction } from 'DUCKS/letterColored';
-import { FetchListRequestAction, FetchListResponseAction } from 'DUCKS/list';
 import { FetchTodosRequestAction, FetchTodosResponseAction } from 'DUCKS/todos';
 
 const UNKNOWN = 'UNKNOWN';
@@ -25,8 +25,8 @@ type AppAction =
   | DecrementAction
   | FetchItemsRequestAction
   | FetchItemsResponseAction
-  | FetchListRequestAction
-  | FetchListResponseAction
+  | FetchChoicesRequestAction
+  | FetchChoicesResponseAction
   | FetchTodosRequestAction
   | FetchTodosResponseAction
   | IncrementAction
