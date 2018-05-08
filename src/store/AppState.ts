@@ -4,6 +4,10 @@ import { CounterState, counterStateDefault } from 'DUCKS/counter';
 import { InfiniteState, infiniteStateDefault } from 'DUCKS/infinite';
 import { ItemsStateRecord, itemsStateRecordDefault } from 'DUCKS/items/ItemsState';
 import { letterColoredStateDefault, LetterColoredToggleState } from 'DUCKS/letterColored';
+import {
+  ParentChoicesStateRecord,
+  parentChoicesStateRecordDefault,
+} from 'DUCKS/parentChoices/ParentChoicesState';
 import { TodosStateRecord, todosStateRecordDefault } from 'DUCKS/todos/TodosState';
 import { Record } from 'immutable';
 
@@ -15,6 +19,7 @@ export default interface AppState {
   infinite: InfiniteState;
   items: ItemsStateRecord;
   letterColored: LetterColoredToggleState;
+  parentChoices: ParentChoicesStateRecord;
   todos: TodosStateRecord;
 }
 
@@ -26,6 +31,7 @@ const appStateDefault: AppState = {
   infinite: infiniteStateDefault,
   items: itemsStateRecordDefault,
   letterColored: letterColoredStateDefault,
+  parentChoices: parentChoicesStateRecordDefault,
   todos: todosStateRecordDefault,
 };
 

@@ -8,6 +8,10 @@ import {
   SetItemsCurrentPageAction,
 } from 'DUCKS/items';
 import { LetterColoredToggleAction } from 'DUCKS/letterColored';
+import {
+  FetchParentChoicesRequestAction,
+  FetchParentChoicesResponseAction,
+} from 'DUCKS/parentChoices';
 import { FetchTodosRequestAction, FetchTodosResponseAction } from 'DUCKS/todos';
 
 const UNKNOWN = 'UNKNOWN';
@@ -27,6 +31,8 @@ type AppAction =
   | FetchItemsResponseAction
   | FetchChoicesRequestAction
   | FetchChoicesResponseAction
+  | FetchParentChoicesRequestAction
+  | FetchParentChoicesResponseAction
   | FetchTodosRequestAction
   | FetchTodosResponseAction
   | IncrementAction

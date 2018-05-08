@@ -11,6 +11,7 @@ import Letters from './Letters';
 import Listing from './Listing';
 import Media from './Media';
 import Paginated from './Paginated';
+import ParentChoicesSection from './ParentChoicesSection';
 import PassThrough from './PassThrough';
 import Risky from './Risky';
 import Stateful from './Stateful';
@@ -51,6 +52,7 @@ const PageView = ({
       <Listing add={add} items={adder.toJS()} />
       <Media />
       <Paginated />
+      <ParentChoicesSection />
       <PassThrough />
       <Risky />
       <Stateful />
