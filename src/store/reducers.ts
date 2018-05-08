@@ -9,7 +9,8 @@ import { combineReducers } from 'redux-immutable';
 
 const reducers = {
   adder,
-  choices,
+  choicesA: choices('choicesA'),
+  choicesB: choices('choicesB'),
   counter,
   infinite,
   items,

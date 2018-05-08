@@ -2,19 +2,19 @@ import { ChoiceType } from 'DUCKS/choices';
 import { ChoiceRecord } from 'DUCKS/choices/Choice';
 import { List } from 'immutable';
 import React, { Component } from 'react';
-import ChoicesA from './ChoicesA';
+import ChoicesB from './ChoicesB';
 
-interface ChoicesAViewProps {
+interface ChoicesBViewProps {
   error: boolean;
   requested: boolean;
   choices: List<ChoiceRecord>;
   fetchChoices(type: ChoiceType): void;
 }
 
-export default class ChoicesAView extends Component<ChoicesAViewProps> {
+export default class ChoicesBView extends Component<ChoicesBViewProps> {
   public componentDidMount() {
     const { fetchChoices } = this.props;
-    fetchChoices('choicesA');
+    fetchChoices('choicesB');
   }
   public render() {
     const { error, requested, choices } = this.props;
@@ -27,8 +27,8 @@ export default class ChoicesAView extends Component<ChoicesAViewProps> {
     }
     return (
       <div>
-        <h2>ChoicesA</h2>
-        <ChoicesA choices={choices.toJS()} />
+        <h2>ChoicesB</h2>
+        <ChoicesB choices={choices.toJS()} />
       </div>
     );
   }

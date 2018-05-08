@@ -9,7 +9,8 @@ import { Record } from 'immutable';
 
 export default interface AppState {
   adder: AdderState;
-  choices: ChoicesStateRecord;
+  choicesA: ChoicesStateRecord;
+  choicesB: ChoicesStateRecord;
   counter: CounterState;
   infinite: InfiniteState;
   items: ItemsStateRecord;
@@ -19,7 +20,8 @@ export default interface AppState {
 
 const appStateDefault: AppState = {
   adder: adderStateDefault,
-  choices: choicesStateRecordDefault,
+  choicesA: choicesStateRecordDefault,
+  choicesB: choicesStateRecordDefault,
   counter: counterStateDefault,
   infinite: infiniteStateDefault,
   items: itemsStateRecordDefault,

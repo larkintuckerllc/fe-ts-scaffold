@@ -3,7 +3,7 @@ import { ChoiceRecord } from 'DUCKS/choices/Choice';
 import { List } from 'immutable';
 import { connect } from 'react-redux';
 import { AppStateRecord } from 'STORE/AppState';
-import ChoicesAView from './ChoicesAView';
+import ChoicesBView from './ChoicesBView';
 
 interface StateProps {
   choices: List<ChoiceRecord>;
@@ -16,9 +16,9 @@ interface DispatchProps {
 }
 
 const mapStateToProps = (state: AppStateRecord) => ({
-  choices: fromChoices.getChoices(state, 'choicesA'),
-  error: fromChoices.getChoicesError(state, 'choicesA'),
-  requested: fromChoices.getChoicesRequested(state, 'choicesA'),
+  choices: fromChoices.getChoices(state, 'choicesB'),
+  error: fromChoices.getChoicesError(state, 'choicesB'),
+  requested: fromChoices.getChoicesRequested(state, 'choicesB'),
 });
 
 const mapDispatchToProps = {
@@ -26,5 +26,5 @@ const mapDispatchToProps = {
 };
 
 export default connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(
-  ChoicesAView
+  ChoicesBView
 );

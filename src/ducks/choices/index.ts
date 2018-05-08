@@ -1,5 +1,6 @@
 export {
   default,
+  ChoiceType,
   fetchChoices,
   FetchChoicesRequestAction,
   FetchChoicesResponseAction,
