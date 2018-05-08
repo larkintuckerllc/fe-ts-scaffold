@@ -1,4 +1,5 @@
 import adder from 'DUCKS/adder';
+import childChoices from 'DUCKS/childChoices';
 import choices from 'DUCKS/choices';
 import counter from 'DUCKS/counter';
 import infinite from 'DUCKS/infinite';
@@ -10,6 +11,7 @@ import { combineReducers } from 'redux-immutable';
 
 const reducers = {
   adder,
+  childChoices,
   choicesA: choices('choicesA'),
   choicesB: choices('choicesB'),
   counter,

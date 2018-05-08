@@ -1,4 +1,5 @@
 import { AddAction } from 'DUCKS/adder';
+import { FetchChildChoicesResponseAction } from 'DUCKS/childChoices';
 import { FetchChoicesRequestAction, FetchChoicesResponseAction } from 'DUCKS/choices';
 import { DecrementAction, IncrementAction } from 'DUCKS/counter';
 import { ToggleInfiniteAction } from 'DUCKS/infinite';
@@ -27,6 +28,7 @@ export const unknown = (): UnknownAction => ({
 type AppAction =
   | AddAction
   | DecrementAction
+  | FetchChildChoicesResponseAction
   | FetchItemsRequestAction
   | FetchItemsResponseAction
   | FetchChoicesRequestAction

@@ -1,9 +1,17 @@
 import parentChoicesAPI from 'APIS/parentChoices';
-import { List } from 'immutable';
+import { fetchChildChoicesResponse } from 'DUCKS/childChoices';
+import ChildChoice, { ChildChoiceFactory, ChildChoiceRecord } from 'DUCKS/childChoices/ChildChoice';
+import { List, Map } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import AppAction from 'STORE/AppAction';
 import { AppStateRecord } from 'STORE/AppState';
 import ParentChoice, { ParentChoiceFactory, ParentChoiceRecord } from './ParentChoice';
+
+interface ParentChoiceApi {
+  id: number;
+  name: string;
+  children: ChildChoice[];
+}
 
 // ACTIONS
 const FETCH_PARENT_CHOICES_REQUEST = 'FETCH_PARENT_CHOICES_REQUEST';
@@ -49,6 +57,18 @@ export const fetchParentChoices = () => async (dispatch: (action: AppAction) => 
       ParentChoiceRecord
     >;
     dispatch(fetchParentChoicesResponse(parentChoices));
+    // CHILDREN
+    const childReducer = (accumulator: List<ChildChoiceRecord>, jsonChildChoice: ChildChoice) =>
+      accumulator.push(ChildChoiceFactory(jsonChildChoice));
+    const parentReducer = (
+      accumulator: Map<number, List<ChildChoiceRecord>>,
+      jsonParentChoice: ParentChoiceApi
+    ) => {
+      const children = jsonParentChoice.children.reduce(childReducer, List<ChildChoiceRecord>([]));
+      return accumulator.set(jsonParentChoice.id, children);
+    };
+    const childChoices = json.reduce(parentReducer, Map<number, List<ChildChoiceRecord>>());
+    dispatch(fetchChildChoicesResponse(childChoices));
   } catch {
     dispatch(fetchParentChoicesResponse('500', true));
   }

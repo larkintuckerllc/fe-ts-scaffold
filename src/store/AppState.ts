@@ -1,4 +1,5 @@
 import { AdderState, adderStateDefault } from 'DUCKS/adder';
+import { ChildChoicesState, childChoicesStateDefault } from 'DUCKS/childChoices';
 import { ChoicesStateRecord, choicesStateRecordDefault } from 'DUCKS/choices/ChoicesState';
 import { CounterState, counterStateDefault } from 'DUCKS/counter';
 import { InfiniteState, infiniteStateDefault } from 'DUCKS/infinite';
@@ -13,6 +14,7 @@ import { Record } from 'immutable';
 
 export default interface AppState {
   adder: AdderState;
+  childChoices: ChildChoicesState;
   choicesA: ChoicesStateRecord;
   choicesB: ChoicesStateRecord;
   counter: CounterState;
@@ -25,6 +27,7 @@ export default interface AppState {
 
 const appStateDefault: AppState = {
   adder: adderStateDefault,
+  childChoices: childChoicesStateDefault,
   choicesA: choicesStateRecordDefault,
   choicesB: choicesStateRecordDefault,
   counter: counterStateDefault,
