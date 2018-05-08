@@ -1,6 +1,6 @@
 import { List, Map } from 'immutable';
 import AppAction from 'STORE/AppAction';
-// import { AppStateRecord } from 'STORE/AppState';
+import { AppStateRecord } from 'STORE/AppState';
 import { ChildChoiceRecord } from './ChildChoice';
 
 // STATE
@@ -32,15 +32,6 @@ export default (state: ChildChoicesState, action: AppAction) => {
   }
 };
 
-/*
 // SELECTORS
-export const getParentChoicesRequested = (state: AppStateRecord) =>
-  state.get('todos', null).get('requested', null);
-
-export const getParentChoicesError = (state: AppStateRecord) =>
-  state.get('todos', null).get('errored', null);
-
-export const getParentChoices = (state: AppStateRecord) =>
-  state.get('parentChoices', null).get('items', null);
-
-*/
+export const getChildChoices = (state: AppStateRecord, id: number) =>
+  state.get('childChoices', null).get(id);

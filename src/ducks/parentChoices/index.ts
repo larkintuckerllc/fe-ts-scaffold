@@ -1,5 +1,6 @@
 export {
   default,
+  getParentChoiceChildren,
   fetchParentChoices,
   FetchParentChoicesRequestAction,
   FetchParentChoicesResponseAction,

@@ -3,7 +3,7 @@ import { ParentChoiceRecord } from 'DUCKS/parentChoices/ParentChoice';
 import { List } from 'immutable';
 import { connect } from 'react-redux';
 import { AppStateRecord } from 'STORE/AppState';
-import ParentChoicesView from './ParentChoicesView';
+import ParentChoicesSectionView from './ParentChoicesSectionView';
 
 interface StateProps {
   choices: List<ParentChoiceRecord>;
@@ -26,5 +26,5 @@ const mapDispatchToProps = {
 };
 
 export default connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(
-  ParentChoicesView
+  ParentChoicesSectionView
 );

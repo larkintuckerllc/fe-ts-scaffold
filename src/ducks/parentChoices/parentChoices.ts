@@ -1,5 +1,5 @@
 import parentChoicesAPI from 'APIS/parentChoices';
-import { fetchChildChoicesResponse } from 'DUCKS/childChoices';
+import { fetchChildChoicesResponse, getChildChoices } from 'DUCKS/childChoices';
 import ChildChoice, { ChildChoiceFactory, ChildChoiceRecord } from 'DUCKS/childChoices/ChildChoice';
 import { List, Map } from 'immutable';
 import { combineReducers } from 'redux-immutable';
@@ -124,3 +124,6 @@ export const getParentChoicesError = (state: AppStateRecord) =>
 
 export const getParentChoices = (state: AppStateRecord) =>
   state.get('parentChoices', null).get('items', null);
+
+export const getParentChoiceChildren = (state: AppStateRecord, id: number) =>
+  getChildChoices(state, id);

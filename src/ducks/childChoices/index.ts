@@ -1,7 +1,8 @@
 export {
   default,
   ChildChoicesState,
-  fetchChildChoicesResponse,
   childChoicesStateDefault,
+  fetchChildChoicesResponse,
   FetchChildChoicesResponseAction,
+  getChildChoices,
 } from './childChoices';
