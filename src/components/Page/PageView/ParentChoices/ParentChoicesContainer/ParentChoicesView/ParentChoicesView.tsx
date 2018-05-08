@@ -2,10 +2,10 @@ import ParentChoice from 'DUCKS/parentChoices/ParentChoice';
 import React from 'react';
 import ChildChoices from './ChildChoices';
 
-interface ParentChoicesProps {
+interface ParentChoicesViewProps {
   choices: ParentChoice[];
 }
-const ParentChoices = ({ choices }: ParentChoicesProps) => {
+const ParentChoicesView = ({ choices }: ParentChoicesViewProps) => {
   return (
     <div>
       {choices.map(o => (
@@ -17,4 +17,4 @@ const ParentChoices = ({ choices }: ParentChoicesProps) => {
     </div>
   );
 };
-export default ParentChoices;
+export default ParentChoicesView;

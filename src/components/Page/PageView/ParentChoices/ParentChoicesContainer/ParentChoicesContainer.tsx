@@ -1,16 +1,16 @@
 import { ParentChoiceRecord } from 'DUCKS/parentChoices/ParentChoice';
 import { List } from 'immutable';
 import React, { Component } from 'react';
-import ParentChoices from './ParentChoices';
+import ParentChoicesView from './ParentChoicesView';
 
-interface ParentChoicesSectionViewProps {
+interface ParentChoicesContainerProps {
   error: boolean;
   requested: boolean;
   choices: List<ParentChoiceRecord>;
   fetchParentChoices(): void;
 }
 
-export default class ParentChoicesSectionView extends Component<ParentChoicesSectionViewProps> {
+export default class ParentChoicesContainer extends Component<ParentChoicesContainerProps> {
   public componentDidMount() {
     const { fetchParentChoices } = this.props;
     fetchParentChoices();
@@ -27,7 +27,7 @@ export default class ParentChoicesSectionView extends Component<ParentChoicesSec
     return (
       <div>
         <h2>ParentChoices</h2>
-        <ParentChoices choices={choices.toJS()} />
+        <ParentChoicesView choices={choices.toJS()} />
       </div>
     );
   }
