@@ -6,6 +6,21 @@ import AppAction from 'STORE/AppAction';
 import { AppStateRecord } from 'STORE/AppState';
 import Choice, { ChoiceFactory, ChoiceRecord } from './Choice';
 
+/*
+Duck manages multiple lists of async fetched Choices in store keyed by an identifier
+To first use need to create first list (see below for adding) and then:
+- Update choices.test.ts
+To add a new list:
+- Add new identifier to ChoicesType (below), e.g., choicesA
+- Add new API exposing a fetch to choicesApi (below), e.g., choicesAAPI
+- Add reducer (reducers.js), e.g., choicesA: choices('choicesA'),
+- Add initial state (AppState.js), e.g., choicesA: choicesStateRecordDefault,
+To use new list:
+- In mapStateToProps, e.g., choices: fromChoices.getChoices(state, 'choicesA'),
+- In mapDispatchToProps, e.g., fetchChoices: fromChoices.fetchChoices,
+- In componentDidMount, e.g., fetchChoices('choicesA')
+*/
+
 // TYPES
 export type ChoiceType = 'choicesA' | 'choicesB';
 const choicesApi = {
@@ -103,7 +118,7 @@ export default (type: ChoiceType) => {
   const items = (state: List<Choice>, action: AppAction) => {
     switch (action.type) {
       case FETCH_CHOICES_RESPONSE:
-        if (action.payload.type !== type) {
+        if (action.payload.type !== type || action.error) {
           return state;
         }
         return action.payload.response;
