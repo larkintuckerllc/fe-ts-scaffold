@@ -8,12 +8,14 @@ import { appStateRecordDefault } from 'STORE/AppState';
 import ParentChoice, { ParentChoiceFactory, ParentChoiceRecord } from './ParentChoice';
 import parentChoices, {
   fetchParentChoices,
+  FetchParentChoicesRequestAction,
   getParentChoiceChildren,
   getParentChoices,
   getParentChoicesError,
   getParentChoicesRequested,
 } from './parentChoices';
 import { parentChoicesStateRecordDefault } from './ParentChoicesState';
+import { FetchChildChoicesResponseAction } from 'DUCKS/childChoices';
 
 interface ParentChoiceApi {
   id: number;
@@ -21,7 +23,7 @@ interface ParentChoiceApi {
   children: ChildChoice[];
 }
 
-describe('todos parentChoices', () => {
+describe('parentChoices', () => {
   const request = {
     type: 'FETCH_PARENT_CHOICES_REQUEST',
   };
@@ -58,7 +60,6 @@ describe('todos parentChoices', () => {
     parentReducer,
     Map<number, List<ChildChoiceRecord>>()
   );
-  // TODO: BUILD CHILD_CHOICES
   const appStateSample = appStateRecordDefault
     .set('parentChoices', parentChoicesStateSample)
     .set('childChoices', childChoicesStateSample);
