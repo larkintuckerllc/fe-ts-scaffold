@@ -1,9 +1,8 @@
 import { ItemRecord } from 'DUCKS/items/Item';
 import { List } from 'immutable';
 import React, { Component } from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 import ReactInfiniteScrollView from './ReactInfiniteScrollView';
-
-const GAP = 100;
 
 interface ReactInfiniteScrollControllerProps {
   currentPage: number;
@@ -17,49 +16,37 @@ interface ReactInfiniteScrollControllerProps {
 export default class ReactInfiniteScrollController extends Component<
   ReactInfiniteScrollControllerProps
 > {
-  private rootRef: HTMLDivElement;
-
   public componentDidMount() {
     const { currentPage, fetchItems } = this.props;
     fetchItems(currentPage);
-    window.scroll(0, 0);
-    window.addEventListener('scroll', this.handleScroll, false);
   }
-
-  // TESTING TOO HARD
-  /* istanbul ignore next */
-  public componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll, false);
-  }
-
   public render() {
-    const { error, items } = this.props;
+    const { currentPage, error, items, lastPage } = this.props;
     if (error) {
       return <div>Error</div>;
     }
     return (
-      <div ref={this.setRootRef}>
-        <h2>Infinite Scroll</h2>
-        <ReactInfiniteScrollView items={items.toJS()} />
+      <div>
+        <h2>React Infinite Scroll</h2>
+        <InfiniteScroll
+          initialLoad={false}
+          pageStart={1}
+          loadMore={this.handleLoadMore}
+          hasMore={currentPage !== lastPage}
+          loader={
+            <div className="loader" key={0}>
+              Loading ...
+            </div>
+          }
+        >
+          <ReactInfiniteScrollView items={items.toJS()} />
+        </InfiniteScroll>
       </div>
     );
   }
 
-  // TESTING TOO HARD
-  /* istanbul ignore next */
-  private setRootRef = (element: HTMLDivElement) => {
-    this.rootRef = element;
-  };
-
-  // TESTING TOO HARD
-  /* istanbul ignore next */
-  private handleScroll = () => {
-    const { currentPage, fetchItems, lastPage, requested } = this.props;
-    const scrollY = window.scrollY;
-    const windowH = window.innerHeight;
-    const contentH = this.rootRef.scrollHeight;
-    if (windowH + scrollY > contentH - GAP && currentPage !== lastPage && !requested) {
-      fetchItems(currentPage + 1).then(this.handleScroll);
-    }
+  private handleLoadMore = (page: number) => {
+    const { fetchItems } = this.props;
+    fetchItems(page - 1);
   };
 }

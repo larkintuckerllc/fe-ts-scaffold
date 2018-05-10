@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`InfiniteScrollView component renders differently with not requested and error 1`] = `
-<div>
-  Error
-</div>
-`;

@@ -52,6 +52,12 @@
     "@types/node" "*"
     "@types/react" "*"
 
+"@types/react-infinite-scroller@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@types/react-infinite-scroller/-/react-infinite-scroller-1.0.6.tgz#ab36d95ce25712b70ccff439f2a3204bb15476d9"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-redux@^5.0.15":
   version "5.0.16"
   resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-5.0.16.tgz#46f1b2043abd2b4364a857100abf5e5a6ef94bf0"

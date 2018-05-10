@@ -6,7 +6,6 @@ import Async from './Async';
 import Choices from './Choices';
 import Counter from './Counter';
 import Frame from './Frame';
-// import InfiniteScroll from './InfiniteScroll';
 import Letters from './Letters';
 import Listing from './Listing';
 import Media from './Media';
@@ -39,6 +38,7 @@ const PageView = ({
   toggleInfinite,
 }: PageViewProps) => {
   if (infinite) {
+    window.scroll(0, 0);
     return <ReactInfiniteScroll />;
   }
   return (
