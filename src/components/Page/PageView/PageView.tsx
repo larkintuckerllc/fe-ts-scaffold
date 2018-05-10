@@ -6,13 +6,14 @@ import Async from './Async';
 import Choices from './Choices';
 import Counter from './Counter';
 import Frame from './Frame';
-import InfiniteScroll from './InfiniteScroll';
+// import InfiniteScroll from './InfiniteScroll';
 import Letters from './Letters';
 import Listing from './Listing';
 import Media from './Media';
 import Paginated from './Paginated';
 import ParentChoices from './ParentChoices';
 import PassThrough from './PassThrough';
+import ReactInfiniteScroll from './ReactInfiniteScroll';
 import Risky from './Risky';
 import Stateful from './Stateful';
 import Styling from './Styling';
@@ -38,7 +39,7 @@ const PageView = ({
   toggleInfinite,
 }: PageViewProps) => {
   if (infinite) {
-    return <InfiniteScroll />;
+    return <ReactInfiniteScroll />;
   }
   return (
     <Frame>
@@ -47,13 +48,13 @@ const PageView = ({
       <Async />
       <Choices />
       <Counter counter={counter} decrement={decrement} increment={increment} />
-      <button onClick={toggleInfinite}>Show Infinite</button>
       <Letters />
       <Listing add={add} items={adder.toJS()} />
       <Media />
       <Paginated />
       <ParentChoices />
       <PassThrough />
+      <button onClick={toggleInfinite}>Show React Infinite</button>
       <Risky />
       <Stateful />
       <Styling />

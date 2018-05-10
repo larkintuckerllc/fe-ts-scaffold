@@ -8,14 +8,12 @@ import { appStateRecordDefault } from 'STORE/AppState';
 import ParentChoice, { ParentChoiceFactory, ParentChoiceRecord } from './ParentChoice';
 import parentChoices, {
   fetchParentChoices,
-  FetchParentChoicesRequestAction,
   getParentChoiceChildren,
   getParentChoices,
   getParentChoicesError,
   getParentChoicesRequested,
 } from './parentChoices';
 import { parentChoicesStateRecordDefault } from './ParentChoicesState';
-import { FetchChildChoicesResponseAction } from 'DUCKS/childChoices';
 
 interface ParentChoiceApi {
   id: number;

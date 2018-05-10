@@ -1,6 +1,6 @@
 import choicesAAPI from 'APIS/choicesA';
 import choicesATestData from 'APIS/choicesA/choicesA.testdata.json';
-import { List, Map } from 'immutable';
+import { List } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
 import { unknown } from 'STORE/AppAction';
 import { appStateRecordDefault } from 'STORE/AppState';
