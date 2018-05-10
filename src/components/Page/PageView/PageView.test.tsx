@@ -15,6 +15,7 @@ const getDefaultProps = () => ({
   infinite: false,
   toggleInfinite: jest.fn(),
 });
+window.scroll = jest.fn();
 
 describe('PageView component', () => {
   it('shallow renders without crashing', () => {

@@ -34,7 +34,7 @@ describe('items duck', () => {
     payload: {
       items: itemsSample,
       page: 0,
-      pageCount: 2,
+      pageCount: 3,
     },
     type: 'FETCH_ITEMS_RESPONSE',
   };
@@ -53,7 +53,7 @@ describe('items duck', () => {
   const itemsStateSample = itemsStateRecordDefault
     .set('byId', byIdSample)
     .set('ids', idsSample)
-    .set('lastPage', 1)
+    .set('lastPage', 2)
     .set('pages', pages);
   const appStateSample = appStateRecordDefault.set('items', itemsStateSample);
   beforeEach(() => {
@@ -161,7 +161,7 @@ describe('items duck', () => {
     });
 
     it('getItemsLastPage should return', () => {
-      const result = 1;
+      const result = 2;
       expect(getItemsLastPage(appStateSample)).toEqualImmutable(result);
     });
 
