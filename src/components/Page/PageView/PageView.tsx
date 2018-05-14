@@ -5,6 +5,7 @@ import Ant from './Ant';
 import Async from './Async';
 import Choices from './Choices';
 import Counter from './Counter';
+import FormSample from './FormSample';
 import Frame from './Frame';
 import Letters from './Letters';
 import Listing from './Listing';
@@ -48,6 +49,7 @@ const PageView = ({
       <Async />
       <Choices />
       <Counter counter={counter} decrement={decrement} increment={increment} />
+      <FormSample />
       <Letters />
       <Listing add={add} items={adder.toJS()} />
       <Media />
