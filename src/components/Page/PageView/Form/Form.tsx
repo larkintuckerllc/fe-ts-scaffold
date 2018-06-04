@@ -15,12 +15,14 @@ export default class Form extends Component<{}, FormState> {
     return (
       <div>
         <h2>Form</h2>
-        {userName}
+        <div>User Name:: {userName}</div>
         <FormSample doSomething={this.handleDoSomething} />
       </div>
     );
   }
   private handleDoSomething = (userName: string) => {
-    window.console.log(userName);
+    this.setState({
+      userName,
+    });
   };
 }
