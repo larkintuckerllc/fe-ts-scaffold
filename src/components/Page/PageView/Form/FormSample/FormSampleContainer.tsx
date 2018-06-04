@@ -1,9 +1,9 @@
-import { WrappedFormUtils } from 'antd/lib/form/Form';
+import { FormComponentProps } from 'antd/lib/form';
 import React, { Component, FormEvent } from 'react';
 import FormSampleView from './FormSampleView';
 
-interface FormSampleContainerProps {
-  form: WrappedFormUtils;
+interface FormSampleContainerProps extends FormComponentProps {
+  doSomething(userName: string): void;
 }
 
 interface FormFields {
@@ -17,13 +17,13 @@ export default class FormSampleContainer extends Component<FormSampleContainerPr
 
   private handleSubmit = (e: FormEvent<HTMLInputElement>) => {
     const {
+      doSomething,
       form: { validateFields },
     } = this.props;
     e.preventDefault();
-    validateFields((err: boolean, values: FormFields) => {
+    validateFields((err: boolean, { userName }: FormFields) => {
       if (!err) {
-        // DO SOMETHING WITH SUBMITTED VALUES
-        window.console.log('Received values of form: ', values);
+        doSomething(userName);
       }
     });
   };
