@@ -5,14 +5,12 @@ import FormSampleView from './FormSampleView';
 interface FormSampleContainerProps {
   form: WrappedFormUtils;
 }
-export default class FormSampleContainer extends Component<FormSampleContainerProps, {}> {
-  public componentDidMount() {
-    const {
-      form: { validateFields },
-    } = this.props;
-    validateFields();
-  }
 
+interface FormFields {
+  userName: string;
+}
+
+export default class FormSampleContainer extends Component<FormSampleContainerProps, {}> {
   public render() {
     return <FormSampleView {...this.props} onSubmit={this.handleSubmit} />;
   }
@@ -22,7 +20,7 @@ export default class FormSampleContainer extends Component<FormSampleContainerPr
       form: { validateFields },
     } = this.props;
     e.preventDefault();
-    validateFields((err: boolean, values: any) => {
+    validateFields((err: boolean, values: FormFields) => {
       if (!err) {
         // DO SOMETHING WITH SUBMITTED VALUES
         window.console.log('Received values of form: ', values);

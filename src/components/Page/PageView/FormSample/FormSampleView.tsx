@@ -1,13 +1,14 @@
 import { Button, Form, Input } from 'antd';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
-import React from 'react';
+import React, { FormEvent } from 'react';
 
 interface FormSampleViewProps {
   form: WrappedFormUtils;
-  onSubmit: (e: any) => void;
+  onSubmit: (e: FormEvent<HTMLInputElement>) => void;
 }
 
 const FormItem = Form.Item;
+
 const FormSampleView = ({ form: { getFieldDecorator }, onSubmit }: FormSampleViewProps) => (
   <div>
     <h2>Form Sample</h2>
@@ -25,4 +26,5 @@ const FormSampleView = ({ form: { getFieldDecorator }, onSubmit }: FormSampleVie
     </Form>
   </div>
 );
+
 export default FormSampleView;
